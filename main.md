@@ -1,9 +1,10 @@
 
-I'm rather interested in compressed sensing and adaptive sampling, but that
-doesn't tell you much. What it means is it's of interest to pull all the
-information you can out of the signal. To any interesting real world signal,
-there are interesting and uninteresting part; why focus on the uninteresting
-parts? 
+I'm rather interested in adaptive sampling and the new techniques compressed
+sensing brings to the table, but that really doesn't tell you much. What it
+means is that there are interesting places to look in any signal, and most of
+our energy should be focused there. For example, thermal images are relatively
+simple; why not focus on the edges? Or determining ages from a family portrait:
+the faces hold the most information.
 
 This concept of detecting and estimating data present in a signal and using it
 to your advantage seems so natural and fascinates me, the reason I'll be
@@ -16,15 +17,14 @@ brain scan may have a tumor or a baggage scan might contain a weapon. There a
 My [Github][git] contains almost all of the code I work on. It has everything
 from research activities to small projects to this website.
 
-
 <br>
 <br>
 <br>
 <br>
 <br>
 <br>
-<font size="1">I know this is a classic academic webpage. I pledge to actually
-update it, and it was last updated in November 2013.</font>
+<div style="text-align: center"><font size="1">I know this is a classic academic webpage. I pledge to actually
+update it, and it was last updated in November 2013.</font></div>
 
 
 [talk]:http://nuit-blanche.blogspot.com/2013/08/sahd-compressive-saliency-sensing.html

@@ -238,6 +238,9 @@ h5 {
 h6 {
   font-size: 1.15em;
 }
+.break-word{
+    word-wrap: break-word;
+}
 .center{
     text-align: center;
     display: table-cell;

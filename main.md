@@ -1,4 +1,5 @@
 
+<br>
 I'm rather interested in adaptive sampling and the new techniques compressed
 sensing brings to the table, but that really doesn't tell you much. What it
 means is that there are interesting places to look in any signal, and most of

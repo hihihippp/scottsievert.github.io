@@ -186,6 +186,7 @@ body {
   height: 150%;
   border: 1pt solid #93a1a1;
   padding: 1em;
+  overflow-x: hidden;
 }
 code {
   background-color: #eee8d5;

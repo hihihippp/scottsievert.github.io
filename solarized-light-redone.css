@@ -188,6 +188,7 @@ body {
   /*added by scott*/
   max-width: 14cm;
   width: 95%;
+  margin-bottom: 1em;
 }
 code {
   background-color: #eee8d5;

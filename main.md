@@ -24,8 +24,6 @@ from research activities to small projects to this website.
 <br>
 <br>
 <br>
-<div style="text-align: center"><font size="1">I know this is a classic academic webpage. I pledge to actually
-update it, and it was last updated in November 2013.</font></div>
 
 
 [talk]:http://nuit-blanche.blogspot.com/2013/08/sahd-compressive-saliency-sensing.html

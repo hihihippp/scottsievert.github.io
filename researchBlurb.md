@@ -19,23 +19,28 @@ implications.
 
 [app]:https://github.com/scottsievert/iSparse
 
-### Granular Flows
-Here, I wrote a [C++ program][c++] to analyze a granular flow of two different sized
-sands. This analysis required the use of a high speed camera and tracked many
-different sand particles (using a light's reflection). It converted to real
-units, corrected for camera distortion, found the flow direction and elimented
-erronous date -- an intensive process. Because this anaylsis tracked so many
-particles, it took a long time. I deployed this program on Amazon's EC2 servers
-to reduce the computation time.
+### Granular Flows 
+I wrote a [C++ program][c++] to analyze a granular flow of
+two different sized sands. This analysis required the use of a high speed
+camera and tracked many different sand particles (using a light's reflection).
+It converted to real units, corrected for camera distortion, found the flow
+direction and elimented erronous date -- an intensive process. Because this
+anaylsis tracked so many particles, it took a long time. I deployed the
+computer vision program (which I modified) to find these particles on Amazon's
+EC2 servers to reduce the computation time.
 
 [c++]:https://github.com/scottsievert/Granular-Flows-Image-Analysis
 
 #### Undergraduate Research Opportunities (UROP)
-**Piezoelectric wind energy**: Advisor: Prof. Robbins, [report][wind].
-
+**Piezoelectric wind energy scheme, optimizing for width and separation**: Advisor: Prof. Robbins, [report][wind].
 <p>
-**Stripes in granular flows under special conditions**: Advisor: Prof. Hill,
+**Stripes in granular flows under special conditions, and seeing the effects of
+speed and angular velocity**: Advisor: Prof. Hill,
 [report][gran].
+
+<br>
+<br>
+<br>
 
 [wind]:http://purl.umn.edu/120427
 [gran]:http://purl.umn.edu/113663

@@ -24,4 +24,4 @@ from research activities to small projects to this website.
 
 [talk]:http://nuit-blanche.blogspot.com/2013/08/sahd-compressive-saliency-sensing.html
 [CV]:https://www.dropbox.com/s/9s4yvz6mjc7x41a/CV.pdf
-[git]:https://github.com/scottsievert?tab=repositories
+[git]:https://github.com/scottsievert

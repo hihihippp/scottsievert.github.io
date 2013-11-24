@@ -8,7 +8,7 @@ signal, and most of our energy (aka time or money) should be focused there.
 For example, thermal images are relatively simple; why not focus on the edges?
 That's where the detail, the most pertinent information lies. Or determining
 ages from a family portrait: the faces hold the information we're interested
-in. Prof. Jarvis Haupt, the advisor of my lab, has done a [great talk][talk] on
+in. Prof. Jarvis Haupt, the advisor of our lab, has done a [great talk][talk] on
 finding the most interesting information.
 
 This concept of detecting and estimating data present in a signal and using it

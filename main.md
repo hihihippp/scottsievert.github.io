@@ -18,8 +18,6 @@ getting my PhD in it. My most up to date "course of life," my CV, is available [
 My [Github][git] contains almost all of the code I work on. It has everything
 from research activities to small projects to this website.
 
-<br>
-<br>
 
 
 

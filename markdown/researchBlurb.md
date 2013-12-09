@@ -40,7 +40,7 @@ speed and angular velocity**: Advisor: Prof. Hill,
 
 
 ##### Class Explorations
-[Estimating the weather from remote locations.](Predicting Weather.html)
+[Estimating the weather from remote locations.](blog/Predicting Weather.html)
 
 
 [wind]:http://purl.umn.edu/120427

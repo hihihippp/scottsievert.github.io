@@ -1,5 +1,3 @@
-
-
 I'm rather interested in adaptive sampling and the new techniques compressed
 sensing brings to the table. There are interesting places to look in any
 signal, and most of our energy (aka time or money) should be focused there. 

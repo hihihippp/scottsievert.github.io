@@ -1,0 +1,93 @@
+div#notebook {
+padding-left:20%;
+padding-right:20%;
+}
+ 
+div#ipython-main-app {
+background: url('Shotei.jpeg') no-repeat top left;
+}
+ 
+body {
+background : url('paper.jpeg') ;
+}
+ 
+div.cell {
+margin-top:20px;
+margin-bottom:20px;
+}
+ 
+ 
+h1 {
+text-align:center;
+}
+ 
+ 
+div#notebook li {
+margin-bottom:20px;
+}
+ 
+p,li,h1 {
+line-height:120%;
+}
+ 
+p,ul {
+padding-left:10%;
+padding-right:10%;
+}
+ 
+.text_cell_render{
+font-family: 'Palatino','Arial';
+font-size:1.8em;
+}
+ 
+.text_cell h1 {
+font-size: 2.2em;
+text-align:center;
+line-height:120%;
+}
+ 
+.text_cell h2 {
+font-size: 1.8em;
+margin-bottom:0;
+}
+ 
+ 
+div.input_area {
+background: url('mountain_paper.png') ;
+border-radius: 15px;
+overflow:auto;
+}
+ 
+ 
+div.CodeMirror {
+background: url('mountain.jpeg') repeat-y top right;
+background-size: 20%;
+padding-right:20%;
+font-size: 1.3em;
+}
+ 
+div.CodeMirror-scroll {
+padding-bottom:1.01em;
+}
+ 
+.output_wrapper{
+background-image: url('sky.jpeg');
+border-radius: 15px;
+}
+ 
+div.output {
+border-radius: 15px;
+background: url('cherryFlower.jpeg') repeat-y right;
+background-size: 25%;
+}
+ 
+div.prompt.input_prompt{
+display:none;
+}
+ 
+div.code_cell {
+background: #e6ddce;
+-moz-border-radius: 15px;
+border-radius: 15px;
+padding: 15px;
+font-size:14px;}

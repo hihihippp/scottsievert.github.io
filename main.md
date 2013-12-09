@@ -1,5 +1,4 @@
 
-<br>
 
 I'm rather interested in adaptive sampling and the new techniques compressed
 sensing brings to the table. There are interesting places to look in any
@@ -17,8 +16,6 @@ getting my PhD in it. My most up to date "course of life," my CV, is available [
 
 My [Github][git] contains almost all of the code I work on. It has everything
 from research activities to small projects to this website.
-
-
 
 
 [talk]:http://nuit-blanche.blogspot.com/2013/08/sahd-compressive-saliency-sensing.html

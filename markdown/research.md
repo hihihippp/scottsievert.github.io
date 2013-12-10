@@ -38,11 +38,6 @@ EC2 servers to reduce the computation time.
 speed and angular velocity**: Advisor: Prof. Hill,
 [report][gran].
 
-
-##### Class Explorations
-[Estimating the weather from remote locations.](blog/predicting_weather/Predicting Weather.html)
-
-
 [wind]:http://purl.umn.edu/120427
 [gran]:http://purl.umn.edu/113663
 

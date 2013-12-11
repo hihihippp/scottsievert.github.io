@@ -1,9 +1,10 @@
 
 
-* [Predicting the weather][predicting_weather]
+
+* **2013-12-1** -- [Predicting the weather][predicting_weather] 
   based on a nearby geographic location. A rough calculation based on my
   probability class.
-* [Matlab vs Python][matlab_v_python]. Examining the speed of Matlab, Python
+* **2013-6-1** -- [Matlab vs Python][matlab_v_python]. Examining the speed of Matlab, Python
   and C. It's hard to have a fair shake across languages, as I don't know
   enough Matlab to vectorize it properly.
 

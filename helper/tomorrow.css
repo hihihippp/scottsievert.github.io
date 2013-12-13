@@ -200,7 +200,8 @@ code {
   padding: 2px;
 }
 a {
-  color: #9e6cff;
+  color: #9649a8;
+  color: #cb4b15;
 }
 a:visited {
   color: #cb4b16;
@@ -210,7 +211,7 @@ a:hover {
 }
 h1 {
   /*color: #d33682;*/
-  color: #ff4343;
+  color: #629200;
 }
 h2,
 h3,

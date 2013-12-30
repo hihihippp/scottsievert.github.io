@@ -211,7 +211,8 @@ a:hover {
 }
 h1 {
   /*color: #d33682;*/
-  color: #629200;
+  /*color: #629200;*/
+  color: #5061dd
 }
 h2,
 h3,
@@ -219,6 +220,8 @@ h4,
 h5,
 h6 {
   color: #859900;
+  color: #4655c2;
+  color: #354194;
 }
 pre {
   background-color: #fdf6e3;

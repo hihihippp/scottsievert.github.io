@@ -1,0 +1,28 @@
+ <!--show the reconstruction video - don’t edit-->
+<div ALIGN=CENTER>
+<video width="280" height="620" controls="controls">
+<source src="video/lena_trimmed_2.mp4" type="video/mp4">
+</video>
+</div>
+
+<div ALIGN=CENTER>
+<p>
+This video is of the app actually running on an iPhone 5.
+</div>
+
+
+This theory of grouping the detail terms with the noise was implemented in an
+iOS application, called [iSparse][app] which is available on the App Store.
+This app allows the user to select a sampling rate as well as the number of
+ignored detail levels.
+
+Any picture can be chosen from the user’s camera roll, meaning this
+reconstruction is taking place on the seemingly underpowered mobile device.
+The power of signal processing techniques is then apparent, and our hope is to
+show and inspire researchers in other fields.
+
+
+
+
+
+[app]:https://www.github.com/scottsievert/isparse

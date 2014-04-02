@@ -1,3 +1,5 @@
+
+
 <body>
 
 <div style="text-align: center;">
@@ -8,37 +10,23 @@
         $(function(){
           $("#header").load("helper/header.html");
           $("#navBar").load("helper/nav.html");
-          $("#mainInfo").load("markdown/research.html");
+          $("#mainInfo").load("markdown/blog.html");
+          $("#footer").load("helper/footer.html");
         });
         </script>
       </head>
       <body>
           <div id="header"></div>
           <div id="navBar"></div>
+          <div align="left" id="mainInfo"></div>
+          <div id="footer"</div>
       </body>
     </html>
 </div>
 
  
-<html>
-  <head>
-    <script src="jquery.js"></script>
-    <script>
-    $(function(){
-      $("#mainInfo").load("markdown/blog.html");
-      $("#footer").load("helper/footer.html");
-    });
-    </script>
-  </head>
-
-  <body>
-     <div id="mainInfo"></div>
-     <div id="footer"></div>
-  </body>
-</html>
 
 </body>
-
 
 
 

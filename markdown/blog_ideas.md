@@ -3,4 +3,5 @@
    choose to maximize the probability? (ie, red and blue. The probability winds
    up being 1/3).
 2. Optical high frequencies with example picture.
+3. Explain why lasers are speckled.
 

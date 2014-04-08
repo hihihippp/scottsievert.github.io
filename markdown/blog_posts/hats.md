@@ -10,5 +10,8 @@ different and lies with a much deeper fact.
 
 <!--include image here-->
 
+We know the probability of picking a blue hat is 
+
+$$P_{blue}(n) = (1-p) $$
 
 

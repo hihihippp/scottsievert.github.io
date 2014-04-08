@@ -12,7 +12,7 @@ different and lies with a much deeper fact.
 
 We know the probability of picking a red hat is 
 
-$$P_{red}(n) = \frac{1}{2^n} $$
+$$P_{\textrm{red}}(n) = \frac{1}{2^n} $$
 
 Since the hats fall at equal rates, we have a $1/2, 1/4, 1/8, \ldots$ chance
 of picking the red hat on the $1,2, 3,\ldots$ pick.

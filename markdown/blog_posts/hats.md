@@ -12,6 +12,8 @@ different and lies with a much deeper fact.
 
 We know the probability of picking a blue hat is 
 
-$$P_{blue}(n) = (1-p) $$
+$$P_{blue}(n) = (1-p)^{n-1}p $$
+
+if the probability of encountering a blue hat is $p$.
 
 

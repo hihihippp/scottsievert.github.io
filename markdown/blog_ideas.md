@@ -3,4 +3,8 @@
    up being 1/3).
 2. Optical high frequencies with example picture.
 3. Explain why lasers are speckled (pg 121 of optics PDF notes)
+4. Converting .mp3 single instrument music to sheet music, inspired by [this
+   post][1]
+
+[1]:http://zulko.github.io/blog/2014/02/12/transcribing-piano-rolls/
 

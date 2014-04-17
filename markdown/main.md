@@ -15,7 +15,6 @@ getting my PhD in it. My most up to date "course of life," my CV, is available [
 My [Github][git] contains almost all of the code I work on. It has everything
 from research activities to small projects to this website.
 
-
 [talk]:http://nuit-blanche.blogspot.com/2013/08/sahd-compressive-saliency-sensing.html
-[CV]:https://www.dropbox.com/s/9s4yvz6mjc7x41a/CV.pdf
+[CV]:https://www.dropbox.com/s/k747bfdrqdaztl8/Scott_Sievert_CV.pdf
 [git]:https://github.com/scottsievert

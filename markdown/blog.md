@@ -1,4 +1,5 @@
 
+<script src="foldable_menu.js"></script>
 
 * **2013-12-11** -- [NumPy, Julia, Matlab, R and C][matlab_v_python_v2]. I
   compare speeds and have it more fair across languages.
@@ -8,6 +9,43 @@
 * **2013-6-1** -- [Matlab vs Python][matlab_v_python]. Examining the speed of Matlab, Python
   and C. It's hard to have a fair shake across languages, as I don't know
   enough Matlab to vectorize it properly.
+
+  <div id="listContainer">
+    <ul id="expList">
+      <li>Item A
+        <ul>
+          <li>Item A.1
+            <ul>
+              <li><span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis ultricies arcu, quis porttitor risus placerat et. Proin quis metus diam, quis bibendum dolor. Nulla nec dapibus nunc. Quisque ac erat sit amet nisl venenatis consequat nec in nibh. Aliquam viverra vestibulum elit faucibus sollicitudin.</span>
+		      </li>
+      	    </ul>
+	  	  </li>
+	      <li>Item A.2</li>
+	      <li>Item A.3
+        	<ul>
+          	  <li>
+			    <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis ultricies arcu, quis porttitor risus placerat et. Proin quis metus diam, quis bibendum dolor. Nulla nec dapibus nunc. Quisque ac erat sit amet nisl venenatis consequat nec in nibh. Aliquam viverra vestibulum elit faucibus sollicitudin.</span>
+		  	  </li>
+        	</ul>
+	  	  </li>
+	   </ul>
+	</li>
+	<li>Item B</li>
+	<li>Item C
+	  <ul>
+		<li>Item C.1</li>
+		<li>Item C.2
+	  	  <ul>
+			<li>
+		  	  <span>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec sagittis ultricies arcu, quis porttitor risus placerat et. Proin quis metus diam, quis bibendum dolor. Nulla nec dapibus nunc. Quisque ac erat sit amet nisl venenatis consequat nec in nibh. Aliquam viverra vestibulum elit faucibus sollicitudin.</span>
+			</li>
+	  	  </ul>
+		</li>
+  	  </ul>
+	</li>
+  </ul>
+</div>
+
 
 <br>
 <br>

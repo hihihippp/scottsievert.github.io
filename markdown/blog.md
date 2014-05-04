@@ -50,7 +50,7 @@
 
 <!--the actual folding list-->
 <a href="#hide1" class="hide" id="hide1"><tt>+</tt> 2013</a>
-<a href="#show1" class="show" id="show1"><tt>-</tt> 2013</a>
+<a href="#show1" class="show" id="show1"><tt>°</tt> 2013</a>
 <div class="list">
   <ul>
   <li><strong>2013-12-11</strong> -- <a href="http://nbviewer.ipython.org/github/scottsievert/side-projects/blob/master/matlab_v_python_v2/Python,%20Matlab,%20Julia,%20R%20and%20C.ipynb">NumPy, Julia, Matlab, R and C</a>. I

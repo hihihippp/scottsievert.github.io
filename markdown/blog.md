@@ -1,14 +1,4 @@
 
-<style type="text/css">
-.row { vertical-align: top; height:auto !important; }
-.list {display:none; }
-.show {display: none; }
-.hide:target + .show {display: inline; }
-.hide:target {display: none; }
-.hide:target ~ .list {display:inline; }
-@media print { .hide, .show { display: none; } }
-</style>
-
 ### Recent posts
 
 * **2013-12-11** -- [NumPy, Julia, Matlab, R and C][matlab_v_python_v2]. I
@@ -48,10 +38,11 @@
 <body>
 <div class="row">
 
-<!--the actual folding list-->
+<!--begin folding list-->
 <a href="#hide1" class="hide" id="hide1"><tt>+</tt> 2013</a>
 <a href="#show1" class="show" id="show1"><tt>°</tt> 2013</a>
 <div class="list">
+<!--begin copy/paste-->
   <ul>
   <li><strong>2013-12-11</strong> -- <a href="http://nbviewer.ipython.org/github/scottsievert/side-projects/blob/master/matlab_v_python_v2/Python,%20Matlab,%20Julia,%20R%20and%20C.ipynb">NumPy, Julia, Matlab, R and C</a>. I
   compare speeds and have it more fair across languages.</li>
@@ -62,6 +53,7 @@
   and C. It's hard to have a fair shake across languages, as I don't know
   enough Matlab to vectorize it properly.</li>
   </ul>
+<!--end copy/paste-->
 <!--end folding list-->
 
 
@@ -73,19 +65,3 @@
 
 </html>
 
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<br>-->
-<!--<p>-->
-<!--<p>-->
-<!--<p>-->
-<!--<p>-->
-<!--<p>-->
-<!--<p>-->
-<!--<p>-->
-<!--<p>-->
-<!--<p>-->

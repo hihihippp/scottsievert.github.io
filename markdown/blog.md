@@ -39,8 +39,8 @@
 <div class="row">
 
 <!--begin folding list-->
-<a href="#hide1" class="hide" id="hide1"><tt>+</tt> 2013</a>
-<a href="#show1" class="show" id="show1"><tt>°</tt> 2013</a>
+<a href="#hide1" class="hide" id="hide1"><tt>+ 2013</tt></a>
+<a href="#show1" class="show" id="show1"><tt>° 2013</tt></a>
 <div class="list">
 <!--begin copy/paste-->
   <ul>

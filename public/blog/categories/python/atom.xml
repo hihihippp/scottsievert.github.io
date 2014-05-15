@@ -2,22 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Category: Python | Scott Sievert]]></title>
-  <link href="http://yoursite.com/blog/categories/python/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2014-05-15T11:04:01-05:00</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://scottsievert.github.io/blog/categories/python/atom.xml" rel="self"/>
+  <link href="http://scottsievert.github.io/"/>
+  <updated>2014-05-15T11:20:44-05:00</updated>
+  <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
-    
+    <email><![CDATA[sieve121@umn.edu]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
     <title type="html"><![CDATA[Scienfitic Python: Tips and Tricks]]></title>
-    <link href="http://yoursite.com/blog/2014/05/14/scienfitic-python-tips-and-tricks/"/>
+    <link href="http://scottsievert.github.io/blog/2014/05/14/scienfitic-python-tips-and-tricks/"/>
     <updated>2014-05-14T20:20:24-05:00</updated>
-    <id>http://yoursite.com/blog/2014/05/14/scienfitic-python-tips-and-tricks</id>
+    <id>http://scottsievert.github.io/blog/2014/05/14/scienfitic-python-tips-and-tricks</id>
     <content type="html"><![CDATA[<p>You want to switch from MATLAB to Python. You look into it a bit, but it’s hard
 and confusing to pick up a whole new framework. You want to try and switch, but
 it’s too much effort and takes too much time, so you stick with MATLAB. </p>

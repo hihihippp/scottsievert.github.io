@@ -2,22 +2,22 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Scott Sievert]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2014-05-15T11:04:01-05:00</updated>
-  <id>http://yoursite.com/</id>
+  <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
+  <link href="http://scottsievert.github.io/"/>
+  <updated>2014-05-15T11:20:44-05:00</updated>
+  <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
-    
+    <email><![CDATA[sieve121@umn.edu]]></email>
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
   
   <entry>
     <title type="html"><![CDATA[Scienfitic Python: Tips and Tricks]]></title>
-    <link href="http://yoursite.com/blog/2014/05/14/scienfitic-python-tips-and-tricks/"/>
+    <link href="http://scottsievert.github.io/blog/2014/05/14/scienfitic-python-tips-and-tricks/"/>
     <updated>2014-05-14T20:20:24-05:00</updated>
-    <id>http://yoursite.com/blog/2014/05/14/scienfitic-python-tips-and-tricks</id>
+    <id>http://scottsievert.github.io/blog/2014/05/14/scienfitic-python-tips-and-tricks</id>
     <content type="html"><![CDATA[<p>You want to switch from MATLAB to Python. You look into it a bit, but it’s hard
 and confusing to pick up a whole new framework. You want to try and switch, but
 it’s too much effort and takes too much time, so you stick with MATLAB. </p>
@@ -322,18 +322,21 @@ changes and make it accessible globally!</p>
   
   <entry>
     <title type="html"><![CDATA[Predicting the Weather]]></title>
-    <link href="http://yoursite.com/blog/2014/05/14/predicting-the-weather/"/>
+    <link href="http://scottsievert.github.io/blog/2014/05/14/predicting-the-weather/"/>
     <updated>2014-05-14T10:44:33-05:00</updated>
-    <id>http://yoursite.com/blog/2014/05/14/predicting-the-weather</id>
+    <id>http://scottsievert.github.io/blog/2014/05/14/predicting-the-weather</id>
     <content type="html"><![CDATA[<p>Let’s say that we’re accurately measuring the temperature in both Madison and Minneapolis, but then our temperature sensor in Minneapolis breaks. We could easily install a new sensor, but we would prefer to estimate the temperature in Minneapolis based on the temperature in Madison. </p>
 
 <p>First, let’s see the temperature difference between the two cities:</p>
 
 <p>$
 \newcommand{\ex}[1]{\mathbb{E}\left[ #1 \right]}
-$
-<img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" width="500" />
-<!--I have to go a level of meta first here and push to github--></p>
+$</p>
+
+<p><img src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" alt="Temperature difference" /></p>
+
+<!--<img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" width="500">&#8211;>
+<!--I have to go a level of meta first here and push to github-->
 
 <p>Let’s say we’re collecting the data accurately and are free from the effects of noise. So, let’s gather the data. In this, we’re estimating $X$ from $Y$. The mean temperature difference, or in math terms, $\ex{\left|X-Y\right|} = 4.26^\circ$ ($\ex{\cdot}$ is an operator that finds the mean).</p>
 
@@ -382,7 +385,7 @@ Let’s see how good our results are using this $\alpha$ and $\beta$. The
 temperature difference between the two cities, but predicting one off the other
 is shown below:</p>
 
-<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png" width="500" /></p>
+<p><img src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png" alt="After prediction" /></p>
 
 <p>That’s <em>exactly</em> what we want! It’s fairly close to the first graph. While
 there are areas it’s off, it’s pretty dang close. In fact, on average it’s
@@ -394,9 +397,9 @@ difference of $4.26^\circ$!</p>
   
   <entry>
     <title type="html"><![CDATA[Test Post]]></title>
-    <link href="http://yoursite.com/blog/2014/05/14/test-post/"/>
+    <link href="http://scottsievert.github.io/blog/2014/05/14/test-post/"/>
     <updated>2014-05-14T08:52:07-05:00</updated>
-    <id>http://yoursite.com/blog/2014/05/14/test-post</id>
+    <id>http://scottsievert.github.io/blog/2014/05/14/test-post</id>
     <content type="html"><![CDATA[<h3 id="work">Work!</h3>
 <p>A test!</p>
 

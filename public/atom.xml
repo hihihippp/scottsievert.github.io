@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://yoursite.com/atom.xml" rel="self"/>
   <link href="http://yoursite.com/"/>
-  <updated>2014-05-15T09:19:43-05:00</updated>
+  <updated>2014-05-15T11:04:01-05:00</updated>
   <id>http://yoursite.com/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -293,7 +293,8 @@ are available.</p>
 <p>They even offer <a href="https://education.github.com/">private licenses for users in academia</a>. This
 allows you to have up to five free <em>private</em> code repositories online. This
 allows for easy collaboration and sharing (another plus: access to 
-<a href="https://pages.github.com/">Github Pages</a>).</p>
+<a href="https://pages.github.com/">Github Pages</a>). There’s <a href="https://help.github.com/articles/what-are-other-good-resources-for-learning-git-and-github">a list of useful guides</a> to
+getting started with Git/Github.</p>
 
 <h3 id="drawnow">drawnow</h3>
 <p>(shameless plug) MATLAB has a great feature that allows you to call <code>drawnow</code> to have a figure

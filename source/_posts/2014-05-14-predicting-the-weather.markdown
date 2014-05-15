@@ -14,7 +14,10 @@ First, let's see the temperature difference between the two cities:
 $
 \newcommand{\ex}[1]{\mathbb{E}\left[ #1 \right]}
 $
-{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png 500 %}
+
+<IMG SRC="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" width=500 align="center" ALT="Temperture difference">
+
+<!--{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png 500 %}-->
 <!--I have to go a level of meta first here and push to github-->
 
 Let's say we're collecting the data accurately and are free from the effects of noise. So, let's gather the data. In this, we're estimating $X$ from $Y$. The mean temperature difference, or in math terms, $\ex{\left\|X-Y\right\|} = 4.26^\circ$ ($\ex{\cdot}$ is an operator that finds the mean).
@@ -63,7 +66,8 @@ Let's see how good our results are using this $\alpha$ and $\beta$. The
 temperature difference between the two cities, but predicting one off the other
 is shown below:
 
-{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png 500 %}
+<!--{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png 500 %}-->
+<IMG SRC="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png" width=500 align="center" ALT="Temperture difference">
 
 That's *exactly* what we want! It's fairly close to the first graph. While
 there are areas it's off, it's pretty dang close. In fact, on average it's

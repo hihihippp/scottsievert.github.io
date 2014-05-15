@@ -1,0 +1,21 @@
+---
+layout: post
+title: "Test post"
+date: 2014-05-14 08:52:07 -0500
+comments: true
+categories: 
+---
+
+### Work!
+A test!
+
+$\exp[j\pi] + 1 = 0$
+
+> Four score and seven years ago...
+
+```python
+def fib(n):
+    if n==1: return 1
+    if n==2: return 1
+    return fib(n-1) + n
+```

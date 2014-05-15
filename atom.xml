@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-15T16:52:49-05:00</updated>
+  <updated>2014-05-15T17:37:05-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -26,7 +26,9 @@
 \newcommand{\ex}[1]{\mathbb{E}\left[ #1 \right]}
 $</p>
 
-<p><img src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" alt="Temperature difference" /></p>
+<!--![Temperature difference](https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png)-->
+
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" width="500" /></p>
 
 <p>Let’s say we’re collecting the data accurately and are free from the effects of noise. So, let’s gather the data. In this, we’re estimating $X$ from $Y$. The mean temperature difference, or in math terms, $\ex{\left|X-Y\right|} = 4.26^\circ$ ($\ex{\cdot}$ is an operator that finds the mean).</p>
 
@@ -75,7 +77,8 @@ Let’s see how good our results are using this $\alpha$ and $\beta$. The
 temperature difference between the two cities, but predicting one off the other
 is shown below:</p>
 
-<p><img src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png" alt="After prediction" /></p>
+<!--![After prediction](https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png)-->
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png" width="500" /></p>
 
 <p>That’s <em>exactly</em> what we want! It’s fairly close to the first graph. While
 there are areas it’s off, it’s pretty dang close. In fact, on average it’s

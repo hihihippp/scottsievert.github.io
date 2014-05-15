@@ -1,31 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://yoursite.com/blog/2014/05/14/test-post/</loc>
-        <lastmod>2014-05-14T13:42:16-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://yoursite.com/blog/2014/05/14/predicting-the-weather/</loc>
-        <lastmod>2014-05-14T14:55:12-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://yoursite.com/blog/2014/05/14/scienfitic-python-tips-and-tricks/</loc>
-        <lastmod>2014-05-15T09:24:33-05:00</lastmod>
-    </url>
-    <url>
-        <loc>http://yoursite.com/about/</loc>
+        <loc>http://scottsievert.github.io/about/about/</loc>
         <lastmod>2014-05-15T09:19:42-05:00</lastmod>
     </url>
     <url>
-        <loc>http://yoursite.com/blog/archives/</loc>
-        <lastmod>2014-05-15T09:24:33-05:00</lastmod>
+        <loc>http://scottsievert.github.io/blog/archives/blog/archives/</loc>
+        <lastmod>2014-05-14T13:42:16-05:00</lastmod>
     </url>
     <url>
-        <loc>http://yoursite.com/</loc>
-        <lastmod>2014-05-15T09:24:33-05:00</lastmod>
+        <loc>http://scottsievert.github.io/</loc>
+        <lastmod>2014-05-14T13:42:16-05:00</lastmod>
     </url>
     <url>
-        <loc>http://yoursite.com/robots.txt</loc>
+        <loc>http://scottsievert.github.io/robots.txt</loc>
         <lastmod>2014-05-14T08:51:17-05:00</lastmod>
     </url>
 </urlset>

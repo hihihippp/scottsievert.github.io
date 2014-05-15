@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-15T11:20:44-05:00</updated>
+  <updated>2014-05-15T11:27:32-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -334,9 +334,6 @@ changes and make it accessible globally!</p>
 $</p>
 
 <p><img src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" alt="Temperature difference" /></p>
-
-<!--<img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" width="500">&#8211;>
-<!--I have to go a level of meta first here and push to github-->
 
 <p>Let’s say we’re collecting the data accurately and are free from the effects of noise. So, let’s gather the data. In this, we’re estimating $X$ from $Y$. The mean temperature difference, or in math terms, $\ex{\left|X-Y\right|} = 4.26^\circ$ ($\ex{\cdot}$ is an operator that finds the mean).</p>
 

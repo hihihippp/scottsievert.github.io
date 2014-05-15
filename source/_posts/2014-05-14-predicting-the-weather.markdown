@@ -17,9 +17,6 @@ $
 
 ![Temperature difference](https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png)
 
-<!--{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png 500 %}-->
-<!--I have to go a level of meta first here and push to github-->
-
 Let's say we're collecting the data accurately and are free from the effects of noise. So, let's gather the data. In this, we're estimating $X$ from $Y$. The mean temperature difference, or in math terms, $\ex{\left\|X-Y\right\|} = 4.26^\circ$ ($\ex{\cdot}$ is an operator that finds the mean).
 
 We're going to a linear estimation process. This process only takes in

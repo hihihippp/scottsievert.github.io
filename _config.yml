@@ -2,7 +2,7 @@
 #      Main Configs       #
 # ----------------------- #
 
-url: http://yoursite.com
+url: http://scottsievert.github.io
 title: Scott Sievert
 subtitle: Carefully curated musings on math, python and skiing.
 author: Scott Sievert
@@ -19,7 +19,7 @@ date_format: "ordinal"
 subscribe_rss: /atom.xml
 subscribe_email:
 # RSS feeds can list your email address if you like
-email:
+email: sieve121@umn.edu
 
 # ----------------------- #
 #    Jekyll & Plugins     #

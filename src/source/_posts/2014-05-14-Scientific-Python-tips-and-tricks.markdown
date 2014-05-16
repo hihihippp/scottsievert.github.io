@@ -8,13 +8,15 @@ categories: python
 
 You want to switch from MATLAB to Python. You look into it a bit, but it's hard
 and confusing to pick up a whole new framework. You want to try and switch, but
-it's too much effort and takes too much time, so you stick with MATLAB. 
+it's too much effort and takes too much time, so you stick with MATLAB. I
+essentially grew up on Python, meaning I can guide you to some solid resources
+and hand over tips and tricks I've learned.
 
 This guide aims to ease that process a bit by showing tips and tricks within
 Python. This guide *is not* a full switch-to-Python guide. There are plenty of
 resources for that, including [some wonderful SciPy lectures][scipy-lectures],
 [detailed guides][scipy-lectures-http] to the same material, and [Python for
-MATLAB users][py-for-mat].  Those links are all useful, and **those links
+MATLAB users][py-for-mat]. Those links are all useful, and **those links
 should be looked at.**
 
 For an intro to Python, including types, the scope, functions and optional
@@ -28,6 +30,11 @@ those resources! I want to emphasize that.
 I recommend you install [Anaconda][anaconda]. Essentially, all this amounts to
 is running `bash <downloaded file>`, but complete instructions can be found on
 [Anaconda's website][install].
+
+This would be easiest if you're familiar with the command line. The basics
+involve using `cd` to navigate directories, `bash ...` to run files and `man
+<command>` to find help, but more of the basics can be found
+[with this tutorial][bash-basics].
 
 ### Interpreters
 The land of Python has many interpreters, aligning with the [Unix philosophy][unix].
@@ -243,16 +250,18 @@ allows for easy collaboration and sharing (another plus: access to
 getting started with Git/Github.
 
 ### drawnow
-(shameless plug) MATLAB has a great feature that allows you to call `drawnow` to have a figure
-update (after calling a series of plot commands). I searched high and low for a
-similar syntax in Python. I couldn't find anything but matplotlib's animation
-frameworks which didn't jive with the global scope ease I wanted to use. So, I
-created [python-drawnow][drawnow] to add this functionality. It easily allows
-you to view the results of an iterative (aka for-loop) process.
+(shameless plug) MATLAB has a great feature that allows you to call `drawnow`
+to have a figure update (after calling a series of plot commands). I searched
+high and low for a similar syntax in Python. I couldn't find anything but
+matplotlib's animation frameworks which didn't jive with the global scope ease
+I wanted to use. After a long and arduous search, I did find `clf()` and
+`draw()`. This is simple once you know about it, but it's a pain to find it.
 
+So, I created [python-drawnow][drawnow] to make this functionality *easily*
+accessible. It easily allows you to view the results of an iterative (aka
+for-loop) process.
 
 ### Conclusion
-
 As I stressed in the introduction, this guide is not meant to be a full
 introduction to Python; there are plenty of other tools to do that.
 [There][scipy-lectures] [are][scipy-lectures-http] [many][py-for-mat]
@@ -264,6 +273,7 @@ Google/stackoverflow search will likely solve your problem. Perhaps the best
 part: if you find a problem in a package and fix it, you can commit your
 changes and make it accessible globally!
 
+[bash-basics]:http://mac.appstorm.net/how-to/utilities-how-to/how-to-use-terminal-the-basics/
 [gh-tutorial]:https://help.github.com/articles/what-are-other-good-resources-for-learning-git-and-github
 [gh-pages]:https://pages.github.com/
 [gh-academia]:https://education.github.com/

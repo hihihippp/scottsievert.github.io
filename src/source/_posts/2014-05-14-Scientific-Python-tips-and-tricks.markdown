@@ -49,7 +49,7 @@ develop a fix, you can make that available to everyone globally through a pull
 request.
 
 #### Speed
-This is an issue that always pops up. There's a [SciPy post][perfomance-python]
+This is an issue that always pops up. There's a [SciPy post][performance-python]
 doing a single complicated example and comparing the results among MATLAB,
 Python+numpy and finds similar times.
 

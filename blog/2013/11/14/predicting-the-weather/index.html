@@ -21,13 +21,11 @@ MathJax.Hub.Config({
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
     
   <meta charset="utf-8">
-  <title>Blog Archive - Scott Sievert</title>
+  <title>Predicting the Weather - Scott Sievert</title>
   <meta name="author" content="Scott Sievert">
 
   
-  <meta name="description" content="Blog Archive 2014 Scientific Python: Tips and Tricks
-May 14 2014 posted in python 2013 Predicting the Weather
-Nov 14 2013 Recent Posts Scientific &hellip;">
+  <meta name="description" content="Let’s say that we’re accurately measuring the temperature in both Madison and Minneapolis, but then our temperature sensor in Minneapolis breaks. We &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -36,7 +34,7 @@ Nov 14 2013 Recent Posts Scientific &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://scottsievert.github.io/blog/archives">
+  <link rel="canonical" href="http://scottsievert.github.io/blog/2013/11/14/predicting-the-weather">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="Scott Sievert" type="application/atom+xml">
@@ -108,48 +106,142 @@ MathJax.Hub.Config({
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Predicting the Weather</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-14T09:44:33-06:00" pubdate data-updated="true">Nov 14<span>th</span>, 2013</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>Let’s say that we’re accurately measuring the temperature in both Madison and Minneapolis, but then our temperature sensor in Minneapolis breaks. We could easily install a new sensor, but we would prefer to estimate the temperature in Minneapolis based on the temperature in Madison. </p>
 
-  
-  <h2>2014</h2>
+<p>First, let’s see the temperature difference between the two cities:</p>
 
-<article>
-  
-<h1><a href="/blog/2014/05/14/Scientific+Python-tips-and-tricks/">Scientific Python: Tips and Tricks</a></h1>
-<time datetime="2014-05-14T20:20:24-05:00" pubdate><span class='month'>May</span> <span class='day'>14</span> <span class='year'>2014</span></time>
+<p>$
+\newcommand{\ex}[1]{\mathbb{E}\left[ #1 \right]}
+$</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/python/'>python</a></span>
-</footer>
+<!--![Temperature difference](https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png)-->
 
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" width="500" /></p>
 
-</article>
+<p>Let’s say we’re collecting the data accurately and are free from the effects of noise. So, let’s gather the data. In this, we’re estimating $X$ from $Y$. The mean temperature difference, or in math terms, $\ex{\left|X-Y\right|} = 4.26^\circ$ ($\ex{\cdot}$ is an operator that finds the mean).</p>
 
+<p>We’re going to a linear estimation process. This process only takes in
+information data about the current data and nothing about the general trend of
+the seasons. This process just says that the temperature in Minneapolis is 80%
+of the temp in Madison plus some constant; fairly simple. Regardless, it’s still
+pretty good as Madison and Minneapolis are fairly similar for temperature. The
+only thing this estimation requires is some past weather data in Minneapolis to
+predict the mean $\ex{X}$ and variance $\propto \ex{X^2}$ nothing more.</p>
 
+<p>We want to minimize the <em>energy</em> of the error, using the $l_2$ norm. This
+choice may seem arbitrary, and it kind of is. If this data were sparse (aka
+lots of zeros), we might want to use the $l_1$ or $l_0$ norms. But if we’re
+trying to minimize cost spent, the $l_0$ or $l_1$ norms don’t do as good of a
+job minimizing the amount of dollars spent.</p>
 
-  
-  <h2>2013</h2>
+<p>But doing the math,</p>
 
-<article>
-  
-<h1><a href="/blog/2013/11/14/predicting-the-weather/">Predicting the Weather</a></h1>
-<time datetime="2013-11-14T09:44:33-06:00" pubdate><span class='month'>Nov</span> <span class='day'>14</span> <span class='year'>2013</span></time>
+<script type="math/tex; mode=display"> \min \ex{\left(X-(\alpha Y+\beta)\right)^2} = \\\\\min \ex{X^2} +
+\alpha^2\ex{X^2} + \beta^2 + 2\alpha\beta\ex{X} - 2\alpha\ex{XY} - 2\beta\ex{X}  </script>
 
+<p>Since this function is concave (or U-shaped) and $\ex{\cdot}$ a linear function, we can minimize it using derivates on each term.</p>
 
-</article>
+<script type="math/tex; mode=display">\frac{d}{d\alpha} = 0 = -2 \ex{XY} + 2 \alpha\ex{Y^2} + 2\beta \ex{y}</script>
+
+<script type="math/tex; mode=display">\frac{d}{d\beta} = 0 = -2 \ex{X} + 2\beta + 2\alpha\ex{X}</script>
+
+<p>This linear system of equations is described by $Ax = b$ or </p>
+
+<script type="math/tex; mode=display">% <![CDATA[
+
+\begin{bmatrix} \ex{Y^2} & \ex{Y} \\\\ \ex{X} & 1 \end{bmatrix}
+\cdot
+\begin{bmatrix} \alpha~/~2 \\\\ \beta~/~2  \end{bmatrix}
+=
+\begin{bmatrix} \ex{XY}\\\\ \ex{X}\end{bmatrix}
+ %]]></script>
+
+<p>Solving this linear system of equations by multiplying $A^{-1}$ gives us</p>
+
+<script type="math/tex; mode=display">\alpha = 0.929\\\\\beta = 3.14 </script>
+
+<p>On average, the temperature in Minneapolis 92.9% of Madison’s, plus 3 degrees.
+Let’s see how good our results are using this $\alpha$ and $\beta$. The
+temperature difference between the two cities, but predicting one off the other
+is shown below:</p>
+
+<!--![After prediction](https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png)-->
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png" width="500" /></p>
+
+<p>That’s <em>exactly</em> what we want! It’s fairly close to the first graph. While
+there are areas it’s off, it’s pretty dang close. In fact, on average it’s
+within $4.36^\circ$ – fairly close to the original on average temperature
+difference of $4.26^\circ$!</p>
 
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Scott Sievert</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-14T09:44:33-06:00" pubdate data-updated="true">Nov 14<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2014/05/14/Scientific+Python-tips-and-tricks/" title="Next Post: Scientific Python: tips and tricks">Scientific Python: tips and tricks &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>

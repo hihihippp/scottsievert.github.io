@@ -1,9 +1,8 @@
 ---
 layout: post
-title: "Scienfitic Python: tips and tricks"
+title: "Scientific Python: tips and tricks"
 date: 2014-05-14 20:20:24 -0500
 comments: true
-published: false
 categories: python
 ---
 

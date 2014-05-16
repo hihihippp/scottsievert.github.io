@@ -15,8 +15,9 @@ and hand over tips and tricks I've learned.
 This guide aims to ease that process a bit by showing tips and tricks within
 Python. This guide *is not* a full switch-to-Python guide. There are plenty of
 resources for that, including [some wonderful SciPy lectures][scipy-lectures],
-[detailed guides][scipy-lectures-http] to the same material, and [Python for
-MATLAB users][py-for-mat]. Those links are all useful, and **those links
+[detailed guides][scipy-lectures-http] to the same material, and 
+[Python for MATLAB users][py-for-mat]. Those links are all useful, 
+and **those links
 should be looked at.**
 
 For an intro to Python, including types, the scope, functions and optional
@@ -25,6 +26,65 @@ keywords and syntax (string addition, etc), look at [the Python docs][python-doc
 But, that said, I'll share my most valuable tips and tricks I learned from
 looking at the resources above. These do not serve as a complete replacement
 those resources! I want to emphasize that.
+
+### Benefits of Python
+Before we start, I should explain what's nice about Python (and not making any
+comments about any other language).
+
+#### Active developer community
+Python's developer community is strong. The [NumPy github][numpy-gh] currently
+has a total of 215 contributors, 634 issues filed and 72 pull request (meaning
+someone else made a modification and wants to make it available globally). I
+perceive this to be seemingly much more active than closed source approaches such
+as LaTeX or MATLAB.
+
+There are exciting new projects such as [Numba][numba], a JIT compiler and
+[Julia][julia], an incredibly fast mid-level language. These projects have only
+recently launched and are under heavy development. It seems this will continue.
+
+#### Pull request
+Pull requests are perhaps the best part of the active developing community. You
+can submit your own contributions. If something bugs you enough that you
+develop a fix, you can make that available to everyone globally through a pull
+request.
+
+#### Speed
+This is an issue that always pops up. There's a [SciPy post][perfomance-python]
+doing a single complicated example and comparing the results among MATLAB,
+Python+numpy and finds similar times.
+
+A more complete [speed comparison][speed] is available and it again finds
+similar speeds with Python+numpy slightly faster. I didn't find any of these
+comparisons to be *exactly* what I wanted, so I wrote my own. I compared
+MATLAB, Python+numpy, Julia and R and found Julia to be blazing fast, MATLAB
+and Python to be similar speeds and R to be the slowest. [The code][code-speed]
+is available on Github, but I defined the functions as below:
+
+```python
+def plainFor():
+    ans = 0
+    for i in arange(1e6):
+        ans += i
+
+def vecFor():
+    x = arange(1e8)
+    y = sum(x)
+
+def svdTime():
+    n = 524
+    x = rand(n,n)
+    u,s,v = svd(x)
+
+def cumSumTime():
+    x = arange(1e7)
+    y = cumsum(x)
+```
+
+The results from this speed comparison are best viewed in a graph, shown below.
+
+{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/matlab_v_python_v2/speed_1.png 500 %}
+
+Basically, the speed difference between MATLAB and Python doesn't matter.
 
 ### Installation
 I recommend you install [Anaconda][anaconda]. Essentially, all this amounts to
@@ -45,8 +105,8 @@ I most recommend IPython; they seem to be more connected with scientific
 computing. But which one of IPython's shells should you use? They all have
 their pros and cons, but the QtConsole wins for plain interpreters.
 [Spyder][spyder] is an alternative (and IDE, meaning I haven't used it much)
-out there that tries to present a MATLAB-like GUI. I do know [it's possible to
-have IPython's QtConsole in Spyder][spyder-qt].
+out there that tries to present a MATLAB-like GUI. I do know 
+[it's possible to have IPython's QtConsole in Spyder][spyder-qt].
 
 ##### QtConsole
 This is what I most highly recommend. It allows you to see plots inline. Let me
@@ -273,6 +333,14 @@ Google/stackoverflow search will likely solve your problem. Perhaps the best
 part: if you find a problem in a package and fix it, you can commit your
 changes and make it accessible globally!
 
+[full-ide]:https://wiki.python.org/moin/IntegratedDevelopmentEnvironments
+[sci-ide]:http://xcorr.net/2013/04/17/evaluating-ides-for-scientific-python/
+[code-speed]:https://github.com/scottsievert/side-projects/tree/master/matlab_v_python_v2
+[speed]:https://modelingguru.nasa.gov/docs/DOC-1762
+[performance-python]:http://wiki.scipy.org/PerformancePython
+[julia]:http://julialang.org
+[numba]:http://numba.pydata.org
+[numpy-gh]:https://github.com/numpy/numpy
 [bash-basics]:http://mac.appstorm.net/how-to/utilities-how-to/how-to-use-terminal-the-basics/
 [gh-tutorial]:https://help.github.com/articles/what-are-other-good-resources-for-learning-git-and-github
 [gh-pages]:https://pages.github.com/

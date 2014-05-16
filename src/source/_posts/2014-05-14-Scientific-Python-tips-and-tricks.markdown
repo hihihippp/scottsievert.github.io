@@ -121,10 +121,10 @@ This `from pylab import *` is frowned upon. The [Zen of Python][zen] says
 > Namespaces are a honking great idea -- let's use more of those!
 
 meaning that `from package import *` shouldn't be used *with any package.* It's
-best to use `from pylab import ones, zeros, arange` but that's long and harder
-for development. I use `from pylab import *`; I'm guesing you'll do the same.
-If I'm wondering if a function exists, I try calling it and see what happens;
-oftentimes, I'm surprised.
+best to use `import pylab as p` but that's kinda annoying and gets messy in
+long lines with lots of function calls.  I use `from pylab import *`; I'm
+guesing you'll do the same.  If I'm wondering if a function exists, I try
+calling it and see what happens; oftentimes, I'm surprised.
 
 ### Parallelism
 Parallelism is a big deal to the scientific community: the code we have takes
@@ -226,7 +226,7 @@ to perform the dot product of $X \cdot Y \cdot Z$. But instead, you can use
 `x.dot(y).dot(z)`. Much easier and much cleaner.
 
 ### Version Control
-This is kind of related to the scientific programming process; it applies to
+This is not really related to the scientific programming process; it applies to
 any file, whether it be in a programming language or not (a good example: 
 LaTeX files).
 

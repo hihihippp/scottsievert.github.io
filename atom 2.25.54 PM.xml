@@ -1,143 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-<!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  jax: ["input/TeX", "output/HTML-CSS"],
-  tex2jax: {
-    inlineMath: [ ['$', '$'] ],
-    displayMath: [ ['$$', '$$']],
-    processEscapes: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  },
-  messageStyle: "none",
-  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-});
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
-    
-  <meta charset="utf-8">
-  <title>Scott Sievert</title>
-  <meta name="author" content="Scott Sievert">
+  <title><![CDATA[Scott Sievert]]></title>
+  <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
+  <link href="http://scottsievert.github.io/"/>
+  <updated>2014-05-16T14:05:22-05:00</updated>
+  <id>http://scottsievert.github.io/</id>
+  <author>
+    <name><![CDATA[Scott Sievert]]></name>
+    <email><![CDATA[sieve121@umn.edu]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-  <meta name="description" content="You want to switch from MATLAB to Python. You look into it a bit, but it’s hard
-and confusing to pick up a whole new framework. You want to try and &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://scottsievert.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Scott Sievert" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="//fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="//fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-
-  
-
-</head>
-
-<!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    TeX: { 
-        equationNumbers: { autoNumber: "AMS" } ,
-        extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-    }
-});
-</script>
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-  jax: ["input/TeX", "output/HTML-CSS"],
-  tex2jax: {
-    inlineMath: [ ['$', '$'] ],
-    displayMath: [ ['$$', '$$']],
-    processEscapes: true,
-    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-  },
-  messageStyle: "none",
-  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
-});
-</script>
-<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Scott Sievert</a></h1>
-  
-    <h2>Carefully curated musings on math, python and skiing.</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="https://www.google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:scottsievert.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/about">About</a></li>
-  <li><a href="https://github.com/scottsievert">Github</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/14/Scientific-Python-tips-and-tricks/">Scientific Python Tips and Tricks</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-14T20:20:24-05:00" pubdate data-updated="true">May 14<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>You want to switch from MATLAB to Python. You look into it a bit, but it’s hard
+  <entry>
+    <title type="html"><![CDATA[Scientific Python Tips and Tricks]]></title>
+    <link href="http://scottsievert.github.io/blog/2014/05/14/Scientific-Python-tips-and-tricks/"/>
+    <updated>2014-05-14T20:20:24-05:00</updated>
+    <id>http://scottsievert.github.io/blog/2014/05/14/Scientific-Python-tips-and-tricks</id>
+    <content type="html"><![CDATA[<p>You want to switch from MATLAB to Python. You look into it a bit, but it’s hard
 and confusing to pick up a whole new framework. You want to try and switch, but
 it’s too much effort and takes too much time, so you stick with MATLAB. I
 essentially grew up on Python, meaning I can guide you to some solid resources
@@ -462,42 +343,15 @@ Google/stackoverflow search will likely solve your problem. Perhaps the best
 part: if you find a problem in a package and fix it, you can commit your
 changes and make it accessible globally!</p>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/14/predicting-the-weather/">Predicting the Weather</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-14T09:44:33-06:00" pubdate data-updated="true">Nov 14<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Let’s say that we’re accurately measuring the temperature in both Madison and Minneapolis, but then our temperature sensor in Minneapolis breaks. We could easily install a new sensor, but we would prefer to estimate the temperature in Minneapolis based on the temperature in Madison. </p>
+  <entry>
+    <title type="html"><![CDATA[Predicting the Weather]]></title>
+    <link href="http://scottsievert.github.io/blog/2013/11/14/predicting-the-weather/"/>
+    <updated>2013-11-14T09:44:33-06:00</updated>
+    <id>http://scottsievert.github.io/blog/2013/11/14/predicting-the-weather</id>
+    <content type="html"><![CDATA[<p>Let’s say that we’re accurately measuring the temperature in both Madison and Minneapolis, but then our temperature sensor in Minneapolis breaks. We could easily install a new sensor, but we would prefer to estimate the temperature in Minneapolis based on the temperature in Madison. </p>
 
 <p>First, let’s see the temperature difference between the two cities:</p>
 
@@ -538,14 +392,14 @@ job minimizing the amount of dollars spent.</p>
 
 <p>This linear system of equations is described by $Ax = b$ or </p>
 
-<script type="math/tex; mode=display">% <![CDATA[
+<script type="math/tex; mode=display">% &lt;![CDATA[
 
 \begin{bmatrix} \ex{Y^2} & \ex{Y} \\\\ \ex{X} & 1 \end{bmatrix}
 \cdot
 \begin{bmatrix} \alpha~/~2 \\\\ \beta~/~2  \end{bmatrix}
 =
 \begin{bmatrix} \ex{XY}\\\\ \ex{X}\end{bmatrix}
- %]]></script>
+ %]]&gt;</script>
 
 <p>Solving this linear system of equations by multiplying $A^{-1}$ gives us</p>
 
@@ -564,91 +418,7 @@ there are areas it’s off, it’s pretty dang close. In fact, on average it’s
 within $4.36^\circ$ – fairly close to the original on average temperature
 difference of $4.26^\circ$!</p>
 
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-    <a href="/blog/archives">Blog Archives</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2014/05/14/Scientific-Python-tips-and-tricks/">Scientific Python Tips and Tricks</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/11/14/predicting-the-weather/">Predicting the Weather</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/scottsievert">@scottsievert</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'scottsievert',
-            count: 3,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Scott Sievert -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
-
-</footer>
-  
-
-
-
-
-
-
-
-
-
-
-
-</body>
-</html>
+</feed>

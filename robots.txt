@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: 
+
+Sitemap: http://scottsievert.github.io/sitemap.xml 

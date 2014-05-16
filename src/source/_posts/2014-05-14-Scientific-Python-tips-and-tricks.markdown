@@ -17,8 +17,7 @@ Python. This guide *is not* a full switch-to-Python guide. There are plenty of
 resources for that, including [some wonderful SciPy lectures][scipy-lectures],
 [detailed guides][scipy-lectures-http] to the same material, and 
 [Python for MATLAB users][py-for-mat]. Those links are all useful, 
-and **those links
-should be looked at.**
+and **those links should be looked at.**
 
 For an intro to Python, including types, the scope, functions and optional
 keywords and syntax (string addition, etc), look at [the Python docs][python-docs].
@@ -41,15 +40,18 @@ as LaTeX or MATLAB.
 There are exciting new projects such as [Numba][numba], a JIT compiler and
 [Julia][julia], an incredibly fast mid-level language. These projects have only
 recently launched and are under heavy development. It seems this will continue.
+The machine learning community has already adopted Python; I wonder about
+further impacts of this.
 
 #### Pull request
 Pull requests are perhaps the best part of the active developing community. You
 can submit your own contributions. If something bugs you enough that you
 develop a fix, you can make that available to everyone globally through a pull
-request.
+request. Submitting a pull request makes you feel like are changing the world
+in some small way: it's a good feeling.
 
 #### Speed
-This is an issue that always pops up. There's a [SciPy post][performance-python]
+This is an issue that always pops up. There's a [SciPy post][perf-py]
 doing a single complicated example and comparing the results among MATLAB,
 Python+numpy and finds similar times.
 
@@ -58,7 +60,8 @@ similar speeds with Python+numpy slightly faster. I didn't find any of these
 comparisons to be *exactly* what I wanted, so I wrote my own. I compared
 MATLAB, Python+numpy, Julia and R and found Julia to be blazing fast, MATLAB
 and Python to be similar speeds and R to be the slowest. [The code][code-speed]
-is available on Github, but I defined the functions as below:
+is available on Github, but I defined the functions as below. All the functions
+ran on my machine with almost identical background processes.
 
 ```python
 def plainFor():
@@ -82,9 +85,15 @@ def cumSumTime():
 
 The results from this speed comparison are best viewed in a graph, shown below.
 
-{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/matlab_v_python_v2/speed_1.png 500 %}
+{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/matlab_v_python_v2/speed_1.png %}
 
 Basically, the speed difference between MATLAB and Python doesn't matter.
+
+#### Ease
+Python is often described as the second best language for everything. It's
+possible to run shell commands with Python, but it's easier to do it with Ruby.
+It's possible to run web stuff with Python, but it's easier with Flask/other
+stuff. That means it's easy to run general commands.
 
 ### Installation
 I recommend you install [Anaconda][anaconda]. Essentially, all this amounts to
@@ -333,11 +342,12 @@ Google/stackoverflow search will likely solve your problem. Perhaps the best
 part: if you find a problem in a package and fix it, you can commit your
 changes and make it accessible globally!
 
+[mat-py-hack]:http://stackoverflow.com/questions/17445995/how-to-call-multiple-functions-from-a-single-m-matlab-file
 [full-ide]:https://wiki.python.org/moin/IntegratedDevelopmentEnvironments
 [sci-ide]:http://xcorr.net/2013/04/17/evaluating-ides-for-scientific-python/
 [code-speed]:https://github.com/scottsievert/side-projects/tree/master/matlab_v_python_v2
 [speed]:https://modelingguru.nasa.gov/docs/DOC-1762
-[performance-python]:http://wiki.scipy.org/PerformancePython
+[perf-py]:http://wiki.scipy.org/PerformancePython
 [julia]:http://julialang.org
 [numba]:http://numba.pydata.org
 [numpy-gh]:https://github.com/numpy/numpy

@@ -3,7 +3,7 @@ layout: post
 title: "Predicting the weather"
 date: 2013-11-14 10:44:33 -0500
 comments: true
-categories: 
+categories: math
 ---
 
 

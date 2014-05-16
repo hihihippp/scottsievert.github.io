@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-15T23:37:54-05:00</updated>
+  <updated>2014-05-16T08:07:25-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -29,8 +29,7 @@ Python. This guide <em>is not</em> a full switch-to-Python guide. There are plen
 resources for that, including <a href="https://github.com/jrjohansson/scientific-python-lectures">some wonderful SciPy lectures</a>,
 <a href="http://scipy-lectures.github.io">detailed guides</a> to the same material, and 
 <a href="http://wiki.scipy.org/NumPy_for_Matlab_Users">Python for MATLAB users</a>. Those links are all useful, 
-and <strong>those links
-should be looked at.</strong></p>
+and <strong>those links should be looked at.</strong></p>
 
 <p>For an intro to Python, including types, the scope, functions and optional
 keywords and syntax (string addition, etc), look at <a href="https://docs.python.org/2/tutorial/introduction.html">the Python docs</a>.</p>
@@ -52,16 +51,19 @@ as LaTeX or MATLAB.</p>
 
 <p>There are exciting new projects such as <a href="http://numba.pydata.org">Numba</a>, a JIT compiler and
 <a href="http://julialang.org">Julia</a>, an incredibly fast mid-level language. These projects have only
-recently launched and are under heavy development. It seems this will continue.</p>
+recently launched and are under heavy development. It seems this will continue.
+The machine learning community has already adopted Python; I wonder about
+further impacts of this.</p>
 
 <h4 id="pull-request">Pull request</h4>
 <p>Pull requests are perhaps the best part of the active developing community. You
 can submit your own contributions. If something bugs you enough that you
 develop a fix, you can make that available to everyone globally through a pull
-request.</p>
+request. Submitting a pull request makes you feel like are changing the world
+in some small way: it’s a good feeling.</p>
 
 <h4 id="speed">Speed</h4>
-<p>This is an issue that always pops up. There’s a [SciPy post][perfomance-python]
+<p>This is an issue that always pops up. There’s a <a href="http://wiki.scipy.org/PerformancePython">SciPy post</a>
 doing a single complicated example and comparing the results among MATLAB,
 Python+numpy and finds similar times.</p>
 
@@ -70,7 +72,8 @@ similar speeds with Python+numpy slightly faster. I didn’t find any of these
 comparisons to be <em>exactly</em> what I wanted, so I wrote my own. I compared
 MATLAB, Python+numpy, Julia and R and found Julia to be blazing fast, MATLAB
 and Python to be similar speeds and R to be the slowest. <a href="https://github.com/scottsievert/side-projects/tree/master/matlab_v_python_v2">The code</a>
-is available on Github, but I defined the functions as below:</p>
+is available on Github, but I defined the functions as below. All the functions
+ran on my machine with almost identical background processes.</p>
 
 <p>```python
 def plainFor():
@@ -94,9 +97,15 @@ def plainFor():
 
 <p>The results from this speed comparison are best viewed in a graph, shown below.</p>
 
-<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/matlab_v_python_v2/speed_1.png" width="500"></p>
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/matlab_v_python_v2/speed_1.png"></p>
 
 <p>Basically, the speed difference between MATLAB and Python doesn’t matter.</p>
+
+<h4 id="ease">Ease</h4>
+<p>Python is often described as the second best language for everything. It’s
+possible to run shell commands with Python, but it’s easier to do it with Ruby.
+It’s possible to run web stuff with Python, but it’s easier with Flask/other
+stuff. That means it’s easy to run general commands.</p>
 
 <h3 id="installation">Installation</h3>
 <p>I recommend you install <a href="http://docs.continuum.io/anaconda/">Anaconda</a>. Essentially, all this amounts to

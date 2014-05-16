@@ -265,10 +265,10 @@ instead.</p>
 </blockquote>
 
 <p>meaning that <code>from package import *</code> shouldn’t be used <em>with any package.</em> It’s
-best to use <code>from pylab import ones, zeros, arange</code> but that’s long and harder
-for development. I use <code>from pylab import *</code>; I’m guesing you’ll do the same.
-If I’m wondering if a function exists, I try calling it and see what happens;
-oftentimes, I’m surprised.</p>
+best to use <code>import pylab as p</code> but that’s kinda annoying and gets messy in
+long lines with lots of function calls.  I use <code>from pylab import *</code>; I’m
+guesing you’ll do the same.  If I’m wondering if a function exists, I try
+calling it and see what happens; oftentimes, I’m surprised.</p>
 
 <h3 id="parallelism">Parallelism</h3>
 <p>Parallelism is a big deal to the scientific community: the code we have takes
@@ -396,7 +396,7 @@ to perform the dot product of $X \cdot Y \cdot Z$. But instead, you can use
 <code>x.dot(y).dot(z)</code>. Much easier and much cleaner.</p>
 
 <h3 id="version-control">Version Control</h3>
-<p>This is kind of related to the scientific programming process; it applies to
+<p>This is not really related to the scientific programming process; it applies to
 any file, whether it be in a programming language or not (a good example: 
 LaTeX files).</p>
 

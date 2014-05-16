@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-15T20:41:49-05:00</updated>
+  <updated>2014-05-15T20:43:57-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -44,9 +44,8 @@ is running <code>bash &lt;downloaded file&gt;</code>, but complete instructions 
 <a href="https://store.continuum.io/cshop/anaconda/">Anaconda’s website</a>.</p>
 
 <p>This would be easiest if you’re familiar with the command line. The basics
-involve using <code>cd</code> to navigate directories, <code>bash ...</code> to run files and `man</p>
-<command />
-<p>` to find help, but more of the basics can be found
+involve using <code>cd</code> to navigate directories, <code>bash ...</code> to run files and <code>man
+___</code> to find help, but more of the basics can be found
 <a href="http://mac.appstorm.net/how-to/utilities-how-to/how-to-use-terminal-the-basics/">with this tutorial</a>.</p>
 
 <h3 id="interpreters">Interpreters</h3>

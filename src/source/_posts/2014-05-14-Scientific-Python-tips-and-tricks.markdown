@@ -33,7 +33,7 @@ is running `bash <downloaded file>`, but complete instructions can be found on
 
 This would be easiest if you're familiar with the command line. The basics
 involve using `cd` to navigate directories, `bash ...` to run files and `man
-<command>` to find help, but more of the basics can be found
+___` to find help, but more of the basics can be found
 [with this tutorial][bash-basics].
 
 ### Interpreters

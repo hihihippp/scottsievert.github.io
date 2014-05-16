@@ -26,83 +26,14 @@ But, that said, I'll share my most valuable tips and tricks I learned from
 looking at the resources above. These do not serve as a complete replacement
 those resources! I want to emphasize that.
 
-### Benefits of Python
-Before we start, I should explain what's nice about Python (and not making any
-comments about any other language).
-
-#### Active developer community
-Python's developer community is strong. The [NumPy github][numpy-gh] currently
-has a total of 215 contributors, 634 issues filed and 72 pull request (meaning
-someone else made a modification and wants to make it available globally). I
-perceive this to be seemingly much more active than closed source approaches such
-as LaTeX or MATLAB.
-
-There are exciting new projects such as [Numba][numba], a JIT compiler and
-[Julia][julia], an incredibly fast mid-level language. These projects have only
-recently launched and are under heavy development. It seems this will continue.
-The machine learning community has already adopted Python; I wonder about
-further impacts of this.
-
-#### Pull request
-Pull requests are perhaps the best part of the active developing community. You
-can submit your own contributions. If something bugs you enough that you
-develop a fix, you can make that available to everyone globally through a pull
-request. Submitting a pull request makes you feel like are changing the world
-in some small way: it's a good feeling.
-
-#### Speed
-This is an issue that always pops up. There's a [SciPy post][perf-py]
-doing a single complicated example and comparing the results among MATLAB,
-Python+numpy and finds similar times.
-
-A more complete [speed comparison][speed] is available and it again finds
-similar speeds with Python+numpy slightly faster. I didn't find any of these
-comparisons to be *exactly* what I wanted, so I wrote my own. I compared
-MATLAB, Python+numpy, Julia and R and found Julia to be blazing fast, MATLAB
-and Python to be similar speeds and R to be the slowest. [The code][code-speed]
-is available on Github, but I defined the functions as below. All the functions
-ran on my machine with almost identical background processes.
-
-```python
-def plainFor():
-    ans = 0
-    for i in arange(1e6):
-        ans += i
-
-def vecFor():
-    x = arange(1e8)
-    y = sum(x)
-
-def svdTime():
-    n = 524
-    x = rand(n,n)
-    u,s,v = svd(x)
-
-def cumSumTime():
-    x = arange(1e7)
-    y = cumsum(x)
-```
-
-The results from this speed comparison are best viewed in a graph, shown below.
-
-{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/matlab_v_python_v2/speed_1.png %}
-
-Basically, the speed difference between MATLAB and Python doesn't matter.
-
-#### Ease
-Python is often described as the second best language for everything. It's
-possible to run shell commands with Python, but it's easier to do it with Ruby.
-It's possible to run web stuff with Python, but it's easier with Flask/other
-stuff. That means it's easy to run general commands.
-
 ### Installation
 I recommend you install [Anaconda][anaconda]. Essentially, all this amounts to
 is running `bash <downloaded file>`, but complete instructions can be found on
 [Anaconda's website][install].
 
 This would be easiest if you're familiar with the command line. The basics
-involve using `cd` to navigate directories, `bash ...` to run files and `man
-___` to find help, but more of the basics can be found
+involve using `cd` to navigate directories, `bash <command>` to run files and 
+`man <command>` to find help, but more of the basics can be found
 [with this tutorial][bash-basics].
 
 ### Interpreters
@@ -312,7 +243,10 @@ Stealing from [this list][version-control], if you've ever
 * wanted to see how much work is being done, and where, when and by whom?
 * wanted to experiment with a new feature without interfering with working code?
 
-then you need version control.
+then you need version control. Personally, I can't imagine doing anything
+significant without source control. Whenever I'm writing a paper and working on
+almost any programming project, I use `git commit -am "description"` all the
+time. Source control is perhaps my biggest piece of advice.
 
 Version control is normally a bit of a pain: you normally have be familiar with the
 command line and (with CVS/etc) it can be an even bigger pain. Git (and it's

@@ -299,9 +299,20 @@ This is not really related to the scientific programming process; it applies to
 any file, whether it be in a programming language or not (a good example: 
 LaTeX files).
 
-Version control is a great thing. There are [many][version-control] sites
-proclaiming how great it is, but mainly you don't have to make `file_v1`
-through `file_vN` with version control.
+Stealing from [this list][version-control], if you've ever
+
+* made a change to code, realised it was a mistake and wanted to revert back?
+* lost code or had a backup that was too old?
+* had to maintain multiple versions of a product?
+* wanted to see the difference between two (or more) versions of your code?
+* wanted to prove that a particular change broke or fixed a piece of code?
+* wanted to review the history of some code?
+* wanted to submit a change to someone else's code?
+* wanted to share your code, or let other people work on your code?
+* wanted to see how much work is being done, and where, when and by whom?
+* wanted to experiment with a new feature without interfering with working code?
+
+then you need version control.
 
 Version control is normally a bit of a pain: you normally have be familiar with the
 command line and (with CVS/etc) it can be an even bigger pain. Git (and it's

@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-16T08:07:25-05:00</updated>
+  <updated>2014-05-16T09:01:03-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -369,9 +369,22 @@ to perform the dot product of $X \cdot Y \cdot Z$. But instead, you can use
 any file, whether it be in a programming language or not (a good example: 
 LaTeX files).</p>
 
-<p>Version control is a great thing. There are <a href="http://stackoverflow.com/a/1408464">many</a> sites
-proclaiming how great it is, but mainly you don’t have to make <code>file_v1</code>
-through <code>file_vN</code> with version control.</p>
+<p>Stealing from <a href="http://stackoverflow.com/a/1408464">this list</a>, if you’ve ever</p>
+
+<ul>
+  <li>made a change to code, realised it was a mistake and wanted to revert back?</li>
+  <li>lost code or had a backup that was too old?</li>
+  <li>had to maintain multiple versions of a product?</li>
+  <li>wanted to see the difference between two (or more) versions of your code?</li>
+  <li>wanted to prove that a particular change broke or fixed a piece of code?</li>
+  <li>wanted to review the history of some code?</li>
+  <li>wanted to submit a change to someone else’s code?</li>
+  <li>wanted to share your code, or let other people work on your code?</li>
+  <li>wanted to see how much work is being done, and where, when and by whom?</li>
+  <li>wanted to experiment with a new feature without interfering with working code?</li>
+</ul>
+
+<p>then you need version control.</p>
 
 <p>Version control is normally a bit of a pain: you normally have be familiar with the
 command line and (with CVS/etc) it can be an even bigger pain. Git (and it’s

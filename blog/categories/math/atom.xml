@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-16T14:05:22-05:00</updated>
+  <updated>2014-05-16T18:18:36-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -48,8 +48,10 @@ job minimizing the amount of dollars spent.</p>
 
 <p>But doing the math,</p>
 
-<script type="math/tex; mode=display"> \min \ex{\left(X-(\alpha Y+\beta)\right)^2} = \\\\\min \ex{X^2} +
-\alpha^2\ex{X^2} + \beta^2 + 2\alpha\beta\ex{X} - 2\alpha\ex{XY} - 2\beta\ex{X}  </script>
+<script type="math/tex; mode=display">
+\min \ex{\left(X-(\alpha Y+\beta)\right)^2} = \\\\\min \ex{X^2} +
+\alpha^2\ex{X^2} + \beta^2 + 2\alpha\beta\ex{X} - 2\alpha\ex{XY} - 2\beta\ex{X}
+</script>
 
 <p>Since this function is concave (or U-shaped) and $\ex{\cdot}$ a linear function, we can minimize it using derivates on each term.</p>
 

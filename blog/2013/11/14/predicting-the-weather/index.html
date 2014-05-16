@@ -51,11 +51,15 @@ MathJax.Hub.Config({
 
 </head>
 
+
+<!--added by scott-->
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     TeX: { 
         equationNumbers: { autoNumber: "AMS" } ,
+          "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } },
         extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
     }
 });
@@ -70,7 +74,12 @@ MathJax.Hub.Config({
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
   },
   messageStyle: "none",
-  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+  "HTML-CSS": { 
+      preferredFont: "TeX", 
+      availableFonts: ["STIX","TeX"],
+      linebreaks: {automatic: true} 
+  }
+  SVG: { linebreaks: { automatic: true } },
 });
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
@@ -163,8 +172,10 @@ job minimizing the amount of dollars spent.</p>
 
 <p>But doing the math,</p>
 
-<script type="math/tex; mode=display"> \min \ex{\left(X-(\alpha Y+\beta)\right)^2} = \\\\\min \ex{X^2} +
-\alpha^2\ex{X^2} + \beta^2 + 2\alpha\beta\ex{X} - 2\alpha\ex{XY} - 2\beta\ex{X}  </script>
+<script type="math/tex; mode=display">
+\min \ex{\left(X-(\alpha Y+\beta)\right)^2} = \\\\\min \ex{X^2} +
+\alpha^2\ex{X^2} + \beta^2 + 2\alpha\beta\ex{X} - 2\alpha\ex{XY} - 2\beta\ex{X}
+</script>
 
 <p>Since this function is concave (or U-shaped) and $\ex{\cdot}$ a linear function, we can minimize it using derivates on each term.</p>
 

@@ -37,8 +37,10 @@ job minimizing the amount of dollars spent.
 
 But doing the math,
 
-$$ \min \ex{\left(X-(\alpha Y+\beta)\right)^2} = \\\\\min \ex{X^2} +
-\alpha^2\ex{X^2} + \beta^2 + 2\alpha\beta\ex{X} - 2\alpha\ex{XY} - 2\beta\ex{X}  $$
+$$
+\min \ex{\left(X-(\alpha Y+\beta)\right)^2} = \\\\\min \ex{X^2} +
+\alpha^2\ex{X^2} + \beta^2 + 2\alpha\beta\ex{X} - 2\alpha\ex{XY} - 2\beta\ex{X}
+$$
 
 Since this function is concave (or U-shaped) and $\ex{\cdot}$ a linear function, we can minimize it using derivates on each term.
 

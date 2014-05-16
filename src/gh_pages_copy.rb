@@ -12,6 +12,7 @@ folders = ['about',
            'stylesheets']
 
 for folder in folders do
+    system('rm -rf ../'+folder)
     system('cp -r public/'+folder+' ../'+folder)
 end
 
@@ -24,5 +25,6 @@ files = ['atom.xml',
          'sitemap.xml']
 
 for file in files do
+    system('rm -f ../'+file)
     system('cp public/'+file+' ../'+file)
 end

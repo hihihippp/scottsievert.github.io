@@ -52,11 +52,15 @@ sensing brings to the table. There are interesting &hellip;">
 
 </head>
 
+
+<!--added by scott-->
 <!-- mathjax config similar to math.stackexchange -->
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
     TeX: { 
         equationNumbers: { autoNumber: "AMS" } ,
+          "HTML-CSS": { linebreaks: { automatic: true } },
+         SVG: { linebreaks: { automatic: true } },
         extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
     }
 });
@@ -71,7 +75,12 @@ MathJax.Hub.Config({
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
   },
   messageStyle: "none",
-  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+  "HTML-CSS": { 
+      preferredFont: "TeX", 
+      availableFonts: ["STIX","TeX"],
+      linebreaks: {automatic: true} 
+  }
+  SVG: { linebreaks: { automatic: true } },
 });
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>

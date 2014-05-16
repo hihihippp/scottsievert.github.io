@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Scott Sievert]]></title>
-  <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
+  <title><![CDATA[Category: Python | Scott Sievert]]></title>
+  <link href="http://scottsievert.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-16T14:05:22-05:00</updated>
+  <updated>2014-05-16T14:40:34-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -64,7 +64,7 @@ out there that tries to present a MATLAB-like GUI. I do know
 <p>This is what I most highly recommend. It allows you to see plots inline. Let me
 repeat that: <em>you can plot inline</em>. To see what I mean, here’s an example:</p>
 
-<p><img class="right" src="http://ipython.org/ipython-doc/stable/_images/qtconsole.png" width="350" /></p>
+<p><img class="right" src="http://ipython.org/ipython-doc/stable/_images/qtconsole.png" width="350"></p>
 
 <p>I’ve only found one area where it’s lacking. The issue is so small, I won’t
 mention it.</p>
@@ -88,35 +88,22 @@ useful tools including <code>%debug</code> (debug <em>after</em> error occured a
 to open; saves opening up iTerm.app) visible and open
 with an external monitor to look at documentation. A typical script look like</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-</span><span class="line"><span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
-</span><span class="line">
-</span><span class="line"><span class="n">N</span> <span class="o">=</span> <span class="mi">1024</span>
-</span><span class="line"><span class="n">x</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">N</span><span class="p">)</span> <span class="c"># make vector from -1 to 1 with N components</span>
-</span><span class="line"><span class="n">y</span> <span class="o">=</span> <span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">N</span><span class="p">)</span>
-</span><span class="line"><span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">meshgrid</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
-</span><span class="line"><span class="n">z</span> <span class="o">=</span> <span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="nb">pow</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="c"># ** and pow(y, 2) are equivalent</span>
-</span><span class="line">
-</span><span class="line"><span class="n">figure</span><span class="p">()</span>
-</span><span class="line"><span class="n">imshow</span><span class="p">(</span><span class="n">z</span><span class="p">,</span> <span class="n">interpolation</span><span class="o">=</span><span class="s">&#39;nearest&#39;</span><span class="p">)</span> <span class="c"># interpolation for no fuzziness</span>
-</span><span class="line"><span class="n">colorbar</span><span class="p">()</span>
-</span><span class="line"><span class="n">savefig</span><span class="p">(</span><span class="s">&#39;z.png&#39;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">300</span><span class="p">)</span>
-</span><span class="line"><span class="n">show</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>```python
+from <strong>future</strong> import division
+from pylab import *</p>
+
+<p>N = 1024
+x = linspace(-1, 1, num=N) # make vector from -1 to 1 with N components
+y = linspace(-1, 1, num=N)
+x, y = meshgrid(x, y)
+z = x**2 + pow(y, 2) # ** and pow(y, 2) are equivalent</p>
+
+<p>figure()
+imshow(z, interpolation=’nearest’) # interpolation for no fuzziness
+colorbar()
+savefig(‘z.png’, dpi=300)
+show()
+```</p>
 
 <p>I can then run this script in IPython’s QtConsole with <code>%run script.py</code> (using
 a handy <a href="http://www.keyboardmaestro.com/main/">Keyboard Maestro</a> shortcut to switch windows and
@@ -136,11 +123,10 @@ instead.</p>
 
 <p>To present a nearly drop-in MATLAB interface, use the following code</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="kn">from</span> <span class="nn">__future__</span> <span class="kn">import</span> <span class="n">division</span>
-</span><span class="line"><span class="kn">from</span> <span class="nn">pylab</span> <span class="kn">import</span> <span class="o">*</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p><code>python
+from __future__ import division
+from pylab import *
+</code></p>
 
 <p>This <code>from pylab import *</code> is frowned upon. The <a href="http://legacy.python.org/dev/peps/pep-0020/">Zen of Python</a> says</p>
 
@@ -166,27 +152,18 @@ recently stumbled across on
 <a href="https://medium.com/building-things-on-the-internet/40e9b2b36148">a method to parallelize a function in one line</a>. Basically,
 all you do is the following:</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># serial</span>
-</span><span class="line"><span class="n">x</span> <span class="o">=</span> <span class="p">[]</span>
-</span><span class="line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
-</span><span class="line">    <span class="n">x</span> <span class="o">+=</span> <span class="p">[</span><span class="n">function</span><span class="p">()]</span>
-</span><span class="line">
-</span><span class="line"><span class="c"># parallel</span>
-</span><span class="line"><span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
-</span><span class="line"><span class="n">x</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">function</span><span class="p">,</span> <span class="n">arange</span><span class="p">(</span><span class="mi">10</span><span class="p">))</span> <span class="c"># normally `for i in arange(10): function()`</span>
-</span><span class="line"><span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
-</span><span class="line"><span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>```python
+# serial
+x = []
+for i in arange(10):
+    x += [function()]</p>
+
+<h1 id="parallel">parallel</h1>
+<p>from multiprocessing import Pool
+x = pool.map(function, arange(10)) # normally <code>for i in arange(10): function()</code>
+pool.close()
+pool.join()
+```</p>
 
 <p><a href="https://medium.com/building-things-on-the-internet/40e9b2b36148">The link above</a> goes into more detail; I’ll omit most of it.
 IPython’s parallelization toolkit <a href="http://ipython.org/ipython-doc/dev/parallel/asyncresult.html#map-results-are-iterable">also includes a <code>map()</code> interface.</a></p>
@@ -200,7 +177,7 @@ complete library.</p>
 
 <p>Perhaps most attractive, <a href="http://docs.sympy.org/latest/tutorial/printing.html">you can even pretty print LaTeX or ASCII</a>.</p>
 
-<p><img class="left" src="http://docs.sympy.org/latest/_images/ipythonqtconsole.png" width="400" /></p>
+<p><img class="left" src="http://docs.sympy.org/latest/_images/ipythonqtconsole.png" width="400"></p>
 
 <p>I haven’t used this library much, but I’m sure there are good tutorials out
 there.</p>
@@ -212,43 +189,26 @@ there.</p>
 
 <p>For example,</p>
 
-<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
-<span class="line-number">2</span>
-<span class="line-number">3</span>
-<span class="line-number">4</span>
-<span class="line-number">5</span>
-<span class="line-number">6</span>
-<span class="line-number">7</span>
-<span class="line-number">8</span>
-<span class="line-number">9</span>
-<span class="line-number">10</span>
-<span class="line-number">11</span>
-<span class="line-number">12</span>
-<span class="line-number">13</span>
-<span class="line-number">14</span>
-<span class="line-number">15</span>
-<span class="line-number">16</span>
-<span class="line-number">17</span>
-<span class="line-number">18</span>
-</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">x</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="c"># make 4x4 matrix</span>
-</span><span class="line"><span class="k">print</span> <span class="n">x</span>
-</span><span class="line"> <span class="c">#  [[ 0  1  2  3]</span>
-</span><span class="line"> <span class="c">#   [ 4  5  6  7]</span>
-</span><span class="line"> <span class="c">#   [ 8  9 10 11]</span>
-</span><span class="line"> <span class="c">#   [12 13 14 15]]</span>
-</span><span class="line">
-</span><span class="line"><span class="k">print</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="c"># selects 2nd row (0-based indexing) and every column</span>
-</span><span class="line"> <span class="c"># [4, 5, 6, 7]</span>
-</span><span class="line">
-</span><span class="line"><span class="k">print</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="c"># selects 3rd column and every row</span>
-</span><span class="line"> <span class="c"># [2, 6, 10, 14]</span>
-</span><span class="line">
-</span><span class="line"><span class="k">print</span> <span class="n">x</span><span class="o">.</span><span class="n">T</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-</span><span class="line"> <span class="c"># [0, 4, 8, 12]</span>
-</span><span class="line">
-</span><span class="line"><span class="k">print</span> <span class="n">x</span><span class="o">.</span><span class="n">flat</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">]</span>
-</span><span class="line"> <span class="c"># [0, 1, 2, 3]</span>
-</span></code></pre></td></tr></table></div></figure></notextile></div>
+<p>```python
+x = arange(4*4).reshape(4,4) # make 4x4 matrix
+print x
+ #  [[ 0  1  2  3]
+ #   [ 4  5  6  7]
+ #   [ 8  9 10 11]
+ #   [12 13 14 15]]</p>
+
+<p>print x[1,:] # selects 2nd row (0-based indexing) and every column
+ # [4, 5, 6, 7]</p>
+
+<p>print x[:,2] # selects 3rd column and every row
+ # [2, 6, 10, 14]</p>
+
+<p>print x.T.flat[0, 1, 2, 3]
+ # [0, 4, 8, 12]</p>
+
+<p>print x.flat[0, 1, 2, 3]
+ # [0, 1, 2, 3]
+```</p>
 
 <p>This makes sense because you’d normally use <code>x[0][1]</code> to select the element in
 the 1st row and 2nd column. <code>x[0,1]</code> does the same thing but drops the
@@ -342,81 +302,6 @@ documentation is also a great place to look (<a href="http://docs.scipy.org/doc/
 Google/stackoverflow search will likely solve your problem. Perhaps the best
 part: if you find a problem in a package and fix it, you can commit your
 changes and make it accessible globally!</p>
-
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[Predicting the Weather]]></title>
-    <link href="http://scottsievert.github.io/blog/2013/11/14/predicting-the-weather/"/>
-    <updated>2013-11-14T09:44:33-06:00</updated>
-    <id>http://scottsievert.github.io/blog/2013/11/14/predicting-the-weather</id>
-    <content type="html"><![CDATA[<p>Let’s say that we’re accurately measuring the temperature in both Madison and Minneapolis, but then our temperature sensor in Minneapolis breaks. We could easily install a new sensor, but we would prefer to estimate the temperature in Minneapolis based on the temperature in Madison. </p>
-
-<p>First, let’s see the temperature difference between the two cities:</p>
-
-<p>$
-\newcommand{\ex}[1]{\mathbb{E}\left[ #1 \right]}
-$</p>
-
-<!--![Temperature difference](https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png)-->
-
-<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" width="500" /></p>
-
-<p>Let’s say we’re collecting the data accurately and are free from the effects of noise. So, let’s gather the data. In this, we’re estimating $X$ from $Y$. The mean temperature difference, or in math terms, $\ex{\left|X-Y\right|} = 4.26^\circ$ ($\ex{\cdot}$ is an operator that finds the mean).</p>
-
-<p>We’re going to a linear estimation process. This process only takes in
-information data about the current data and nothing about the general trend of
-the seasons. This process just says that the temperature in Minneapolis is 80%
-of the temp in Madison plus some constant; fairly simple. Regardless, it’s still
-pretty good as Madison and Minneapolis are fairly similar for temperature. The
-only thing this estimation requires is some past weather data in Minneapolis to
-predict the mean $\ex{X}$ and variance $\propto \ex{X^2}$ nothing more.</p>
-
-<p>We want to minimize the <em>energy</em> of the error, using the $l_2$ norm. This
-choice may seem arbitrary, and it kind of is. If this data were sparse (aka
-lots of zeros), we might want to use the $l_1$ or $l_0$ norms. But if we’re
-trying to minimize cost spent, the $l_0$ or $l_1$ norms don’t do as good of a
-job minimizing the amount of dollars spent.</p>
-
-<p>But doing the math,</p>
-
-<script type="math/tex; mode=display"> \min \ex{\left(X-(\alpha Y+\beta)\right)^2} = \\\\\min \ex{X^2} +
-\alpha^2\ex{X^2} + \beta^2 + 2\alpha\beta\ex{X} - 2\alpha\ex{XY} - 2\beta\ex{X}  </script>
-
-<p>Since this function is concave (or U-shaped) and $\ex{\cdot}$ a linear function, we can minimize it using derivates on each term.</p>
-
-<script type="math/tex; mode=display">\frac{d}{d\alpha} = 0 = -2 \ex{XY} + 2 \alpha\ex{Y^2} + 2\beta \ex{y}</script>
-
-<script type="math/tex; mode=display">\frac{d}{d\beta} = 0 = -2 \ex{X} + 2\beta + 2\alpha\ex{X}</script>
-
-<p>This linear system of equations is described by $Ax = b$ or </p>
-
-<script type="math/tex; mode=display">% &lt;![CDATA[
-
-\begin{bmatrix} \ex{Y^2} & \ex{Y} \\\\ \ex{X} & 1 \end{bmatrix}
-\cdot
-\begin{bmatrix} \alpha~/~2 \\\\ \beta~/~2  \end{bmatrix}
-=
-\begin{bmatrix} \ex{XY}\\\\ \ex{X}\end{bmatrix}
- %]]&gt;</script>
-
-<p>Solving this linear system of equations by multiplying $A^{-1}$ gives us</p>
-
-<script type="math/tex; mode=display">\alpha = 0.929\\\\\beta = 3.14 </script>
-
-<p>On average, the temperature in Minneapolis 92.9% of Madison’s, plus 3 degrees.
-Let’s see how good our results are using this $\alpha$ and $\beta$. The
-temperature difference between the two cities, but predicting one off the other
-is shown below:</p>
-
-<!--![After prediction](https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png)-->
-<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png" width="500" /></p>
-
-<p>That’s <em>exactly</em> what we want! It’s fairly close to the first graph. While
-there are areas it’s off, it’s pretty dang close. In fact, on average it’s
-within $4.36^\circ$ – fairly close to the original on average temperature
-difference of $4.26^\circ$!</p>
 
 ]]></content>
   </entry>

@@ -6,11 +6,11 @@ comments: true
 categories: python
 ---
 
-You want to switch from MATLAB to Python. You look into it a bit, but it's hard
-and confusing to pick up a whole new framework. You want to try and switch, but
-it's too much effort and takes too much time, so you stick with MATLAB. I
-essentially grew up on Python, meaning I can guide you to some solid resources
-and hand over tips and tricks I've learned.
+You want to pick up Python. But it's hard and confusing to pick up a whole new
+framework. You want to try and switch, but it's too much effort and takes too
+much time, so you stick with MATLAB. I essentially grew up on Python, meaning I
+can guide you to some solid resources and hand over tips and tricks I've
+learned.
 
 This guide aims to ease that process a bit by showing tips and tricks within
 Python. This guide *is not* a full switch-to-Python guide. There are plenty of
@@ -206,12 +206,8 @@ In MATLAB, indexing is 1-based but perhaps most confusingly `array(x,y)` is
 `array[y,x]` in Python. MATLAB also has a feature that allows you to select an
 element based on the total number of element in an array. This is useful for
 the [Kroeneker product][kron]. MATLAB stacks the columns when doing this, which
-is exactly the method `kron` relies on.
-
-To emulate `kron` in Python, you can use `kron` in Pylab, but to index properly
-I use `X.T.flat[i]`. I could transform `X` at the start of the script, but then
-I'd have to rely on always following the same convention (and rationalize it by
-thinking, "I'd rather explicitly use kron").
+is exactly the method `kron` relies on. To use Kroeneker indexing in Python, I
+use `x.T.flat[i]`.
 
 ### `@`: Dot product operator
 In any Python version <= 3.4, there's no dot

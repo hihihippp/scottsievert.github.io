@@ -25,8 +25,8 @@ MathJax.Hub.Config({
   <meta name="author" content="Scott Sievert">
 
   
-  <meta name="description" content="You want to switch from MATLAB to Python. You look into it a bit, but it’s hard
-and confusing to pick up a whole new framework. You want to try and &hellip;">
+  <meta name="description" content="You want to pick up Python. But it’s hard and confusing to pick up a whole new
+framework. You want to try and switch, but it’s too much effort and &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -139,11 +139,11 @@ MathJax.Hub.Config({
   </header>
 
 
-  <div class="entry-content"><p>You want to switch from MATLAB to Python. You look into it a bit, but it’s hard
-and confusing to pick up a whole new framework. You want to try and switch, but
-it’s too much effort and takes too much time, so you stick with MATLAB. I
-essentially grew up on Python, meaning I can guide you to some solid resources
-and hand over tips and tricks I’ve learned.</p>
+  <div class="entry-content"><p>You want to pick up Python. But it’s hard and confusing to pick up a whole new
+framework. You want to try and switch, but it’s too much effort and takes too
+much time, so you stick with MATLAB. I essentially grew up on Python, meaning I
+can guide you to some solid resources and hand over tips and tricks I’ve
+learned.</p>
 
 <p>This guide aims to ease that process a bit by showing tips and tricks within
 Python. This guide <em>is not</em> a full switch-to-Python guide. There are plenty of
@@ -381,12 +381,8 @@ first row.</p>
 <code>array[y,x]</code> in Python. MATLAB also has a feature that allows you to select an
 element based on the total number of element in an array. This is useful for
 the <a href="https://en.wikipedia.org/wiki/Kronecker_product">Kroeneker product</a>. MATLAB stacks the columns when doing this, which
-is exactly the method <code>kron</code> relies on.</p>
-
-<p>To emulate <code>kron</code> in Python, you can use <code>kron</code> in Pylab, but to index properly
-I use <code>X.T.flat[i]</code>. I could transform <code>X</code> at the start of the script, but then
-I’d have to rely on always following the same convention (and rationalize it by
-thinking, “I’d rather explicitly use kron”).</p>
+is exactly the method <code>kron</code> relies on. To use Kroeneker indexing in Python, I
+use <code>x.T.flat[i]</code>.</p>
 
 <h3 id="dot-product-operator"><code>@</code>: Dot product operator</h3>
 <p>In any Python version &lt;= 3.4, there’s no dot

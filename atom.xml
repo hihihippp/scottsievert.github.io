@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-18T15:59:44-05:00</updated>
+  <updated>2014-05-18T18:11:01-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -12,22 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Speckle and Lasers]]></title>
-    <link href="http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers/"/>
-    <updated>2014-05-18T09:26:40-05:00</updated>
-    <id>http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers</id>
-    <content type="html"><![CDATA[<!--Impulse response-->
-<p>In coherent systems, 
-<!--plane wave spectrum-->
-<!--Define coherence-->
-<!--Rough, random phases-->
-<!--convolve-->
-<!--boom--></p>
-
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Scientific Python Tips and Tricks]]></title>

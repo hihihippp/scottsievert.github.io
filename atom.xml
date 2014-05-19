@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-19T11:37:46-05:00</updated>
+  <updated>2014-05-19T11:53:35-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -54,10 +54,10 @@ responses shifted in space and scaled by the corresponding amount. This is
 <a href="https://en.wikipedia.org/wiki/Convolution">convolution</a> and only works because this is a linear and space invariant
 system.</p>
 
-<p>To find our impulse response of $h\left( x, y\right) $, we have to take the
-Fourier transform (aka FFT) of our pupil. Since our pupil function is
-symmetric, the inverse Fourier transform and forward Fourier transform 
-<a href="https://en.wikipedia.org/wiki/Fourier_transform#Invertibility_and_periodicity">are equivalent</a>.</p>
+<p>To find our impulse response (or response to a single pixel) 
+$h\left( x, y\right) $, we have to take the Fourier transform (aka FFT) of our pupil. Since
+our pupil function is symmetric, the inverse Fourier transform and forward
+Fourier transform <a href="https://en.wikipedia.org/wiki/Fourier_transform#Invertibility_and_periodicity">are equivalent</a>.</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>

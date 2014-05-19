@@ -13,7 +13,7 @@ folders = ['about',
 
 for folder in folders do
     system('rm -rf ../'+folder)
-    system('cp -r _deploy/'+folder+' ../'+folder)
+    system('cp -r public/'+folder+' ../'+folder)
 end
 
 puts "    Copying files to parent directory"
@@ -26,5 +26,5 @@ files = ['atom.xml',
 
 for file in files do
     system('rm -f ../'+file)
-    system('cp _deploy/'+file+' ../'+file)
+    system('cp public/'+file+' ../'+file)
 end

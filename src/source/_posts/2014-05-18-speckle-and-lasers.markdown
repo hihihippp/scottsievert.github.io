@@ -82,8 +82,6 @@ full impulse response, we wouldn't see any speckle in laser images.
 We can model this optical system with a 2D convolution and a bunch of random
 phase vectors.
 
- 
-
 ```python
 x = exp(1j*2*pi*rand(N,N)) # a bunch of random phases
 x *= p # only within the pupil

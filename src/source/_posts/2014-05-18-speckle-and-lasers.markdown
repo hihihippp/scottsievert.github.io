@@ -4,8 +4,10 @@ title: "Speckle and lasers"
 date: 2014-05-18 09:26:40 -0500
 comments: true
 published: true
-categories: math, optics
+categories: math optics
 ---
+
+SDFS
 
 We know that lasers are very accurate instruments. We know that they emit a
 very precise wavelength and are used in an array of precision applications

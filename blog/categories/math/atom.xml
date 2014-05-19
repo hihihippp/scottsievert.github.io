@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: Math, | Scott Sievert]]></title>
+  <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-19T09:15:11-05:00</updated>
+  <updated>2014-05-19T09:31:26-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -18,7 +18,9 @@
     <link href="http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers/"/>
     <updated>2014-05-18T09:26:40-05:00</updated>
     <id>http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers</id>
-    <content type="html"><![CDATA[<p>We know that lasers are very accurate instruments. We know that they emit a
+    <content type="html"><![CDATA[<p>SDFS</p>
+
+<p>We know that lasers are very accurate instruments. We know that they emit a
 very precise wavelength and are used in an array of precision applications
 including <a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless surgery</a>, <a href="https://en.wikipedia.org/wiki/Laser_eye_surgery_(disambiguation)">eye surgery</a> and 
 <a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. That begs a question: 
@@ -117,6 +119,85 @@ theory.</p>
 <p><strong>tl;dr:</strong> the roughness of the walls add uncertainty in phase and hence speckle</p>
 
 <p><em>the <a href="https://github.com/scottsievert/side-projects/tree/master/speckle">full code</a> is available on Github.</em></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Predicting the Weather]]></title>
+    <link href="http://scottsievert.github.io/blog/2013/11/14/predicting-the-weather/"/>
+    <updated>2013-11-14T09:44:33-06:00</updated>
+    <id>http://scottsievert.github.io/blog/2013/11/14/predicting-the-weather</id>
+    <content type="html"><![CDATA[<p>Let’s say that we’re accurately measuring the temperature in both Madison and Minneapolis, but then our temperature sensor in Minneapolis breaks. We could easily install a new sensor, but we would prefer to estimate the temperature in Minneapolis based on the temperature in Madison. </p>
+
+<!--More-->
+
+<p>First, let’s see the temperature difference between the two cities:</p>
+
+<p>$
+\newcommand{\ex}[1]{\mathbb{E}\left[ #1 \right]}
+$</p>
+
+<!--![Temperature difference](https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png)-->
+
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/temp_diff.png" width="500"></p>
+
+<p>Let’s say we’re collecting the data accurately and are free from the effects of noise. So, let’s gather the data. In this, we’re estimating $X$ from $Y$. The mean temperature difference, or in math terms, $\ex{\left|X-Y\right|} = 4.26^\circ$ ($\ex{\cdot}$ is an operator that finds the mean).</p>
+
+<p>We’re going to a linear estimation process. This process only takes in
+information data about the current data and nothing about the general trend of
+the seasons. This process just says that the temperature in Minneapolis is 80%
+of the temp in Madison plus some constant; fairly simple. Regardless, it’s still
+pretty good as Madison and Minneapolis are fairly similar for temperature. The
+only thing this estimation requires is some past weather data in Minneapolis to
+predict the mean $\ex{X}$ and variance $\propto \ex{X^2}$ nothing more.</p>
+
+<p>We want to minimize the <em>energy</em> of the error, using the $l_2$ norm. This
+choice may seem arbitrary, and it kind of is. If this data were sparse (aka
+lots of zeros), we might want to use the $l_1$ or $l_0$ norms. But if we’re
+trying to minimize cost spent, the $l_0$ or $l_1$ norms don’t do as good of a
+job minimizing the amount of dollars spent.</p>
+
+<p>But doing the math,</p>
+
+<script type="math/tex; mode=display">
+\min \ex{\left(X-(\alpha Y+\beta)\right)^2} = \\\\\min \ex{X^2} +
+\alpha^2\ex{X^2} + \beta^2 + 2\alpha\beta\ex{X} - 2\alpha\ex{XY} - 2\beta\ex{X}
+</script>
+
+<p>Since this function is concave (or U-shaped) and $\ex{\cdot}$ a linear function, we can minimize it using derivates on each term.</p>
+
+<script type="math/tex; mode=display">\frac{d}{d\alpha} = 0 = -2 \ex{XY} + 2 \alpha\ex{Y^2} + 2\beta \ex{y}</script>
+
+<script type="math/tex; mode=display">\frac{d}{d\beta} = 0 = -2 \ex{X} + 2\beta + 2\alpha\ex{X}</script>
+
+<p>This linear system of equations is described by $Ax = b$ or </p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{bmatrix} \ex{Y^2} & \ex{Y} \\\\ \ex{X} & 1 \end{bmatrix}
+\cdot
+\begin{bmatrix} \alpha~/~2 \\\\ \beta~/~2  \end{bmatrix}
+=
+\begin{bmatrix} \ex{XY}\\\\ \ex{X}\end{bmatrix}
+ %]]&gt;</script>
+
+<p>Solving this linear system of equations by multiplying $A^{-1}$ gives us</p>
+
+<script type="math/tex; mode=display">\alpha = 0.929\\\\\beta = 3.14 </script>
+
+<p>On average, the temperature in Minneapolis 92.9% of Madison’s, plus 3 degrees.
+Let’s see how good our results are using this $\alpha$ and $\beta$. The
+temperature difference between the two cities, but predicting one off the other
+is shown below:</p>
+
+<!--![After prediction](https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png)-->
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/predicting_weather/pred_diff.png" width="500"></p>
+
+<p>That’s <em>exactly</em> what we want! It’s fairly close to the first graph. While
+there are areas it’s off, it’s pretty dang close. In fact, on average it’s
+within $4.36^\circ$ – fairly close to the original on average temperature
+difference of $4.26^\circ$!</p>
 
 ]]></content>
   </entry>

@@ -1,0 +1,13 @@
+<div class="highlight"><pre><span class="n">x</span> <span class="o">=</span> <span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="o">*</span><span class="mi">4</span><span class="p">)</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span><span class="mi">4</span><span class="p">)</span> <span class="c"># make 4x4 matrix</span>
+<span class="k">print</span> <span class="n">x</span>
+ <span class="c">#  [[ 0  1  2  3]</span>
+ <span class="c">#   [ 4  5  6  7]</span>
+ <span class="c">#   [ 8  9 10 11]</span>
+ <span class="c">#   [12 13 14 15]]</span>
+
+<span class="k">print</span> <span class="n">x</span><span class="p">[</span><span class="mi">1</span><span class="p">,:]</span> <span class="c"># selects 2nd row (0-based indexing) and every column</span>
+ <span class="c"># [4, 5, 6, 7]</span>
+
+<span class="k">print</span> <span class="n">x</span><span class="p">[:,</span><span class="mi">2</span><span class="p">]</span> <span class="c"># selects 3rd column and every row</span>
+ <span class="c"># [2, 6, 10, 14]</span>
+</pre></div>

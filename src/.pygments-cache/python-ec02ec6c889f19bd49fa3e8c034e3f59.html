@@ -1,0 +1,8 @@
+<div class="highlight"><pre><span class="c"># a circular pupil</span>
+<span class="n">pupil</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+<span class="n">i</span> <span class="o">=</span> <span class="n">argwhere</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">pupil</span><span class="p">[</span><span class="n">i</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+
+<span class="n">h</span> <span class="o">=</span> <span class="n">fft2</span><span class="p">(</span><span class="n">pupil</span><span class="p">)</span> <span class="c"># since H(fx) = P(x)</span>
+<span class="n">h</span> <span class="o">=</span> <span class="n">fftshift</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</pre></div>

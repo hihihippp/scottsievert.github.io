@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Optics | Scott Sievert]]></title>
+  <link href="http://scottsievert.github.io/blog/categories/optics/atom.xml" rel="self"/>
+  <link href="http://scottsievert.github.io/"/>
+  <updated>2014-05-19T08:42:48-05:00</updated>
+  <id>http://scottsievert.github.io/</id>
+  <author>
+    <name><![CDATA[Scott Sievert]]></name>
+    <email><![CDATA[sieve121@umn.edu]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Speckle and Lasers]]></title>
+    <link href="http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers/"/>
+    <updated>2014-05-18T09:26:40-05:00</updated>
+    <id>http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers</id>
+    <content type="html"><![CDATA[<p>We know that lasers are very accurate instruments. We know that they emit a
+very precise wavelength and are used in an array of precision applications
+including <a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless surgery</a>, <a href="https://en.wikipedia.org/wiki/Laser_eye_surgery_(disambiguation)">eye surgery</a> and 
+<a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. That begs a question: 
+when we shine a laser on anything,
+why do we see bright and dark spots? Shouldn’t it all be the same color?  To
+answer that question, we need to delve into optical theory.</p>
+
+<!--Impulse response-->
+<p><a href="https://en.wikipedia.org/wiki/Coherence_(physics)">Coherent optical systems</a> are simply defined to be systems where you know the
+phase and wavelength of each component. This is very precise light where you
+know what’s going on at all times. Sunlight is not like this, as photons are
+randomly generated in time at many wavelength. 
+Pretty much only lasers are coherent, but if coherent, why does speckle (bright
+and dark spots) appear?</p>
+
+<p>Coherent optical systems have a very special property. Their 
+<a href="https://en.wikipedia.org/wiki/Impulse_response">impulse response</a>
+in the frequency domain is just the pupil function.  For those familiar with
+the parlance and having $f_x$ be a spatial frequency (as opposed to time),</p>
+
+<script type="math/tex; mode=display">H\left( f_x, f_y\right) = P(x, y) </script>
+
+<p>When I saw this derived, I thought “holy shit.” If you just want to only pass high
+frequency spatial content (read: edges), then all that’s required it to not let
+light through the center of the lens.</p>
+
+<p><img class="right" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/impulse_respone.png" width="200"></p>
+
+<p>Since this system is linear, we can think of our output as bunch of impulse
+responses shifted in space and scaled by the corresponding amount. This is
+<a href="https://en.wikipedia.org/wiki/Convolution">convolution</a> and only works because this is a linear system.</p>
+
+<p>To find our $H\left( f_x, f_y\right) $, we have to take the Fourier transform (aka FFT) of
+our pupil. Since our pupil function is symmetric, the inverse Fourier transform
+and forward Fourier transform <a href="https://en.wikipedia.org/wiki/Fourier_transform#Invertibility_and_periodicity">are equivalent</a>.</p>
+
+<p>```python
+# a circular pupil
+pupil = zeros((N,N))
+i = argwhere(x<strong>2 + y</strong>2 &lt; r**2)
+pupil[i[:,0], i[:,1]] = 1</p>
+
+<p>h = fft2(pupil) # our impulse response since H(fx) = P(x)
+h = fftshift(h)
+```</p>
+
+<!--plane wave spectrum-->
+<p>Through the angular plane wave spectrum, this impulse response can be viewed as
+a series plane waves coming in at different angles, shown in the figure below.</p>
+
+<p><img class="right" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/apws.png" width="200"></p>
+
+<p>What angles can a wave be though of as? The frequency content and angles turn
+out to be related, since two planes waves of a constant frequency adding
+together can have a change in frequency depending on what angle they’re at. Or,
+our spatial plane wave $U(x,y)$ can be represented by the Fourier transform:</p>
+
+<script type="math/tex; mode=display">U(x, y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta/\lambda}</script>
+
+<p>The wall (which the laser is shining on) is not smooth and perfectly flat. It’s
+rough, and the distance adds a phase difference between two waves. Through the
+<a href="https://en.wikipedia.org/wiki/Random_walk">random walk processes</a> and the angular wave spectrum, if we could
+obtain every angle, the laser wouldn’t have any speckle. Our eyes don’t have
+infinite dimension, so we can’t do that.</p>
+
+<p>Since the impulse response of our impulse response extends out a ways in the
+spatial domain and our eyes can’t aren’t infinitely big, we can’t receive the
+complete laser image. If our eyes were infinitely large and able to receive the
+full impulse response, we wouldn’t see any speckle in laser images.</p>
+
+<p>We can model this optical system with a 2D convolution and a bunch of random
+phase vectors.</p>
+
+<p>```python
+x = exp(1j<em>2</em>pi*rand(N,N)) # a bunch of random phases
+x *= p # only within the pupil</p>
+
+<p>d = N/2 # delta since our eyes aren’t infinitely big
+y = convolve2d(x, h[N/2-d:N/2+d, N/2-d:N/2+d])
+```</p>
+
+<p>Then the laser shows speckle! This varies on how much of the impulse response
+we include; if we include more frequencies, the dots get smaller. This means
+that if you hold a pinhole up to your eye, the speckles will appear larger.</p>
+
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/speckle.png" width="500"></p>
+
+<p>An intuitive way to think about this involves the impulse response. The impulse
+response changes on with the distance and so does the phase. Certain areas add
+up to 0 while others add up to 1. There’s a whole probability density function
+that goes with that, but that’s goes further into optical and statistical
+theory.</p>
+
+<p><strong>tl;dr:</strong> the roughness of the walls add uncertainty in phase and hence speckle</p>
+
+<p><em>the <a href="https://github.com/scottsievert/side-projects/tree/master/speckle">full code</a> is available on Github.</em></p>
+
+]]></content>
+  </entry>
+  
+</feed>

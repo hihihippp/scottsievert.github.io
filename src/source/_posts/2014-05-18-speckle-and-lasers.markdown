@@ -15,6 +15,8 @@ when we shine a laser on anything,
 why do we see bright and dark spots? Shouldn't it all be the same color?  To
 answer that question, we need to delve into optical theory.
 
+<!--More-->
+
 <!--Impulse response-->
 [Coherent optical systems][coherence] are simply defined to be systems where you know the
 phase and wavelength of each component. This is very precise light where you

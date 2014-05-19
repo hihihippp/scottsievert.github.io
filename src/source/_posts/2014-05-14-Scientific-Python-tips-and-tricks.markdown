@@ -12,6 +12,8 @@ much time, so you stick with MATLAB. I essentially grew up on Python, meaning I
 can guide you to some solid resources and hand over tips and tricks I've
 learned.
 
+<!--More-->
+
 This guide aims to ease that process a bit by showing tips and tricks within
 Python. This guide *is not* a full switch-to-Python guide. There are plenty of
 resources for that, including [some wonderful SciPy lectures][scipy-lectures],

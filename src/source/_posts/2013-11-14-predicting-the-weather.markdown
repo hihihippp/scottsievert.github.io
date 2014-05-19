@@ -9,6 +9,8 @@ categories: math
 
 Let's say that we're accurately measuring the temperature in both Madison and Minneapolis, but then our temperature sensor in Minneapolis breaks. We could easily install a new sensor, but we would prefer to estimate the temperature in Minneapolis based on the temperature in Madison. 
 
+<!--More-->
+
 First, let's see the temperature difference between the two cities:
 
 $

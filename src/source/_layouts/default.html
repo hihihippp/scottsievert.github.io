@@ -1,16 +1,6 @@
 {% capture root_url %}{{ site.root | strip_slash }}{% endcapture %}
 {% include head.html %}
-
-<!--added by scott-->
 <!-- mathjax config similar to math.stackexchange -->
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    TeX: { 
-        equationNumbers: { autoNumber: "AMS" } ,
-        extensions: ["AMSmath.js","AMSsymbols.js","noErrors.js","noUndefined.js"]
-    }
-});
-</script>
 <script type="text/x-mathjax-config">
 MathJax.Hub.Config({
   jax: ["input/TeX", "output/HTML-CSS"],
@@ -21,10 +11,11 @@ MathJax.Hub.Config({
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
   },
   messageStyle: "none",
-  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"]}
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 });
 </script>
 <script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
 <body {% if page.body_id %} id="{{ page.body_id }}" {% endif %} {% if page.sidebar == false %} class="no-sidebar" {% endif %} {% if page.sidebar == 'collapse' or site.sidebar == 'collapse' %} class="collapse-sidebar sidebar-footer" {% endif %}>
   <header role="banner">{% include header.html %}</header>
   <nav role="navigation">{% include navigation.html %}</nav>

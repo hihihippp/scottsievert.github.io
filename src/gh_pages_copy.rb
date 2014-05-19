@@ -18,7 +18,6 @@ end
 
 puts "    Copying files to parent directory"
 files = ['atom.xml',
-         'favicon.ico',
          'favicon.png',
          'index.html',
          'robots.txt',

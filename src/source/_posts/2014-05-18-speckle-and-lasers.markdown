@@ -44,10 +44,10 @@ responses shifted in space and scaled by the corresponding amount. This is
 [convolution][conv] and only works because this is a linear and space invariant
 system.
 
-To find our impulse response of $h\left( x, y\right) $, we have to take the
-Fourier transform (aka FFT) of our pupil. Since our pupil function is
-symmetric, the inverse Fourier transform and forward Fourier transform 
-[are equivalent][fft].
+To find our impulse response (or response to a single pixel) 
+$h\left( x, y\right) $, we have to take the Fourier transform (aka FFT) of our pupil. Since
+our pupil function is symmetric, the inverse Fourier transform and forward
+Fourier transform [are equivalent][fft].
 
 ```python
 # a circular pupil

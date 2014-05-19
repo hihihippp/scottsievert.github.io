@@ -13,7 +13,7 @@ including [bloodless surgery][blood], [eye surgery][eye] and
 [fingerprint detection][finger]. That begs a question: 
 when we shine a laser on anything,
 why do we see bright and dark spots? Shouldn't it all be the same color?  To
-answer that question, we need to delve into optical theory.
+answer that question[^1], we need to delve into optical theory.
 
 <!--More-->
 
@@ -108,7 +108,7 @@ theory.
 
 **tl;dr:** the roughness of the walls add uncertainty in phase and hence speckle
 
-*the [full code][code] is available on Github.*
+[^1]:the [full code][code] is available on Github.
 
 [code]:https://github.com/scottsievert/side-projects/tree/master/speckle
 [coherence]:https://en.wikipedia.org/wiki/Coherence_(physics)

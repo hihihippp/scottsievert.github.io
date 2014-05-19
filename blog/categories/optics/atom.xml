@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Optics | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/optics/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-19T11:36:46-05:00</updated>
+  <updated>2014-05-19T11:37:46-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -24,7 +24,7 @@ including <a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless su
 <a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. That begs a question: 
 when we shine a laser on anything,
 why do we see bright and dark spots? Shouldn’t it all be the same color?  To
-answer that question, we need to delve into optical theory.</p>
+answer that question<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, we need to delve into optical theory.</p>
 
 <!--More-->
 
@@ -118,8 +118,13 @@ theory.</p>
 
 <p><strong>tl;dr:</strong> the roughness of the walls add uncertainty in phase and hence speckle</p>
 
-<p><em>the <a href="https://github.com/scottsievert/side-projects/tree/master/speckle">full code</a> is available on Github.</em></p>
-
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>the <a href="https://github.com/scottsievert/side-projects/tree/master/speckle">full code</a> is available on Github.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
 ]]></content>
   </entry>
   

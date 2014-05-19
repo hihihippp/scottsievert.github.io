@@ -5,10 +5,10 @@
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
 <<<<<<< HEAD
-  <updated>2014-05-18T23:41:59-05:00</updated>
+  <updated>2014-05-18T23:11:54-05:00</updated>
 =======
-  <updated>2014-05-18T23:46:15-05:00</updated>
->>>>>>> FETCH_HEAD
+  <updated>2014-05-18T23:06:24-05:00</updated>
+>>>>>>> 3b7f81a6c58c1d1e94ab67ea986806b1dd742784
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -18,6 +18,125 @@
 
   
   <entry>
+<<<<<<< HEAD
+=======
+    <title type="html"><![CDATA[Speckle and Lasers]]></title>
+    <link href="http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers/"/>
+    <updated>2014-05-18T09:26:40-05:00</updated>
+    <id>http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers</id>
+    <content type="html"><![CDATA[<p>We know that lasers are very accurate instruments. We know that they emit a
+very precise wavelength and are used in an array of precision applications
+including <a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless surgery</a>, <a href="https://en.wikipedia.org/wiki/Laser_eye_surgery_(disambiguation)">eye surgery</a> and 
+<a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. That begs a question: 
+when we shine a laser on anything,
+why do we see bright and dark spots? Shouldn’t it all be the same color?  To
+answer that question, we need to delve into optical theory.</p>
+
+<!--Impulse response-->
+<p><a href="https://en.wikipedia.org/wiki/Coherence_(physics)">Coherent optical systems</a> are simply defined to be systems where you know the
+phase and wavelength of each component. This is very precise light where you
+know what’s going on at all times. Sunlight is not like this, as photons are
+randomly generated in time at many wavelength. 
+Pretty much only lasers are coherent, but if coherent, why does speckle (bright
+and dark spots) appear?</p>
+
+<p>Coherent optical systems have a very special property. Their 
+<a href="https://en.wikipedia.org/wiki/Impulse_response">impulse response</a>
+in the frequency domain is just the pupil function.  For those familiar with
+the parlance and having $f_x$ be a spatial frequency (as opposed to time),</p>
+
+<script type="math/tex; mode=display">H\left( f_x, f_y\right) = P(x, y) </script>
+
+<p>When I saw this derived, I thought “holy shit.” If you just want to only pass high
+frequency spatial content (read: edges), then all that’s required it to not let
+light through the center of the lens.</p>
+
+<p><img class="right" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/impulse_respone.png" width="200" /></p>
+
+<p>Since this system is linear, we can think of our output as bunch of impulse
+responses shifted in space and scaled by the corresponding amount. This is
+<a href="https://en.wikipedia.org/wiki/Convolution">convolution</a> and only works because this is a linear system.</p>
+
+<p>To find our $H\left( f_x, f_y\right) $, we have to take the Fourier transform (aka FFT) of
+our pupil. Since our pupil function is symmetric, the inverse Fourier transform
+and forward Fourier transform <a href="https://en.wikipedia.org/wiki/Fourier_transform#Invertibility_and_periodicity">are equivalent</a>.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="c"># a circular pupil</span>
+</span><span class="line"><span class="n">pupil</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">((</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span>
+</span><span class="line"><span class="n">i</span> <span class="o">=</span> <span class="n">argwhere</span><span class="p">(</span><span class="n">x</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">y</span><span class="o">**</span><span class="mi">2</span> <span class="o">&lt;</span> <span class="n">r</span><span class="o">**</span><span class="mi">2</span><span class="p">)</span>
+</span><span class="line"><span class="n">pupil</span><span class="p">[</span><span class="n">i</span><span class="p">[:,</span><span class="mi">0</span><span class="p">],</span> <span class="n">i</span><span class="p">[:,</span><span class="mi">1</span><span class="p">]]</span> <span class="o">=</span> <span class="mi">1</span>
+</span><span class="line">
+</span><span class="line"><span class="n">h</span> <span class="o">=</span> <span class="n">fft2</span><span class="p">(</span><span class="n">pupil</span><span class="p">)</span> <span class="c"># our impulse response since H(fx) = P(x)</span>
+</span><span class="line"><span class="n">h</span> <span class="o">=</span> <span class="n">fftshift</span><span class="p">(</span><span class="n">h</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<!--plane wave spectrum-->
+<p>Through the angular plane wave spectrum, this impulse response can be viewed as
+a series plane waves coming in at different angles, shown in the figure below.</p>
+
+<p><img class="right" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/apws.png" width="200" /></p>
+
+<p>What angles can a wave be though of as? The frequency content and angles turn
+out to be related, since two planes waves of a constant frequency adding
+together can have a change in frequency depending on what angle they’re at. Or,
+our spatial plane wave $U(x,y)$ can be represented by the Fourier transform:</p>
+
+<script type="math/tex; mode=display">U(x, y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta/\lambda}</script>
+
+<p>The wall (which the laser is shining on) is not smooth and perfectly flat. It’s
+rough, and the distance adds a phase difference between two waves. Through the
+<a href="https://en.wikipedia.org/wiki/Random_walk">random walk processes</a> and the angular wave spectrum, if we could
+obtain every angle, the laser wouldn’t have any speckle. Our eyes don’t have
+infinite dimension, so we can’t do that.</p>
+
+<p>Since the impulse response of our impulse response extends out a ways in the
+spatial domain and our eyes can’t aren’t infinitely big, we can’t receive the
+complete laser image. If our eyes were infinitely large and able to receive the
+full impulse response, we wouldn’t see any speckle in laser images.</p>
+
+<p>We can model this optical system with a 2D convolution and a bunch of random
+phase vectors.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="n">x</span> <span class="o">=</span> <span class="n">exp</span><span class="p">(</span><span class="mi">1j</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">pi</span><span class="o">*</span><span class="n">rand</span><span class="p">(</span><span class="n">N</span><span class="p">,</span><span class="n">N</span><span class="p">))</span> <span class="c"># a bunch of random phases</span>
+</span><span class="line"><span class="n">x</span> <span class="o">*=</span> <span class="n">p</span> <span class="c"># only within the pupil</span>
+</span><span class="line">
+</span><span class="line"><span class="n">d</span> <span class="o">=</span> <span class="n">N</span><span class="o">/</span><span class="mi">2</span> <span class="c"># delta since our eyes aren&#39;t infinitely big</span>
+</span><span class="line"><span class="n">y</span> <span class="o">=</span> <span class="n">convolve2d</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">h</span><span class="p">[</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">d</span><span class="p">:</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">d</span><span class="p">,</span> <span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="o">-</span><span class="n">d</span><span class="p">:</span><span class="n">N</span><span class="o">/</span><span class="mi">2</span><span class="o">+</span><span class="n">d</span><span class="p">])</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Then the laser shows speckle! This varies on how much of the impulse response
+we include; if we include more frequencies, the dots get smaller. This means
+that if you hold a pinhole up to your eye, the speckles will appear larger.</p>
+
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/speckle.png" width="500" /></p>
+
+<p>An intuitive way to think about this involves the impulse response. The impulse
+response changes on with the distance and so does the phase. Certain areas add
+up to 0 while others add up to 1. There’s a whole probability density function
+that goes with that, but that’s goes further into optical and statistical
+theory.</p>
+
+<p><strong>tl;dr:</strong> the roughness of the walls add uncertainty in phase and hence speckle</p>
+
+<p><em>the <a href="https://github.com/scottsievert/side-projects/tree/master/speckle">full code</a> is available on Github.</em></p>
+
+]]></content>
+  </entry>
+  
+  <entry>
+>>>>>>> 3b7f81a6c58c1d1e94ab67ea986806b1dd742784
     <title type="html"><![CDATA[Scientific Python Tips and Tricks]]></title>
     <link href="http://scottsievert.github.io/blog/2014/05/14/Scientific-Python-tips-and-tricks/"/>
     <updated>2014-05-14T20:20:24-05:00</updated>

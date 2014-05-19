@@ -7,8 +7,6 @@ published: true
 categories: math optics
 ---
 
-SDFS
-
 We know that lasers are very accurate instruments. We know that they emit a
 very precise wavelength and are used in an array of precision applications
 including [bloodless surgery][blood], [eye surgery][eye] and 

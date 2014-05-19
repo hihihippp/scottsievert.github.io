@@ -41,7 +41,8 @@ light through the center of the lens.
 
 Since this system is linear, we can think of our output as bunch of impulse
 responses shifted in space and scaled by the corresponding amount. This is
-[convolution][conv] and only works because this is a linear system.
+[convolution][conv] and only works because this is a linear and space invariant
+system.
 
 To find our $H\left( f_x, f_y\right) $, we have to take the Fourier transform (aka FFT) of
 our pupil. Since our pupil function is symmetric, the inverse Fourier transform
@@ -88,7 +89,7 @@ phase vectors.
 x = exp(1j*2*pi*rand(N,N)) # a bunch of random phases
 x *= p # only within the pupil
 
-d = N/2 # delta since our eyes aren't infinitely big
+d = N/10 # delta since our eyes aren't infinitely big
 y = convolve2d(x, h[N/2-d:N/2+d, N/2-d:N/2+d])
 ```
 

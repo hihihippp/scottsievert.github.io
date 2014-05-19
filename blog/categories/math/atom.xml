@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-19T09:31:26-05:00</updated>
+  <updated>2014-05-19T09:40:46-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -18,9 +18,7 @@
     <link href="http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers/"/>
     <updated>2014-05-18T09:26:40-05:00</updated>
     <id>http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers</id>
-    <content type="html"><![CDATA[<p>SDFS</p>
-
-<p>We know that lasers are very accurate instruments. We know that they emit a
+    <content type="html"><![CDATA[<p>We know that lasers are very accurate instruments. We know that they emit a
 very precise wavelength and are used in an array of precision applications
 including <a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless surgery</a>, <a href="https://en.wikipedia.org/wiki/Laser_eye_surgery_(disambiguation)">eye surgery</a> and 
 <a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. That begs a question: 

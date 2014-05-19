@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Optics | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/optics/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-19T14:41:50-05:00</updated>
+  <updated>2014-05-19T18:13:50-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -24,20 +24,31 @@ including <a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless su
 <a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. That begs a question: 
 when we shine a laser on anything,
 why do we see bright and dark spots? Shouldn’t it all be the same color since
-lasers are deterministic or not random?  To
+lasers are deterministic (read: not random)?  To
 answer that question<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, we need to delve into optical theory.</p>
 
 <!--More-->
 
-<p><a href="https://en.wikipedia.org/wiki/Coherence_(physics)">Coherent optical systems</a> are simply defined to be systems where you know the
-phase and wavelength of each component. This is very precise light where you
-know what’s going on at all times. Sunlight is not coherent, as photons are
-randomly generated in time at many wavelength. 
-Pretty much only lasers are coherent, but if coherent, why does speckle (bright
-and dark spots) appear?</p>
+<p><a href="https://en.wikipedia.org/wiki/Coherence_(physics)"><em>Coherent</em> optical systems</a> are simply defined to be
+<em>deterministic</em> systems. That’s a big definition, so let’s break it into
+pieces. Coherent systems are where you know the wavelength and phase of every
+ray. Lasers are very coherent (one wavelength, same phase) while sunlight is
+not coherent (many wavelength, different phases).</p>
+
+<p>Deterministic is just a way of saying everything about the system is known and
+there’s no randomness. Sunlight is not deterministic because there are many
+random processes. Photons are randomly generated and there are many
+wavelengths. Sunspots are one example of this randomness.</p>
+
+<p>But if lasers are coherent and deterministic, why do we see speckle (read:
+bright and dark spots) when we see a laser spot? The speckle is random; we
+can’t predict where every dark spot will be. The randomness of this laser spot
+and the fact that lasers are deterministic throws a helluva question at us. It
+turns out <em>what</em> we see the laser on is important, but let’s look at the math
+and physics behind it.</p>
 
 <p>Coherent optical systems have a very special property. Their 
-<a href="https://en.wikipedia.org/wiki/Impulse_response">impulse response</a>
+<a href="https://en.wikipedia.org/wiki/Impulse_response">impulse response</a> (read: reaction to a small input)
 in the frequency domain is just the pupil function.  For those familiar with
 the parlance and having $f_x$ be a spatial frequency as opposed to a time
 frequency,</p>
@@ -51,14 +62,14 @@ light through the center of the lens.</p>
 <p><img class="right" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/impulse_respone.png" width="200"></p>
 
 <p>Since this system is linear, we can think of our output as bunch of impulse
-responses shifted in space and scaled by the corresponding amount. This is
-<a href="https://en.wikipedia.org/wiki/Convolution">convolution</a> and only works because this is a linear and space invariant
-system.</p>
+responses shifted in space and scaled by the corresponding amount. This is the
+definition of <a href="https://en.wikipedia.org/wiki/Convolution">convolution</a> and only works because this is a 
+<a href="https://en.wikipedia.org/wiki/LTI_system_theory">linear and space invariant system.</a></p>
 
-<p>To find our impulse response or response to a single pixel,
-$h\left( x, y\right) $, we have to take the Fourier transform (aka FFT) of our pupil. Since
-our pupil function is symmetric, the inverse Fourier transform and forward
-Fourier transform <a href="https://en.wikipedia.org/wiki/Fourier_transform#Invertibility_and_periodicity">are equivalent</a>.</p>
+<p>To find our impulse response in the space domain, $h\left( x, y\right) $, we
+have to take the Fourier transform (aka FFT) of our pupil. Since our pupil
+function is symmetric, the inverse Fourier transform and forward Fourier
+transform <a href="https://en.wikipedia.org/wiki/Fourier_transform#Invertibility_and_periodicity">are equivalent</a>.</p>
 
 <p>```python
 # a circular pupil
@@ -76,10 +87,11 @@ a series plane waves coming in at different angles, shown in the figure below.</
 
 <p><img class="right" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/apws.png" width="200"></p>
 
-<p>What angles can a wave be though of as? The frequency content and angles turn
+<p>What angles can a wave be thought of as? The frequency content and angles turn
 out to be related, since two planes waves of a constant frequency adding
-together can have a change in frequency depending on what angle they’re at. Or,
-our spatial plane wave $U(x,y)$ can be represented by the Fourier transform:</p>
+together can have a change in frequency depending on what angle they’re at,
+which makes intuitive sense. Or, our spatial plane wave $U(x,y)$ can be
+represented by the Fourier transform:</p>
 
 <script type="math/tex; mode=display">U(x, y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta/\lambda}</script>
 
@@ -91,26 +103,26 @@ size, so we can’t obtain every angle or frequency.</p>
 
 <p>Since the impulse response extends a ways out in the spatial domain, and by the
 angular plane wave spectrum the frequency domain, we can’t receive every
-frequency since our eye’s are finite in size. If our eyes were infinitely big
-or the impulse response happened to be small, the laser spot wouldn’t have any
-speckle.</p>
+frequency because our eyes are finite in size. If our eyes were infinitely big,
+the laser spot wouldn’t have any speckle.</p>
 
 <p>Because the wall gives the wave some random phase, we can represent the spot we
 see by a 2D convolution with a random phase and the impulse response. This
 convolution is just saying that every spot gives the same response multiplied
-by some random phase.</p>
+by some random phase, added together for every point.</p>
 
 <p>```python
 x = exp(1j<em>2</em>pi*rand(N,N)) # a bunch of random phases
 x *= p # only within the pupil</p>
 
 <p>d = N/10 # delta since our eyes aren’t infinitely big
-y = convolve2d(x, h[N/2-d:N/2+d, N/2-d:N/2+d])
+y = convolve2d(x, h[N/2-d:N/2+d, N/2-d:N/2+d]) # an approximation with d
 ```</p>
 
-<p>Then the laser spot shows speckle! This varies on how much of the impulse response
-we include; if we include more frequencies, the dots get smaller. This means
-that if you hold a pinhole up to your eye, the speckles will appear larger.</p>
+<p>The laser spot <code>y</code> shows some speckle! The speckle varies with how large we
+make <code>d</code> (really <code>delta</code> but that’s long); if we include more frequencies and
+more of the impulse response, the dots get smaller. To see this, if you hold a
+pinhole up to your eye, the speckles will appear larger.</p>
 
 <p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/speckle.png" width="500"></p>
 

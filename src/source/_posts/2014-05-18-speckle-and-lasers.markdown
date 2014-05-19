@@ -3,7 +3,7 @@ layout: post
 title: "Speckle and lasers"
 date: 2014-05-18 09:26:40 -0500
 comments: true
-published: false
+published: true
 categories: math, optics
 ---
 

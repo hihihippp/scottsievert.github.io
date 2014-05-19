@@ -4,11 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-<<<<<<< HEAD
-  <updated>2014-05-18T23:11:54-05:00</updated>
-=======
-  <updated>2014-05-18T23:06:24-05:00</updated>
->>>>>>> 3b7f81a6c58c1d1e94ab67ea986806b1dd742784
+  <updated>2014-05-18T23:26:44-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -18,8 +14,6 @@
 
   
   <entry>
-<<<<<<< HEAD
-=======
     <title type="html"><![CDATA[Speckle and Lasers]]></title>
     <link href="http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers/"/>
     <updated>2014-05-18T09:26:40-05:00</updated>
@@ -136,7 +130,6 @@ theory.</p>
   </entry>
   
   <entry>
->>>>>>> 3b7f81a6c58c1d1e94ab67ea986806b1dd742784
     <title type="html"><![CDATA[Scientific Python Tips and Tricks]]></title>
     <link href="http://scottsievert.github.io/blog/2014/05/14/Scientific-Python-tips-and-tricks/"/>
     <updated>2014-05-14T20:20:24-05:00</updated>

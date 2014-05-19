@@ -7,14 +7,22 @@ published: false
 categories: math, optics
 ---
 
+We know that lasers are very accurate instruments. We know that they emit a
+very precise wavelength and are used in an array of precision applications
+including [bloodless surgery][blood], [eye surgery][eye] and 
+[fingerprint detection][finger]. That begs a question: 
+when we shine a laser on anything,
+why do we see bright and dark spots? Shouldn't it all be the same color?  To
+answer that question, we need to delve into optical theory.
+
 <!--Impulse response-->
 [Coherent optical systems][coherence] are simply defined to be systems where you know the
 phase and wavelength of each component. This is very precise light where you
 know what's going on at all times. Sunlight is not like this, as photons are
-randomly generated in time. Only lasers are like this, but it would appear that
-lasers are not coherent because we see "speckle" or dots when we see a laser.
+randomly generated in time at many wavelength. 
+Pretty much only lasers are coherent, but if coherent, why does speckle (bright
+and dark spots) appear?
 
-[coherence]:https://en.wikipedia.org/wiki/Coherence_(physics)
 
 Coherent optical systems have a very special property. Their 
 [impulse response][ir]
@@ -27,19 +35,15 @@ When I saw this derived, I thought "holy shit." If you just want to only pass hi
 frequency spatial content (read: edges), then all that's required it to not let
 light through the center of the lens.
 
+{% img right https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/impulse_respone.png 200 %}
+
 Since this system is linear, we can think of our output as bunch of impulse
 responses shifted in space and scaled by the corresponding amount. This is
 [convolution][conv] and only works because this is a linear system.
 
-[conv]:https://en.wikipedia.org/wiki/Convolution
-[ir]:https://en.wikipedia.org/wiki/Impulse_response
-
 To find our $H\left( f_x, f_y\right) $, we have to take the Fourier transform (aka FFT) of
 our pupil. Since our pupil function is symmetric, the inverse Fourier transform
 and forward Fourier transform [are equivalent][fft].
-
-[fft]:https://en.wikipedia.org/wiki/Fourier_transform#Invertibility_and_periodicity
-
 
 ```python
 # a circular pupil
@@ -57,9 +61,6 @@ a series plane waves coming in at different angles, shown in the figure below.
 
 {% img right https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/apws.png 200 %}
 
-{% img right https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/impulse_respone.png 200 %}
-
-
 What angles can a wave be though of as? The frequency content and angles turn
 out to be related, since two planes waves of a constant frequency adding
 together can have a change in frequency depending on what angle they're at. Or,
@@ -72,8 +73,6 @@ rough, and the distance adds a phase difference between two waves. Through the
 [random walk processes][rand] and the angular wave spectrum, if we could
 obtain every angle, the laser wouldn't have any speckle. Our eyes don't have
 infinite dimension, so we can't do that.
-
-[rand]:https://en.wikipedia.org/wiki/Random_walk
 
 Since the impulse response of our impulse response extends out a ways in the
 spatial domain and our eyes can't aren't infinitely big, we can't receive the
@@ -97,10 +96,22 @@ that if you hold a pinhole up to your eye, the speckles will appear larger.
 
 {% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/speckle.png 500 %}
 
-
+An intuitive way to think about this involves the impulse response. The impulse
+response changes on with the distance and so does the phase. Certain areas add
+up to 0 while others add up to 1. There's a whole probability density function
+that goes with that, but that's goes further into optical and statistical
+theory.
 
 **tl;dr:** the roughness of the walls add uncertainty in phase and hence speckle
 
-The [full code][code] is available on Github.
+*the [full code][code] is available on Github.*
 
 [code]:https://github.com/scottsievert/side-projects/tree/master/speckle
+[coherence]:https://en.wikipedia.org/wiki/Coherence_(physics)
+[finger]:https://en.wikipedia.org/wiki/Fingerprint
+[eye]:https://en.wikipedia.org/wiki/Laser_eye_surgery_(disambiguation)
+[blood]:https://en.wikipedia.org/wiki/Bloodless_surgery
+[rand]:https://en.wikipedia.org/wiki/Random_walk
+[fft]:https://en.wikipedia.org/wiki/Fourier_transform#Invertibility_and_periodicity
+[conv]:https://en.wikipedia.org/wiki/Convolution
+[ir]:https://en.wikipedia.org/wiki/Impulse_response

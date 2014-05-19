@@ -13,20 +13,31 @@ including [bloodless surgery][blood], [eye surgery][eye] and
 [fingerprint detection][finger]. That begs a question: 
 when we shine a laser on anything,
 why do we see bright and dark spots? Shouldn't it all be the same color since
-lasers are deterministic or not random?  To
+lasers are deterministic (read: not random)?  To
 answer that question[^1], we need to delve into optical theory.
 
 <!--More-->
 
-[Coherent optical systems][coherence] are simply defined to be systems where you know the
-phase and wavelength of each component. This is very precise light where you
-know what's going on at all times. Sunlight is not coherent, as photons are
-randomly generated in time at many wavelength. 
-Pretty much only lasers are coherent, but if coherent, why does speckle (bright
-and dark spots) appear?
+[*Coherent* optical systems][coherence] are simply defined to be
+*deterministic* systems. That's a big definition, so let's break it into
+pieces. Coherent systems are where you know the wavelength and phase of every
+ray. Lasers are very coherent (one wavelength, same phase) while sunlight is
+not coherent (many wavelength, different phases).
+
+Deterministic is just a way of saying everything about the system is known and
+there's no randomness. Sunlight is not deterministic because there are many
+random processes. Photons are randomly generated and there are many
+wavelengths. Sunspots are one example of this randomness.
+
+But if lasers are coherent and deterministic, why do we see speckle (read:
+bright and dark spots) when we see a laser spot? The speckle is random; we
+can't predict where every dark spot will be. The randomness of this laser spot
+and the fact that lasers are deterministic throws a helluva question at us. It
+turns out *what* we see the laser on is important, but let's look at the math
+and physics behind it.
 
 Coherent optical systems have a very special property. Their 
-[impulse response][ir]
+[impulse response][ir] (read: reaction to a small input)
 in the frequency domain is just the pupil function.  For those familiar with
 the parlance and having $f_x$ be a spatial frequency as opposed to a time
 frequency,
@@ -40,14 +51,14 @@ light through the center of the lens.
 {% img right https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/impulse_respone.png 200 %}
 
 Since this system is linear, we can think of our output as bunch of impulse
-responses shifted in space and scaled by the corresponding amount. This is
-[convolution][conv] and only works because this is a linear and space invariant
-system.
+responses shifted in space and scaled by the corresponding amount. This is the
+definition of [convolution][conv] and only works because this is a 
+[linear and space invariant system.][LTI]
 
-To find our impulse response or response to a single pixel,
-$h\left( x, y\right) $, we have to take the Fourier transform (aka FFT) of our pupil. Since
-our pupil function is symmetric, the inverse Fourier transform and forward
-Fourier transform [are equivalent][fft].
+To find our impulse response in the space domain, $h\left( x, y\right) $, we
+have to take the Fourier transform (aka FFT) of our pupil. Since our pupil
+function is symmetric, the inverse Fourier transform and forward Fourier
+transform [are equivalent][fft].
 
 ```python
 # a circular pupil
@@ -65,10 +76,11 @@ a series plane waves coming in at different angles, shown in the figure below.
 
 {% img right https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/apws.png 200 %}
 
-What angles can a wave be though of as? The frequency content and angles turn
+What angles can a wave be thought of as? The frequency content and angles turn
 out to be related, since two planes waves of a constant frequency adding
-together can have a change in frequency depending on what angle they're at. Or,
-our spatial plane wave $U(x,y)$ can be represented by the Fourier transform:
+together can have a change in frequency depending on what angle they're at,
+which makes intuitive sense. Or, our spatial plane wave $U(x,y)$ can be
+represented by the Fourier transform:
 
 $$U(x, y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta/\lambda}$$
 
@@ -80,26 +92,26 @@ size, so we can't obtain every angle or frequency.
 
 Since the impulse response extends a ways out in the spatial domain, and by the
 angular plane wave spectrum the frequency domain, we can't receive every
-frequency since our eye's are finite in size. If our eyes were infinitely big
-or the impulse response happened to be small, the laser spot wouldn't have any
-speckle.
+frequency because our eyes are finite in size. If our eyes were infinitely big,
+the laser spot wouldn't have any speckle.
 
 Because the wall gives the wave some random phase, we can represent the spot we
 see by a 2D convolution with a random phase and the impulse response. This
 convolution is just saying that every spot gives the same response multiplied
-by some random phase.
+by some random phase, added together for every point.
 
 ```python
 x = exp(1j*2*pi*rand(N,N)) # a bunch of random phases
 x *= p # only within the pupil
 
 d = N/10 # delta since our eyes aren't infinitely big
-y = convolve2d(x, h[N/2-d:N/2+d, N/2-d:N/2+d])
+y = convolve2d(x, h[N/2-d:N/2+d, N/2-d:N/2+d]) # an approximation with d
 ```
 
-Then the laser spot shows speckle! This varies on how much of the impulse response
-we include; if we include more frequencies, the dots get smaller. This means
-that if you hold a pinhole up to your eye, the speckles will appear larger.
+The laser spot `y` shows some speckle! The speckle varies with how large we
+make `d` (really `delta` but that's long); if we include more frequencies and
+more of the impulse response, the dots get smaller. To see this, if you hold a
+pinhole up to your eye, the speckles will appear larger.
 
 {% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/speckle.png 500 %}
 
@@ -113,6 +125,7 @@ theory.
 
 [^1]:the [full code][code] is available on Github.
 
+[LTI]:https://en.wikipedia.org/wiki/LTI_system_theory
 [code]:https://github.com/scottsievert/side-projects/tree/master/speckle
 [coherence]:https://en.wikipedia.org/wiki/Coherence_(physics)
 [finger]:https://en.wikipedia.org/wiki/Fingerprint

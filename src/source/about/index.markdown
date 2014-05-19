@@ -40,4 +40,4 @@ My [Github][git] contains almost all of the code I work on. It has everything fr
 [talk]:http://nuit-blanche.blogspot.com/2013/08/sahd-compressive-saliency-sensing.html
 [isparse]:https://github.com/scottsievert/iSparse
 [ir]:https://github.com/scottsievert/IRcamera
-[CV]:https://www.dropbox.com/s/k747bfdrqdaztl8/Scott_Sievert_CV.pdf
+[CV]:https://www.dropbox.com/s/lk0kifmjtzyq0y4/Scott_Sievert_CV.pdf

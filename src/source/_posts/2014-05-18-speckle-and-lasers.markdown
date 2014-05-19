@@ -7,29 +7,29 @@ published: true
 categories: math optics
 ---
 
-We know that lasers are very accurate instruments. We know that they emit a
-very precise wavelength and are used in an array of precision applications
+We know that lasers are very accurate instruments, emit a very precise
+wavelength and are in an array of precision applications
 including [bloodless surgery][blood], [eye surgery][eye] and 
 [fingerprint detection][finger]. That begs a question: 
 when we shine a laser on anything,
-why do we see bright and dark spots? Shouldn't it all be the same color?  To
+why do we see bright and dark spots? Shouldn't it all be the same color since
+lasers are deterministic or not random?  To
 answer that question[^1], we need to delve into optical theory.
 
 <!--More-->
 
-<!--Impulse response-->
 [Coherent optical systems][coherence] are simply defined to be systems where you know the
 phase and wavelength of each component. This is very precise light where you
-know what's going on at all times. Sunlight is not like this, as photons are
+know what's going on at all times. Sunlight is not coherent, as photons are
 randomly generated in time at many wavelength. 
 Pretty much only lasers are coherent, but if coherent, why does speckle (bright
 and dark spots) appear?
 
-
 Coherent optical systems have a very special property. Their 
 [impulse response][ir]
 in the frequency domain is just the pupil function.  For those familiar with
-the parlance and having $f_x$ be a spatial frequency (as opposed to time),
+the parlance and having $f_x$ be a spatial frequency as opposed to a time
+frequency,
 
 $$H\left( f_x, f_y\right) = P(x, y) $$
 
@@ -44,7 +44,7 @@ responses shifted in space and scaled by the corresponding amount. This is
 [convolution][conv] and only works because this is a linear and space invariant
 system.
 
-To find our impulse response (or response to a single pixel) 
+To find our impulse response or response to a single pixel,
 $h\left( x, y\right) $, we have to take the Fourier transform (aka FFT) of our pupil. Since
 our pupil function is symmetric, the inverse Fourier transform and forward
 Fourier transform [are equivalent][fft].
@@ -72,19 +72,22 @@ our spatial plane wave $U(x,y)$ can be represented by the Fourier transform:
 
 $$U(x, y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta/\lambda}$$
 
-The wall (which the laser is shining on) is not smooth and perfectly flat. It's
+The wall which the laser is shining on is not smooth and perfectly flat. It's
 rough, and the distance adds a phase difference between two waves. Through the
-[random walk processes][rand] and the angular wave spectrum, if we could
-obtain every angle, the laser wouldn't have any speckle. Our eyes don't have
-infinite dimension, so we can't do that.
+[Drunkard's Walk process][rand] and the angular plane wave spectrum, if we could
+obtain every angle, the laser spot wouldn't have any speckle. Our eyes are finite in
+size, so we can't obtain every angle or frequency.
 
-Since the impulse response of our impulse response extends out a ways in the
-spatial domain and our eyes can't aren't infinitely big, we can't receive the
-complete laser image. If our eyes were infinitely large and able to receive the
-full impulse response, we wouldn't see any speckle in laser images.
+Since the impulse response extends a ways out in the spatial domain, and by the
+angular plane wave spectrum the frequency domain, we can't receive every
+frequency since our eye's are finite in size. If our eyes were infinitely big
+or the impulse response happened to be small, the laser spot wouldn't have any
+speckle.
 
-We can model this optical system with a 2D convolution and a bunch of random
-phase vectors.
+Because the wall gives the wave some random phase, we can represent the spot we
+see by a 2D convolution with a random phase and the impulse response. This
+convolution is just saying that every spot gives the same response multiplied
+by some random phase.
 
 ```python
 x = exp(1j*2*pi*rand(N,N)) # a bunch of random phases
@@ -94,7 +97,7 @@ d = N/10 # delta since our eyes aren't infinitely big
 y = convolve2d(x, h[N/2-d:N/2+d, N/2-d:N/2+d])
 ```
 
-Then the laser shows speckle! This varies on how much of the impulse response
+Then the laser spot shows speckle! This varies on how much of the impulse response
 we include; if we include more frequencies, the dots get smaller. This means
 that if you hold a pinhole up to your eye, the speckles will appear larger.
 

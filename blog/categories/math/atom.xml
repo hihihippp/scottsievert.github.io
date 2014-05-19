@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-19T12:44:05-05:00</updated>
+  <updated>2014-05-19T14:41:50-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -18,20 +18,20 @@
     <link href="http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers/"/>
     <updated>2014-05-18T09:26:40-05:00</updated>
     <id>http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers</id>
-    <content type="html"><![CDATA[<p>We know that lasers are very accurate instruments. We know that they emit a
-very precise wavelength and are used in an array of precision applications
+    <content type="html"><![CDATA[<p>We know that lasers are very accurate instruments, emit a very precise
+wavelength and are in an array of precision applications
 including <a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless surgery</a>, <a href="https://en.wikipedia.org/wiki/Laser_eye_surgery_(disambiguation)">eye surgery</a> and 
 <a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. That begs a question: 
 when we shine a laser on anything,
-why do we see bright and dark spots? Shouldn’t it all be the same color?  To
+why do we see bright and dark spots? Shouldn’t it all be the same color since
+lasers are deterministic or not random?  To
 answer that question<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, we need to delve into optical theory.</p>
 
 <!--More-->
 
-<!--Impulse response-->
 <p><a href="https://en.wikipedia.org/wiki/Coherence_(physics)">Coherent optical systems</a> are simply defined to be systems where you know the
 phase and wavelength of each component. This is very precise light where you
-know what’s going on at all times. Sunlight is not like this, as photons are
+know what’s going on at all times. Sunlight is not coherent, as photons are
 randomly generated in time at many wavelength. 
 Pretty much only lasers are coherent, but if coherent, why does speckle (bright
 and dark spots) appear?</p>
@@ -39,7 +39,8 @@ and dark spots) appear?</p>
 <p>Coherent optical systems have a very special property. Their 
 <a href="https://en.wikipedia.org/wiki/Impulse_response">impulse response</a>
 in the frequency domain is just the pupil function.  For those familiar with
-the parlance and having $f_x$ be a spatial frequency (as opposed to time),</p>
+the parlance and having $f_x$ be a spatial frequency as opposed to a time
+frequency,</p>
 
 <script type="math/tex; mode=display">H\left( f_x, f_y\right) = P(x, y) </script>
 
@@ -54,7 +55,7 @@ responses shifted in space and scaled by the corresponding amount. This is
 <a href="https://en.wikipedia.org/wiki/Convolution">convolution</a> and only works because this is a linear and space invariant
 system.</p>
 
-<p>To find our impulse response (or response to a single pixel) 
+<p>To find our impulse response or response to a single pixel,
 $h\left( x, y\right) $, we have to take the Fourier transform (aka FFT) of our pupil. Since
 our pupil function is symmetric, the inverse Fourier transform and forward
 Fourier transform <a href="https://en.wikipedia.org/wiki/Fourier_transform#Invertibility_and_periodicity">are equivalent</a>.</p>
@@ -82,19 +83,22 @@ our spatial plane wave $U(x,y)$ can be represented by the Fourier transform:</p>
 
 <script type="math/tex; mode=display">U(x, y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta/\lambda}</script>
 
-<p>The wall (which the laser is shining on) is not smooth and perfectly flat. It’s
+<p>The wall which the laser is shining on is not smooth and perfectly flat. It’s
 rough, and the distance adds a phase difference between two waves. Through the
-<a href="https://en.wikipedia.org/wiki/Random_walk">random walk processes</a> and the angular wave spectrum, if we could
-obtain every angle, the laser wouldn’t have any speckle. Our eyes don’t have
-infinite dimension, so we can’t do that.</p>
+<a href="https://en.wikipedia.org/wiki/Random_walk">Drunkard’s Walk process</a> and the angular plane wave spectrum, if we could
+obtain every angle, the laser spot wouldn’t have any speckle. Our eyes are finite in
+size, so we can’t obtain every angle or frequency.</p>
 
-<p>Since the impulse response of our impulse response extends out a ways in the
-spatial domain and our eyes can’t aren’t infinitely big, we can’t receive the
-complete laser image. If our eyes were infinitely large and able to receive the
-full impulse response, we wouldn’t see any speckle in laser images.</p>
+<p>Since the impulse response extends a ways out in the spatial domain, and by the
+angular plane wave spectrum the frequency domain, we can’t receive every
+frequency since our eye’s are finite in size. If our eyes were infinitely big
+or the impulse response happened to be small, the laser spot wouldn’t have any
+speckle.</p>
 
-<p>We can model this optical system with a 2D convolution and a bunch of random
-phase vectors.</p>
+<p>Because the wall gives the wave some random phase, we can represent the spot we
+see by a 2D convolution with a random phase and the impulse response. This
+convolution is just saying that every spot gives the same response multiplied
+by some random phase.</p>
 
 <p>```python
 x = exp(1j<em>2</em>pi*rand(N,N)) # a bunch of random phases
@@ -104,7 +108,7 @@ x *= p # only within the pupil</p>
 y = convolve2d(x, h[N/2-d:N/2+d, N/2-d:N/2+d])
 ```</p>
 
-<p>Then the laser shows speckle! This varies on how much of the impulse response
+<p>Then the laser spot shows speckle! This varies on how much of the impulse response
 we include; if we include more frequencies, the dots get smaller. This means
 that if you hold a pinhole up to your eye, the speckles will appear larger.</p>
 

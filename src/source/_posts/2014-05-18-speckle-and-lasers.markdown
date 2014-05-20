@@ -82,18 +82,13 @@ together can have a change in frequency depending on what angle they're at,
 which makes intuitive sense. Or, our spatial plane wave $U(x,y)$ can be
 represented by the Fourier transform:
 
-$$U(x, y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta/\lambda}$$
+$$\textrm{APWS}(x, y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta/\lambda}$$
 
 The wall which the laser is shining on is not smooth and perfectly flat. It's
 rough, and the distance adds a phase difference between two waves. Through the
-[Drunkard's Walk process][rand] and the angular plane wave spectrum, if we could
+[Drunkard's Walk][rand] and the angular plane wave spectrum, if we could
 obtain every angle, the laser spot wouldn't have any speckle. Our eyes are finite in
 size, so we can't obtain every angle or frequency.
-
-Since the impulse response extends a ways out in the spatial domain, and by the
-angular plane wave spectrum the frequency domain, we can't receive every
-frequency because our eyes are finite in size. If our eyes were infinitely big,
-the laser spot wouldn't have any speckle.
 
 Because the wall gives the wave some random phase, we can represent the spot we
 see by a 2D convolution with a random phase and the impulse response. This

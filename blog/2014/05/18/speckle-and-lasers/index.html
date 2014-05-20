@@ -9,9 +9,9 @@
   <meta name="author" content="Scott Sievert">
 
   
-  <meta name="description" content="We know that lasers are very accurate instruments, emit a very precise
-wavelength and are in an array of precision applications
-including bloodless &hellip;">
+  <meta name="description" content="We know that lasers are very accurate instruments and emit a very precise
+wavelength and hence are in an array of precision applications
+including &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -103,8 +103,8 @@ MathJax.Hub.Config({
   </header>
 
 
-<div class="entry-content"><p>We know that lasers are very accurate instruments, emit a very precise
-wavelength and are in an array of precision applications
+<div class="entry-content"><p>We know that lasers are very accurate instruments and emit a very precise
+wavelength and hence are in an array of precision applications
 including <a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless surgery</a>, <a href="https://en.wikipedia.org/wiki/Laser_eye_surgery_(disambiguation)">eye surgery</a> and 
 <a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. That begs a question: 
 when we shine a laser on anything,
@@ -123,7 +123,7 @@ not coherent (many wavelength, different phases).</p>
 <p>Deterministic is just a way of saying everything about the system is known and
 there’s no randomness. Sunlight is not deterministic because there are many
 random processes. Photons are randomly generated and there are many
-wavelengths. Sunspots are one example of this randomness.</p>
+wavelengths. Sunspots are one example of the randomness present in sunlight.</p>
 
 <p>But if lasers are coherent and deterministic, why do we see speckle (read:
 bright and dark spots) when we see a laser spot? The speckle is random; we
@@ -133,7 +133,7 @@ turns out <em>what</em> we see the laser on is important, but let’s look at th
 and physics behind it.</p>
 
 <p>Coherent optical systems have a very special property. Their 
-<a href="https://en.wikipedia.org/wiki/Impulse_response">impulse response</a> (read: reaction to a small input)
+<a href="https://en.wikipedia.org/wiki/Impulse_response">impulse response</a> (read: reaction to a standardized input)
 in the frequency domain is just the pupil function.  For those familiar with
 the parlance and having $f_x$ be a spatial frequency as opposed to a time
 frequency,</p>
@@ -184,18 +184,13 @@ together can have a change in frequency depending on what angle they’re at,
 which makes intuitive sense. Or, our spatial plane wave $U(x,y)$ can be
 represented by the Fourier transform:</p>
 
-<script type="math/tex; mode=display">U(x, y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta/\lambda}</script>
+<script type="math/tex; mode=display">\textrm{APWS}(\theta_x, \theta_y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta_x/\lambda}</script>
 
 <p>The wall which the laser is shining on is not smooth and perfectly flat. It’s
 rough, and the distance adds a phase difference between two waves. Through the
-<a href="https://en.wikipedia.org/wiki/Random_walk">Drunkard’s Walk process</a> and the angular plane wave spectrum, if we could
+<a href="https://en.wikipedia.org/wiki/Random_walk">Drunkard’s Walk</a> and the angular plane wave spectrum, if we could
 obtain every angle, the laser spot wouldn’t have any speckle. Our eyes are finite in
 size, so we can’t obtain every angle or frequency.</p>
-
-<p>Since the impulse response extends a ways out in the spatial domain, and by the
-angular plane wave spectrum the frequency domain, we can’t receive every
-frequency because our eyes are finite in size. If our eyes were infinitely big,
-the laser spot wouldn’t have any speckle.</p>
 
 <p>Because the wall gives the wave some random phase, we can represent the spot we
 see by a 2D convolution with a random phase and the impulse response. This

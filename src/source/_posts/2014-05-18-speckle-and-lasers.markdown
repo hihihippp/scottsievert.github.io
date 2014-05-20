@@ -14,7 +14,7 @@ including [bloodless surgery][blood], [eye surgery][eye] and
 when we shine a laser on anything,
 why do we see bright and dark spots? Shouldn't it all be the same color since
 lasers are deterministic (read: not random)?  To
-answer that question[^1], we need to delve into optical theory.
+answer that question{% fn_ref 1 %}, we need to delve into optical theory.
 
 <!--More-->
 
@@ -118,7 +118,10 @@ theory.
 
 **tl;dr:** the roughness of the walls add uncertainty in phase and hence speckle
 
-[^1]:the [full code][code] is available on Github.
+<!--[^1]:[full code][code] available on Github-->
+{% footnotes %}
+  {% fn %} A footnote is this text at the end of you page that explains something.
+{% endfootnotes%}
 
 [LTI]:https://en.wikipedia.org/wiki/LTI_system_theory
 [code]:https://github.com/scottsievert/side-projects/tree/master/speckle

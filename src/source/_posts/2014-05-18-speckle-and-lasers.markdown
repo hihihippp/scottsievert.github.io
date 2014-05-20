@@ -7,8 +7,8 @@ published: true
 categories: math optics
 ---
 
-We know that lasers are very accurate instruments, emit a very precise
-wavelength and are in an array of precision applications
+We know that lasers are very accurate instruments and emit a very precise
+wavelength and hence are in an array of precision applications
 including [bloodless surgery][blood], [eye surgery][eye] and 
 [fingerprint detection][finger]. That begs a question: 
 when we shine a laser on anything,
@@ -27,7 +27,7 @@ not coherent (many wavelength, different phases).
 Deterministic is just a way of saying everything about the system is known and
 there's no randomness. Sunlight is not deterministic because there are many
 random processes. Photons are randomly generated and there are many
-wavelengths. Sunspots are one example of this randomness.
+wavelengths. Sunspots are one example of the randomness present in sunlight.
 
 But if lasers are coherent and deterministic, why do we see speckle (read:
 bright and dark spots) when we see a laser spot? The speckle is random; we
@@ -37,7 +37,7 @@ turns out *what* we see the laser on is important, but let's look at the math
 and physics behind it.
 
 Coherent optical systems have a very special property. Their 
-[impulse response][ir] (read: reaction to a small input)
+[impulse response][ir] (read: reaction to a standardized input)
 in the frequency domain is just the pupil function.  For those familiar with
 the parlance and having $f_x$ be a spatial frequency as opposed to a time
 frequency,
@@ -82,7 +82,7 @@ together can have a change in frequency depending on what angle they're at,
 which makes intuitive sense. Or, our spatial plane wave $U(x,y)$ can be
 represented by the Fourier transform:
 
-$$\textrm{APWS}(x, y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta/\lambda}$$
+$$\textrm{APWS}(\theta_x, \theta_y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta_x/\lambda}$$
 
 The wall which the laser is shining on is not smooth and perfectly flat. It's
 rough, and the distance adds a phase difference between two waves. Through the

@@ -1,5 +1,6 @@
 // This File is imported last, and will override other styles in the cascade
 // Add styles here to make changes without digging in too much
+
 html {
   background:$page-bg;
 }
@@ -70,6 +71,11 @@ body {
   .toggle-sidebar {
     display:none;
   }
+  // XXX: edited by scott!
+  .footnotes {
+      font-size: 0.8em;
+      color: #7e7e7e;
+  }
 }
 @media only screen and (max-width: 749px) {
   aside.sidebar {
@@ -93,17 +99,17 @@ body {
 .meta {
   font-family: $serif;
 }
-// XXX: edited by scott!
-.footnotes {
-    font-size: 0.8em;
-    color: #7e7e7e;
-}
 .sticky {  
     position: fixed;  
     width:100%;  
     left: 0;  
     top: 0;  
     z-index: 100;  
+}
+// XXX: edited by scott!
+.footnotes {
+    font-size: 0.8em;
+    color: #7e7e7e;
 }
 ::-webkit-input-placeholder {
    color: $link-color;
@@ -117,3 +123,4 @@ body {
 :-ms-input-placeholder {  
    color: $link-color;  
 }  
+

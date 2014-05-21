@@ -70,7 +70,8 @@ use IPython, you have access to `%run`. I've found it most useful for
 inspecting global variables after the script has run. IPython even has other
 useful tools including `%debug` (debug *after* error occured acting like it
 *just* occured),
-`!<shell-command>` and `function?`/`function??` for help on a function.
+`!<shell-command>` and `function?`/`function??` for help on a function. There's
+more info on [IPython's list of magics][magic].
 
 #### My personal setup 
 I typically have MacVim and IPython's QtConsole (using 
@@ -157,6 +158,8 @@ pool.join()
 IPython's parallelization toolkit [also includes a `map()` interface.][map]
 
 ### SymPy (+LaTeX printing!)
+{% img right http://docs.sympy.org/latest/_images/ipythonqtconsole.png 400 %}
+
 [SymPy][sympy] serves as a replacement for Mathematica (or at least it's a
 close race). With SymPy, you have access to symbolic variables and can perform
 almost any function on them: differentiation, integration, etc. They support
@@ -165,7 +168,6 @@ complete library.
 
 Perhaps most attractive, [you can even pretty print LaTeX or ASCII][pprint].
 
-{% img left http://docs.sympy.org/latest/_images/ipythonqtconsole.png 400 %}
 
 I haven't used this library much, but I'm sure there are good tutorials out
 there.
@@ -285,6 +287,7 @@ Google/stackoverflow search will likely solve your problem. Perhaps the best
 part: if you find a problem in a package and fix it, you can commit your
 changes and make it accessible globally!
 
+[magic]:http://ipython.org/ipython-doc/dev/interactive/tutorial.html
 [mat-py-hack]:http://stackoverflow.com/questions/17445995/how-to-call-multiple-functions-from-a-single-m-matlab-file
 [full-ide]:https://wiki.python.org/moin/IntegratedDevelopmentEnvironments
 [sci-ide]:http://xcorr.net/2013/04/17/evaluating-ides-for-scientific-python/

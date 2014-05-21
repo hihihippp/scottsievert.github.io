@@ -10,7 +10,7 @@ categories: math optics
 We know that lasers are very accurate instruments and emit a very precise
 wavelength and hence are in an array of precision applications
 including [bloodless surgery][blood], [eye surgery][eye] and 
-[fingerprint detection][finger]. That begs a question: 
+[fingerprint detection][finger]. That raises a question:
 when we shine a laser on anything,
 why do we see bright and dark spots? Shouldn't it all be the same color since
 lasers are deterministic (read: not random)?  To

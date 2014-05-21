@@ -20,6 +20,11 @@
   }
 }
 
+//added by scott to include image caption
+@mixin reset-shadow-box() {
+  @include shadow-box(0px, 0px, 0px);
+}
+
 @function text-color($color, $dark: dark, $light: light){
   $text-color: ( (red($color)*299) + (green($color)*587) + (blue($color)*114) ) / 1000;
   $text-color: if($text-color >= 150, $dark, $light);

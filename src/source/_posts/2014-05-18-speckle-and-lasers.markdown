@@ -7,7 +7,6 @@ published: true
 categories: math optics
 ---
 
-
 We know that lasers are very accurate instruments and emit a very precise
 wavelength and hence are in an array of precision applications
 including [bloodless surgery][blood], [eye surgery][eye] and 

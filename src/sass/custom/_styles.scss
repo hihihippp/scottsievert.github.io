@@ -6,7 +6,7 @@ html {
 }
 body {
   line-height: 1.8em;
-  //font size edited by SCOTT. font-size for small screen
+  //font size edited by SCOTT
   font-size:1.0em;
   max-width:1320px;
   > div {
@@ -92,9 +92,7 @@ body {
 @media only screen and (min-width:992px) {
   body { 
       //edited by scott -- the size for big screen
-      //big screen font size
-    font-size: 1.10em; 
-    //width: 70em;
+    font-size: 1.2em; 
   }
   .collapse-sidebar aside.sidebar {
     background: #fff;

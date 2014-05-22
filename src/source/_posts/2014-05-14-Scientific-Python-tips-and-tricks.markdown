@@ -70,7 +70,8 @@ use IPython, you have access to `%run`. I've found it most useful for
 inspecting global variables after the script has run. IPython even has other
 useful tools including `%debug` (debug *after* error occured acting like it
 *just* occured),
-`!<shell-command>` and `function?`/`function??` for help on a function.
+`!<shell-command>` and `function?`/`function??` for help on a function. The
+[docs on magics are handy][magic].
 
 #### My personal setup 
 I typically have MacVim and IPython's QtConsole (using 
@@ -285,6 +286,7 @@ Google/stackoverflow search will likely solve your problem. Perhaps the best
 part: if you find a problem in a package and fix it, you can commit your
 changes and make it accessible globally!
 
+[magic]:http://ipython.org/ipython-doc/dev/interactive/tutorial.html
 [mat-py-hack]:http://stackoverflow.com/questions/17445995/how-to-call-multiple-functions-from-a-single-m-matlab-file
 [full-ide]:https://wiki.python.org/moin/IntegratedDevelopmentEnvironments
 [sci-ide]:http://xcorr.net/2013/04/17/evaluating-ides-for-scientific-python/

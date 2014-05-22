@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Python | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/python/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-21T22:43:03-05:00</updated>
+  <updated>2014-05-22T12:28:33-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -82,7 +82,8 @@ use IPython, you have access to <code>%run</code>. I’ve found it most useful f
 inspecting global variables after the script has run. IPython even has other
 useful tools including <code>%debug</code> (debug <em>after</em> error occured acting like it
 <em>just</em> occured),
-<code>!&lt;shell-command&gt;</code> and <code>function?</code>/<code>function??</code> for help on a function.</p>
+<code>!&lt;shell-command&gt;</code> and <code>function?</code>/<code>function??</code> for help on a function. The
+<a href="http://ipython.org/ipython-doc/dev/interactive/tutorial.html">docs on magics are handy</a>.</p>
 
 <h4 id="my-personal-setup">My personal setup</h4>
 <p>I typically have MacVim and IPython’s QtConsole (using 

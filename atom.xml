@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-21T22:43:03-05:00</updated>
+  <updated>2014-05-22T12:28:33-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -19,13 +19,13 @@
     <updated>2014-05-18T09:26:40-05:00</updated>
     <id>http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers</id>
     <content type="html"><![CDATA[<p>We know that lasers are very accurate instruments and emit a very precise
-wavelength and hence are in an array of precision applications
-including <a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless surgery</a>, <a href="https://en.wikipedia.org/wiki/Laser_eye_surgery_(disambiguation)">eye surgery</a> and 
-<a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. That begs a question: 
-when we shine a laser on anything,
-why do we see bright and dark spots? Shouldn’t it all be the same color since
-lasers are deterministic (read: not random)?  To
-answer that question<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, we need to delve into optical theory.</p>
+wavelength and hence are in an array of precision applications including
+<a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless surgery</a>, <a href="https://en.wikipedia.org/wiki/Laser_eye_surgery_(disambiguation)">eye surgery</a> and 
+<a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. 
+So why do we see random light/dark spots
+when we shine a laser on anything? Shouldn’t it all be the same color since
+lasers are deterministic (read: not random)?  To answer that question<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, we
+need to delve into optical theory.</p>
 
 <!--More-->
 
@@ -102,7 +102,7 @@ represented by the Fourier transform:</p>
 <script type="math/tex; mode=display">\textrm{APWS}(\theta_x, \theta_y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta_x/\lambda}</script>
 
 <p>The wall which the laser is shining on is not smooth and perfectly flat. It’s
-rough, and the distance adds a phase difference between two waves. Through the
+rough, and the distance adds a phase difference between two waves<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>. Through the
 <a href="https://en.wikipedia.org/wiki/Random_walk">Drunkard’s Walk</a> and the angular plane wave spectrum, if we could
 obtain every angle, the laser spot wouldn’t have any speckle. Our eyes are finite in
 size, so we can’t obtain every angle or frequency.</p>
@@ -143,6 +143,9 @@ theory.</p>
   <ol>
     <li id="fn:1">
       <p>the <a href="https://github.com/scottsievert/side-projects/tree/master/speckle">full code</a> is available on Github.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>reddit commenter <a href="http://www.reddit.com/r/Optics/comments/25zyxa/why_are_laser_spots_speckled/chmg1p2">delmar15</a> pointed out that there’s also phase due to the glass it’s shining through (and many other effects). <a href="http://www.amazon.com/Statistical-Optics-Joseph-W-Goodman/dp/0471399167">Statisitcal optics</a> covers that in much more detail.<a href="#fnref:2" rel="reference">&#8617;</a></p>
     </li>
   </ol>
 </div>
@@ -218,7 +221,8 @@ use IPython, you have access to <code>%run</code>. I’ve found it most useful f
 inspecting global variables after the script has run. IPython even has other
 useful tools including <code>%debug</code> (debug <em>after</em> error occured acting like it
 <em>just</em> occured),
-<code>!&lt;shell-command&gt;</code> and <code>function?</code>/<code>function??</code> for help on a function.</p>
+<code>!&lt;shell-command&gt;</code> and <code>function?</code>/<code>function??</code> for help on a function. The
+<a href="http://ipython.org/ipython-doc/dev/interactive/tutorial.html">docs on magics are handy</a>.</p>
 
 <h4 id="my-personal-setup">My personal setup</h4>
 <p>I typically have MacVim and IPython’s QtConsole (using 

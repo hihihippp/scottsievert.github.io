@@ -8,13 +8,13 @@ categories: math optics
 ---
 
 We know that lasers are very accurate instruments and emit a very precise
-wavelength and hence are in an array of precision applications
-including [bloodless surgery][blood], [eye surgery][eye] and 
-[fingerprint detection][finger]. That begs a question: 
-when we shine a laser on anything,
-why do we see bright and dark spots? Shouldn't it all be the same color since
-lasers are deterministic (read: not random)?  To
-answer that question[^1], we need to delve into optical theory.
+wavelength and hence are in an array of precision applications including
+[bloodless surgery][blood], [eye surgery][eye] and 
+[fingerprint detection][finger]. 
+So why do we see random light/dark spots
+when we shine a laser on anything? Shouldn't it all be the same color since
+lasers are deterministic (read: not random)?  To answer that question[^1], we
+need to delve into optical theory.
 
 <!--More-->
 
@@ -85,7 +85,7 @@ represented by the Fourier transform:
 $$\textrm{APWS}(\theta_x, \theta_y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta_x/\lambda}$$
 
 The wall which the laser is shining on is not smooth and perfectly flat. It's
-rough, and the distance adds a phase difference between two waves. Through the
+rough, and the distance adds a phase difference between two waves[^2]. Through the
 [Drunkard's Walk][rand] and the angular plane wave spectrum, if we could
 obtain every angle, the laser spot wouldn't have any speckle. Our eyes are finite in
 size, so we can't obtain every angle or frequency.
@@ -119,7 +119,10 @@ theory.
 **tl;dr:** the roughness of the walls add uncertainty in phase and hence speckle
 
 [^1]:the [full code][code] is available on Github.
+[^2]:reddit commenter [delmar15][reddit] pointed out that there's also phase due to the glass it's shining through (and many other effects). [Statisitcal optics][stats] covers that in much more detail.
 
+[reddit]:http://www.reddit.com/r/Optics/comments/25zyxa/why_are_laser_spots_speckled/chmg1p2
+[stats]:http://www.amazon.com/Statistical-Optics-Joseph-W-Goodman/dp/0471399167
 [LTI]:https://en.wikipedia.org/wiki/LTI_system_theory
 [code]:https://github.com/scottsievert/side-projects/tree/master/speckle
 [coherence]:https://en.wikipedia.org/wiki/Coherence_(physics)

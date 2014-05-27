@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-27T15:47:24-05:00</updated>
+  <updated>2014-05-27T15:54:05-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -181,9 +181,9 @@ in the frequency domain is just the pupil function.  For those familiar with
 the parlance and having $f_x$ be a spatial frequency as opposed to a time
 frequency,</p>
 
-<script type="math/tex; mode=display">H\left( f_x, f_y\right) = P(x, y) </script>
+<script type="math/tex; mode=display">H\left( f_x, f_y\right) = P(-\lambda z x, -\lambda z y) </script>
 
-<p>When I saw this derived, I thought “holy shit.” If you just want to only pass high
+<p>When I saw this derived<sup id="fnref:3"><a href="#fn:3" rel="footnote">2</a></sup>, I thought “holy shit.” If you just want to only pass high
 frequency spatial content (read: edges), then all that’s required it to not let
 light through the center of the lens.</p>
 
@@ -230,7 +230,7 @@ represented by the Fourier transform:</p>
 <script type="math/tex; mode=display">\textrm{APWS}(\theta_x, \theta_y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta_x/\lambda}</script>
 
 <p>The wall which the laser is shining on is not smooth and perfectly flat. It’s
-rough, and the distance adds a phase difference between two waves<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>. Through the
+rough, and the distance adds a phase difference between two waves<sup id="fnref:2"><a href="#fn:2" rel="footnote">3</a></sup>. Through the
 <a href="https://en.wikipedia.org/wiki/Random_walk">Drunkard’s Walk</a> and the angular plane wave spectrum, if we could
 obtain every angle, the laser spot wouldn’t have any speckle. Our eyes are finite in
 size, so we can’t obtain every angle or frequency.</p>
@@ -267,12 +267,13 @@ theory.</p>
 
 <p><strong>tl;dr:</strong> the roughness of the walls add uncertainty in phase and hence speckle</p>
 
-<hr />
-
 <div class="footnotes">
   <ol>
     <li id="fn:1">
       <p>the <a href="https://github.com/scottsievert/side-projects/tree/master/speckle">full code</a> is available on Github.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>This does rely on assumptions by Goodman. Refer to Eqn. 6-20 for more detail (and thanks Mint!)<a href="#fnref:3" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:2">
       <p>reddit commenter <a href="http://www.reddit.com/r/Optics/comments/25zyxa/why_are_laser_spots_speckled/chmg1p2">delmar15</a> pointed out that there’s also phase due to the glass it’s shining through (and many other effects). <a href="http://www.amazon.com/Statistical-Optics-Joseph-W-Goodman/dp/0471399167">Statisitcal optics</a> covers that in much more detail.<a href="#fnref:2" rel="reference">&#8617;</a></p>

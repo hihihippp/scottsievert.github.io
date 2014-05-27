@@ -42,9 +42,9 @@ in the frequency domain is just the pupil function.  For those familiar with
 the parlance and having $f_x$ be a spatial frequency as opposed to a time
 frequency,
 
-$$H\left( f_x, f_y\right) = P(x, y) $$
+$$H\left( f_x, f_y\right) = P(-\lambda z x, -\lambda z y) $$
 
-When I saw this derived, I thought "holy shit." If you just want to only pass high
+When I saw this derived[^3], I thought "holy shit." If you just want to only pass high
 frequency spatial content (read: edges), then all that's required it to not let
 light through the center of the lens.
 
@@ -118,10 +118,11 @@ theory.
 
 **tl;dr:** the roughness of the walls add uncertainty in phase and hence speckle
 
----
-
 [^1]:the [full code][code] is available on Github.
+
 [^2]:reddit commenter [delmar15][reddit] pointed out that there's also phase due to the glass it's shining through (and many other effects). [Statisitcal optics][stats] covers that in much more detail.
+
+[^3]:This does rely on assumptions by Goodman. Refer to Eqn. 6-20 for more detail (and thanks Mint!)
 
 [reddit]:http://www.reddit.com/r/Optics/comments/25zyxa/why_are_laser_spots_speckled/chmg1p2
 [stats]:http://www.amazon.com/Statistical-Optics-Joseph-W-Goodman/dp/0471399167

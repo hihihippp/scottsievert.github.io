@@ -7,7 +7,6 @@ categories: optics math
 published: true
 ---
 
-
 The [Fourier transform][wiki-fourier] or FFT is a powerful mathematical
 concept. It breaks an input signal down into it's frequency components. The
 best example is lifted from Wikipedia.

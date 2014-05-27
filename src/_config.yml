@@ -1,6 +1,7 @@
 # ----------------------- #
 #      Main Configs       #
 # ----------------------- #
+# XXX: add newline to sass/custom/_styles.scss to refresh footnotes/style
 
 url: http://scottsievert.github.io
 title: Scott Sievert

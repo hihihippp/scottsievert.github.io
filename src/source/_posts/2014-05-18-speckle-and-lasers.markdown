@@ -108,7 +108,7 @@ make `d` (really `delta` but that's long); if we include more frequencies and
 more of the impulse response, the dots get smaller. To see this, if you hold a
 pinhole up to your eye, the speckles will appear larger.
 
-{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/speckle.png 500 %}
+{% img center https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/speckle.png 500 'trial' 'trial2' %}
 
 An intuitive way to think about this involves the impulse response. The impulse
 response changes on with the distance and so does the phase. Certain areas add

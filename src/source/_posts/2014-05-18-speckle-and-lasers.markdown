@@ -118,6 +118,8 @@ theory.
 
 **tl;dr:** the roughness of the walls add uncertainty in phase and hence speckle
 
+---
+
 [^1]:the [full code][code] is available on Github.
 [^2]:reddit commenter [delmar15][reddit] pointed out that there's also phase due to the glass it's shining through (and many other effects). [Statisitcal optics][stats] covers that in much more detail.
 

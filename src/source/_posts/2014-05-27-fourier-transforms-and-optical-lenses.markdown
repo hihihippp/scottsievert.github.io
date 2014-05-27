@@ -4,6 +4,7 @@ title: "Fourier transforms and optical lenses"
 date: 2014-05-27 13:50:25 -0500
 comments: true
 categories: optics math
+published: true
 ---
 
 

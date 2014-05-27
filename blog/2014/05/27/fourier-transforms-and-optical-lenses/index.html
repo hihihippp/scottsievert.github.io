@@ -1,0 +1,406 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Fourier Transforms and Optical Lenses - Scott Sievert</title>
+  <meta name="author" content="Scott Sievert">
+
+  
+  <meta name="description" content="The Fourier transform or FFT is a powerful mathematical
+concept. It breaks an input signal down into it’s frequency components. The
+best example is &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://scottsievert.github.io/blog/2014/05/27/fourier-transforms-and-optical-lenses">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="Scott Sievert" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href='http://fonts.googleapis.com/css?family=Noto+Serif:400,700' rel='stylesheet' type='text/css'>
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+
+  
+
+</head>
+
+<!-- mathjax config similar to math.stackexchange -->
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  jax: ["input/TeX", "output/HTML-CSS"],
+  tex2jax: {
+    inlineMath: [ ['$', '$'] ],
+    displayMath: [ ['$$', '$$']],
+    processEscapes: true,
+    skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  messageStyle: "none",
+  "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
+});
+</script>
+<script src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML" type="text/javascript"></script>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Scott Sievert</a></h1>
+  
+    <h2>Carefully curated musings on math, python and skiing.</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  
+  
+</ul>
+
+<ul class="main-navigation">
+  <li><a href="/about/">About</a></li>
+  <li><a href="/">Blog</a></li>
+  <li><a href="https://github.com/scottsievert">Github</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+  <li><a href="/atom.xml">RSS</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Fourier Transforms and Optical Lenses</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-27T13:50:25-05:00" pubdate data-updated="true">May 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>The <a href="https://en.wikipedia.org/wiki/Fourier_transform">Fourier transform</a> or FFT is a powerful mathematical
+concept. It breaks an input signal down into it’s frequency components. The
+best example is lifted from Wikipedia.</p>
+
+<!--More-->
+
+<p><img class="right" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Fourier_transform_time_and_frequency_domains_%28small%29.gif" width="200" /></p>
+
+<p>The Fourier transform is used in almost every type of analysis. I’ve seen it
+used to detect vehicles smuggling contraband across borders and to seperate
+harmonic overtones from a cello. It can transform <a href="https://en.wikipedia.org/wiki/Convolution">convolution</a> into a
+simple (and fast!) multiplication and multiply incredibly long polynomials.
+These might seem pointless, but they’re useful with any “<a href="https://en.wikipedia.org/wiki/LTI_system_theory">nice</a>” system
+and complicated stability problems, respectively. The Fourier transform
+is perhaps the most useful abstract mathematical concept.</p>
+
+<p>We can see that it’s very abstract and mathematical just by looking at it’s
+definition: $\newcommand{\fourier}[1]{\mathbb{F}\left[ #1 \right]} $</p>
+
+<script type="math/tex; mode=display"> F(f_x) = \fourier{f(x)} = \int f(x) \exp\left[ -j \cdot 2\pi \cdot f_x \cdot x \right] dx</script>
+
+<p>The Fourier transform is so useful, it’s implemented in probably every
+programming language through <code>fft</code> and there are even dedicated chips to
+perform this transform efficiently. The last thing we would expect is for this
+abstract and mathematical concept to be implemented by physical devices.</p>
+
+<p>We could easily have some integrated chip perform an FFT, but that’s not
+interesting. If a physical device that has some completely unrelated purpose
+but can still perform an FFT without human intervention (read: programming),
+that’d be interesting. For example, an optical lens is shaped solely to produce
+an image, not to take a Fourier transform… but that’s exactly what it does.</p>
+
+<p><img class="right" src="https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/setup.png" width="300" /></p>
+
+<p>Let me repeat: a <em>lens can take an exact spatial Fourier transform.</em> This does
+have some limitations<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, mainly that it only works under coherent light. A
+coherent light source is simply defined a source that’s not random. Natural
+light is random as there are many different wavelengths coming in at random
+times. Laser light is very coherent – there’s a very precise wavelength and
+every individual ray is in phase<sup id="fnref:3"><a href="#fn:3" rel="footnote">2</a></sup>.</p>
+
+<p><a href="http://www.amazon.com/Introduction-Fourier-Optics-Joseph-Goodman/dp/0974707724">Goodman</a>, the textbook that almost every Fourier optics course uses, says<sup id="fnref:2"><a href="#fn:2" rel="footnote">3</a></sup>
+that the field corresponding to the diagram is</p>
+
+<script type="math/tex; mode=display"> 
+U_f(u,v) = 
+\frac{
+    A \exp\left[ j \frac{k}{2f} (1 - \frac{d}{f}) (u^2 + v^2) \right]
+                }{j \lambda f}
+    \cdot\\
+    \int \int U_o(x,y) \exp\left[ -j \frac{2\pi}{\lambda f} (xu + yv) \right]
+    dxdy
+</script>
+
+<p>When $d=f$, <em>that’s exactly the definition of a Fourier transform.</em> Meaning we
+can expect $U_f(u,v) = \fourier{U_i(x,y)}\big|_{f_x = u/\lambda f} $. Minus
+some physical scaling, that’s an <em>exact</em> Fourier transform.</p>
+
+<p>No matter how elegant this math was, I wanted to see it in the real world and
+compare the computer FFT with the lens Fourier transform.  The setup for this
+experiment was rather involved, and I would like to give a resounding thanks to
+Mint Kunkel.  Without his help, I <em>never</em> could have gotten an image, much less
+a decent one.</p>
+
+<p>I was taking an image of a grid, illuminated by a infinite<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup> plane wave
+generated by a laser. The computer generated image and Fourier transform are
+shown below.</p>
+
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/lens-fft-computer/grid.png" width="600" /></p>
+
+<p>We can’t expect the lens Fourier transform to look exactly like this. The
+equipment required to get this image is highly specialized and costs more than
+I want to know. But even more significantly, the tuning of this equipment is
+critical and almost impossible to get right. Plus, there’s detail like grid
+spacing/size/etc missing, the reason the two images aren’t almost exactly
+identical.</p>
+
+<p>Regardless, the Fourier transform by lens shows remarkable similarity to the
+Fourier transform done on the computer.</p>
+
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/bench/grid_0001.png" width="500" /></p>
+
+<p>This is a real world example of how a lens, a simple object used for
+photography performs perhaps the most powerful concept in signal processing. 
+This alone is cool, but it shows itself elsewhere. The transfer
+function is just the pupil function or <script type="math/tex">H\left(f_x, f_y\right) = P(x,y) </script>
+(under coherent light, but has similar effect in incoherent light). If you want
+to resolve a higher frequency (aka more detail), you need your pupil function to
+extend further.</p>
+
+<p><img class="right" src="https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/pupil/stack.png" width="300" /></p>
+
+<p>Animals have different shaped <em>pupils</em> or different <em>pupil functions</em> for their
+eye. A cat has a very vertical pupil, a zebra’s pupil is horizontal and an
+eagle’s pupil is round<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup>. There are different evolutionary reasons why an animal
+needs to see more detail in the vertical or horizontal directions (ie, jumping
+vs hunting) and this shows itself with their pupils. Animals see more detail in
+the horizontal or vertical directions if that’s what they care about!</p>
+
+<!--XXX: check!-->
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Another limitation: the lens can only accept frequencies as large as $r/\lambda f$, meaning the input signal must be band-limited.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>For a detailed explanation of why the laser spots are speckled and random, see my <a href="http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers/">previous blog post</a>.<a href="#fnref:3" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>on page 105.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p>Three centimeters is about infinity according to Mint.<a href="#fnref:4" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p>Images are taken from Google Images. If you are the owner of one of these images and would like it removed, let me know and I’ll remove it.<a href="#fnref:5" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Scott Sievert</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-27T13:50:25-05:00" pubdate data-updated="true">May 27<span>th</span>, 2014</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/math/'>math</a>, <a class='category' href='/blog/categories/optics/'>optics</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://scottsievert.github.io/blog/2014/05/27/fourier-transforms-and-optical-lenses/" data-via="" data-counturl="http://scottsievert.github.io/blog/2014/05/27/fourier-transforms-and-optical-lenses/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2014/05/18/speckle-and-lasers/" title="Previous Post: Speckle and lasers">&laquo; Speckle and lasers</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+  <aside class="sidebar">
+   
+<form action="https://www.google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:scottsievert.github.io" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/05/27/fourier-transforms-and-optical-lenses/">Fourier Transforms and Optical Lenses</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/18/speckle-and-lasers/">Speckle and Lasers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2014/05/14/Scientific-Python-tips-and-tricks/">Scientific Python Tips and Tricks</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/11/14/predicting-the-weather/">Predicting the Weather</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/scottsievert">@scottsievert</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'scottsievert',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Scott Sievert -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+<!--scott: commented out to remove sticky header-->
+<!--<script>-->
+  <!--$(document).ready(function() {  -->
+  <!--var stickyNavTop = $('nav').offset().top;  -->
+    
+  <!--var stickyNav = function(){  -->
+  <!--var scrollTop = $(window).scrollTop();  -->
+         
+  <!--if (scrollTop > stickyNavTop) {   -->
+      <!--$('nav').addClass('sticky');  -->
+  <!--} else {  -->
+      <!--$('nav').removeClass('sticky');   -->
+  <!--}  -->
+  <!--};  -->
+    
+  <!--stickyNav();  -->
+    
+  <!--$(window).scroll(function() {  -->
+      <!--stickyNav();  -->
+  <!--});  -->
+  <!--});  -->
+<!--</script>-->
+
+
+</body>
+</html>

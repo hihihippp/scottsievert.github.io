@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Optics | Scott Sievert]]></title>
+  <link href="http://scottsievert.github.io/blog/categories/optics/atom.xml" rel="self"/>
+  <link href="http://scottsievert.github.io/"/>
+  <updated>2014-05-27T15:47:24-05:00</updated>
+  <id>http://scottsievert.github.io/</id>
+  <author>
+    <name><![CDATA[Scott Sievert]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Fourier Transforms and Optical Lenses]]></title>
+    <link href="http://scottsievert.github.io/blog/2014/05/27/fourier-transforms-and-optical-lenses/"/>
+    <updated>2014-05-27T13:50:25-05:00</updated>
+    <id>http://scottsievert.github.io/blog/2014/05/27/fourier-transforms-and-optical-lenses</id>
+    <content type="html"><![CDATA[<p>The <a href="https://en.wikipedia.org/wiki/Fourier_transform">Fourier transform</a> or FFT is a powerful mathematical
+concept. It breaks an input signal down into it’s frequency components. The
+best example is lifted from Wikipedia.</p>
+
+<!--More-->
+
+<p><img class="right" src="https://upload.wikimedia.org/wikipedia/commons/7/72/Fourier_transform_time_and_frequency_domains_%28small%29.gif" width="200"></p>
+
+<p>The Fourier transform is used in almost every type of analysis. I’ve seen it
+used to detect vehicles smuggling contraband across borders and to seperate
+harmonic overtones from a cello. It can transform <a href="https://en.wikipedia.org/wiki/Convolution">convolution</a> into a
+simple (and fast!) multiplication and multiply incredibly long polynomials.
+These might seem pointless, but they’re useful with any “<a href="https://en.wikipedia.org/wiki/LTI_system_theory">nice</a>” system
+and complicated stability problems, respectively. The Fourier transform
+is perhaps the most useful abstract mathematical concept.</p>
+
+<p>We can see that it’s very abstract and mathematical just by looking at it’s
+definition: $\newcommand{\fourier}[1]{\mathbb{F}\left[ #1 \right]} $</p>
+
+<script type="math/tex; mode=display"> F(f_x) = \fourier{f(x)} = \int f(x) \exp\left[ -j \cdot 2\pi \cdot f_x \cdot x \right] dx</script>
+
+<p>The Fourier transform is so useful, it’s implemented in probably every
+programming language through <code>fft</code> and there are even dedicated chips to
+perform this transform efficiently. The last thing we would expect is for this
+abstract and mathematical concept to be implemented by physical devices.</p>
+
+<p>We could easily have some integrated chip perform an FFT, but that’s not
+interesting. If a physical device that has some completely unrelated purpose
+but can still perform an FFT without human intervention (read: programming),
+that’d be interesting. For example, an optical lens is shaped solely to produce
+an image, not to take a Fourier transform… but that’s exactly what it does.</p>
+
+<p><img class="right" src="https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/setup.png" width="300"></p>
+
+<p>Let me repeat: a <em>lens can take an exact spatial Fourier transform.</em> This does
+have some limitations<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, mainly that it only works under coherent light. A
+coherent light source is simply defined a source that’s not random. Natural
+light is random as there are many different wavelengths coming in at random
+times. Laser light is very coherent – there’s a very precise wavelength and
+every individual ray is in phase<sup id="fnref:3"><a href="#fn:3" rel="footnote">2</a></sup>.</p>
+
+<p><a href="http://www.amazon.com/Introduction-Fourier-Optics-Joseph-Goodman/dp/0974707724">Goodman</a>, the textbook that almost every Fourier optics course uses, says<sup id="fnref:2"><a href="#fn:2" rel="footnote">3</a></sup>
+that the field corresponding to the diagram is</p>
+
+<script type="math/tex; mode=display"> 
+U_f(u,v) = 
+\frac{
+    A \exp\left[ j \frac{k}{2f} (1 - \frac{d}{f}) (u^2 + v^2) \right]
+                }{j \lambda f}
+    \cdot\\
+    \int \int U_o(x,y) \exp\left[ -j \frac{2\pi}{\lambda f} (xu + yv) \right]
+    dxdy
+</script>
+
+<p>When $d=f$, <em>that’s exactly the definition of a Fourier transform.</em> Meaning we
+can expect $U_f(u,v) = \fourier{U_i(x,y)}\big|_{f_x = u/\lambda f} $. Minus
+some physical scaling, that’s an <em>exact</em> Fourier transform.</p>
+
+<p>No matter how elegant this math was, I wanted to see it in the real world and
+compare the computer FFT with the lens Fourier transform.  The setup for this
+experiment was rather involved, and I would like to give a resounding thanks to
+Mint Kunkel.  Without his help, I <em>never</em> could have gotten an image, much less
+a decent one.</p>
+
+<p>I was taking an image of a grid, illuminated by a infinite<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup> plane wave
+generated by a laser. The computer generated image and Fourier transform are
+shown below.</p>
+
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/lens-fft-computer/grid.png" width="600"></p>
+
+<p>We can’t expect the lens Fourier transform to look exactly like this. The
+equipment required to get this image is highly specialized and costs more than
+I want to know. But even more significantly, the tuning of this equipment is
+critical and almost impossible to get right. Plus, there’s detail like grid
+spacing/size/etc missing, the reason the two images aren’t almost exactly
+identical.</p>
+
+<p>Regardless, the Fourier transform by lens shows remarkable similarity to the
+Fourier transform done on the computer.</p>
+
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/<em>posts/lens_fft_images/bench/grid</em>0001.png" width="500"></p>
+
+<p>This is a real world example of how a lens, a simple object used for
+photography performs perhaps the most powerful concept in signal processing. 
+This alone is cool, but it shows itself elsewhere. The transfer
+function is just the pupil function or <script type="math/tex">H\left(f_x, f_y\right) = P(x,y) </script>
+(under coherent light, but has similar effect in incoherent light). If you want
+to resolve a higher frequency (aka more detail), you need your pupil function to
+extend further.</p>
+
+<p><img class="right" src="https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/pupil/stack.png" width="300"></p>
+
+<p>Animals have different shaped <em>pupils</em> or different <em>pupil functions</em> for their
+eye. A cat has a very vertical pupil, a zebra’s pupil is horizontal and an
+eagle’s pupil is round<sup id="fnref:5"><a href="#fn:5" rel="footnote">5</a></sup>. There are different evolutionary reasons why an animal
+needs to see more detail in the vertical or horizontal directions (ie, jumping
+vs hunting) and this shows itself with their pupils. Animals see more detail in
+the horizontal or vertical directions if that’s what they care about!</p>
+
+<!--XXX: check!-->
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>Another limitation: the lens can only accept frequencies as large as $r/\lambda f$, meaning the input signal must be band-limited.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:3">
+      <p>For a detailed explanation of why the laser spots are speckled and random, see my <a href="http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers/">previous blog post</a>.<a href="#fnref:3" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>on page 105.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:4">
+      <p>Three centimeters is about infinity according to Mint.<a href="#fnref:4" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:5">
+      <p>Images are taken from Google Images. If you are the owner of one of these images and would like it removed, let me know and I’ll remove it.<a href="#fnref:5" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Speckle and Lasers]]></title>
+    <link href="http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers/"/>
+    <updated>2014-05-18T09:26:40-05:00</updated>
+    <id>http://scottsievert.github.io/blog/2014/05/18/speckle-and-lasers</id>
+    <content type="html"><![CDATA[<p>We know that lasers are very accurate instruments and emit a very precise
+wavelength and hence are in an array of precision applications including
+<a href="https://en.wikipedia.org/wiki/Bloodless_surgery">bloodless surgery</a>, <a href="https://en.wikipedia.org/wiki/Laser_eye_surgery_(disambiguation)">eye surgery</a> and 
+<a href="https://en.wikipedia.org/wiki/Fingerprint">fingerprint detection</a>. 
+So why do we see random light/dark spots
+when we shine a laser on anything? Shouldn’t it all be the same color since
+lasers are deterministic (read: not random)?  To answer that question<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>, we
+need to delve into optical theory.</p>
+
+<!--More-->
+
+<p><a href="https://en.wikipedia.org/wiki/Coherence_(physics)"><em>Coherent</em> optical systems</a> are simply defined to be
+<em>deterministic</em> systems. That’s a big definition, so let’s break it into
+pieces. Coherent systems are where you know the wavelength and phase of every
+ray. Lasers are very coherent (one wavelength, same phase) while sunlight is
+not coherent (many wavelength, different phases).</p>
+
+<p>Deterministic is just a way of saying everything about the system is known and
+there’s no randomness. Sunlight is not deterministic because there are many
+random processes. Photons are randomly generated and there are many
+wavelengths. Sunspots are one example of the randomness present in sunlight.</p>
+
+<p>But if lasers are coherent and deterministic, why do we see speckle (read:
+bright and dark spots) when we see a laser spot? The speckle is random; we
+can’t predict where every dark spot will be. The randomness of this laser spot
+and the fact that lasers are deterministic throws a helluva question at us. It
+turns out <em>what</em> we see the laser on is important, but let’s look at the math
+and physics behind it.</p>
+
+<p>Coherent optical systems have a very special property. Their 
+<a href="https://en.wikipedia.org/wiki/Impulse_response">impulse response</a> (read: reaction to a standardized input)
+in the frequency domain is just the pupil function.  For those familiar with
+the parlance and having $f_x$ be a spatial frequency as opposed to a time
+frequency,</p>
+
+<script type="math/tex; mode=display">H\left( f_x, f_y\right) = P(x, y) </script>
+
+<p>When I saw this derived, I thought “holy shit.” If you just want to only pass high
+frequency spatial content (read: edges), then all that’s required it to not let
+light through the center of the lens.</p>
+
+<p><img class="right" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/impulse_respone.png" width="200"></p>
+
+<p>Since this system is linear, we can think of our output as bunch of impulse
+responses shifted in space and scaled by the corresponding amount. This is the
+definition of <a href="https://en.wikipedia.org/wiki/Convolution">convolution</a> and only works because this is a 
+<a href="https://en.wikipedia.org/wiki/LTI_system_theory">linear and space invariant system.</a></p>
+
+<p>To find our impulse response in the space domain, $h\left( x, y\right) $, we
+have to take the Fourier transform (aka FFT) of our pupil. Since our pupil
+function is symmetric, the inverse Fourier transform and forward Fourier
+transform <a href="https://en.wikipedia.org/wiki/Fourier_transform#Invertibility_and_periodicity">are equivalent</a>.</p>
+
+<p>```python
+# a circular pupil
+pupil = zeros((N,N))
+i = argwhere(x<strong>2 + y</strong>2 &lt; r**2)
+pupil[i[:,0], i[:,1]] = 1</p>
+
+<p>h = fft2(pupil) # our impulse response since H(fx) = P(x)
+h = fftshift(h)
+```</p>
+
+<!--plane wave spectrum-->
+<p>Through the angular plane wave spectrum, this impulse response can be viewed as
+a series plane waves coming in at different angles, shown in the figure below.</p>
+
+<p><img class="right" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/apws.png" width="200"></p>
+
+<p>What angles can a wave be thought of as? The frequency content and angles turn
+out to be related, since two planes waves of a constant frequency adding
+together can have a change in frequency depending on what angle they’re at,
+which makes intuitive sense. Or, our spatial plane wave $U(x,y)$ can be
+represented by the Fourier transform:</p>
+
+<script type="math/tex; mode=display">\textrm{APWS}(\theta_x, \theta_y) = \mathcal{F}\left\{ U(x,y) \right\}\rvert_{f_x = \theta_x/\lambda}</script>
+
+<p>The wall which the laser is shining on is not smooth and perfectly flat. It’s
+rough, and the distance adds a phase difference between two waves<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>. Through the
+<a href="https://en.wikipedia.org/wiki/Random_walk">Drunkard’s Walk</a> and the angular plane wave spectrum, if we could
+obtain every angle, the laser spot wouldn’t have any speckle. Our eyes are finite in
+size, so we can’t obtain every angle or frequency.</p>
+
+<p>Because the wall gives the wave some random phase, we can represent the spot we
+see by a 2D convolution with a random phase and the impulse response. This
+convolution is just saying that every spot gives the same response multiplied
+by some random phase, added together for every point.</p>
+
+<p>```python
+x = exp(1j<em>2</em>pi*rand(N,N)) # a bunch of random phases
+x *= p # only within the pupil</p>
+
+<p>d = N/10 # delta since our eyes aren’t infinitely big
+y = convolve2d(x, h[N/2-d:N/2+d, N/2-d:N/2+d]) # an approximation with d
+```</p>
+
+<p>The laser spot <code>y</code> shows some speckle! The speckle varies with how large we
+make <code>d</code> (really <code>delta</code> but that’s long); if we include more frequencies and
+more of the impulse response, the dots get smaller. To see this, if you hold a
+pinhole up to your eye, the speckles will appear larger.</p>
+
+<p><img class="center" src="https://raw.githubusercontent.com/scottsievert/side-projects/master/speckle/speckle.png" width="500"></p>
+
+<p>An intuitive way to think about this involves the impulse response. The impulse
+response changes on with the distance and so does the phase. Certain areas add
+up to 0 while others add up to 1. There’s a whole probability density function
+that goes with that, but that’s goes further into optical and statistical
+theory.</p>
+
+<p><strong>tl;dr:</strong> the roughness of the walls add uncertainty in phase and hence speckle</p>
+
+<hr />
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>the <a href="https://github.com/scottsievert/side-projects/tree/master/speckle">full code</a> is available on Github.<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:2">
+      <p>reddit commenter <a href="http://www.reddit.com/r/Optics/comments/25zyxa/why_are_laser_spots_speckled/chmg1p2">delmar15</a> pointed out that there’s also phase due to the glass it’s shining through (and many other effects). <a href="http://www.amazon.com/Statistical-Optics-Joseph-W-Goodman/dp/0471399167">Statisitcal optics</a> covers that in much more detail.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+]]></content>
+  </entry>
+  
+</feed>

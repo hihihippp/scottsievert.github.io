@@ -24,11 +24,10 @@ and complicated system stability problems, respectively. The Fourier transform
 is perhaps the most useful abstract mathematical concept.
 
 We can see that it's very abstract and mathematical just by looking at it's
-definition:
-
-$\newcommand{\fourier}[1]{\mathbb{F}\left[ #1 \right]}$
+definition: $\newcommand{\fourier}[1]{\mathbb{F}\left[ #1 \right]} $
 
 $$ F(f_x) = \fourier{f(x)} = \int f(x) \exp\left[ -j \cdot 2\pi \cdot f_x \cdot x \right] dx$$
+
 
 The Fourier transform is so useful, it's implemented in probably every language
 (through `fft`) and there are even dedicated chips to perform this transform
@@ -41,6 +40,8 @@ but can still perform an FFT without human intervention (read: programming),
 that'd be interesting. For example, an optical lens is shaped solely to produce
 an image, not to take a Fourier transform... but that's exactly what it does.
 
+{% img right  200 %}
+
 Let me repeat: a *lens can take an exact spatial Fourier transform.* This does
 have some limitations[^1], mainly that it only works under coherent light. A
 coherent light source is simply defined a source that's not random. Natural
@@ -48,7 +49,7 @@ light is random as there are many different wavelengths coming in at random
 times. Laser light is very coherent -- there's a very precise wavelength and
 every individual ray is in phase[^3].
 
-Goodman, the textbook that almost every Fourier optics course uses, says[^2]
+[Goodman][good], the textbook that almost every Fourier optics course uses, says[^2]
 that the field corresponding to the diagram is
 
 $$ 
@@ -62,13 +63,13 @@ U_f(u,v) =
 $$
 
 When $d=f$, *that's exactly the definition of a Fourier transform.* Meaning we
-can expect $U_f(u,v) = \fourier{U_i(x,y)}\big|_{f_x = x/\lambda f} $. Minus
+can expect $U_f(u,v) = \fourier{U_i(x,y)}\big|_{f_x = u/\lambda f} $. Minus
 some physical scaling, that's an *exact* Fourier transform.
 
 No matter how elegant this math was, I wanted to see it in the real world. I
 decided to use a simple step and compare computer FFT and this lens FFT. The
 setup for this experiment was rather intensive, and I would like to give a
-resounding thanks to [Mint Kunkel][mint]. Without his help, I *never* could
+resounding thanks to Mint Kunkel. Without his help, I *never* could
 have gotten a decent image.
 
 I was taking an image of a grid, illuminated by a infinite[^4] plane wave
@@ -117,6 +118,7 @@ the horizontal or vertical directions if that's what they care about!
 [wiki-fourier]:https://en.wikipedia.org/wiki/Fourier_transform
 [conv]:https://en.wikipedia.org/wiki/Convolution
 [lti]:https://en.wikipedia.org/wiki/LTI_system_theory
+[good]:http://www.amazon.com/Introduction-Fourier-Optics-Joseph-Goodman/dp/0974707724
 
 <!--XXX: check!-->
 

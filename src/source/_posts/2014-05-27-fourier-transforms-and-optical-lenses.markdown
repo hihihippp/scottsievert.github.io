@@ -68,7 +68,7 @@ some physical scaling, that's an *exact* Fourier transform.
 No matter how elegant this math was, I wanted to see it in the real world. I
 decided to use a simple step and compare computer FFT and this lens FFT. The
 setup for this experiment was rather intensive, and I would like to give a
-resounding thanks to [Mint Kunkel][mint][^4]. Without his help, I *never* could
+resounding thanks to [Mint Kunkel][mint]. Without his help, I *never* could
 have gotten a decent image.
 
 I was taking an image of a grid, illuminated by a infinite[^4] plane wave
@@ -95,6 +95,8 @@ function is just the pupil function or $$H\left(f_x, f_y\right) = P(x,y) $$
 to resolve a higher frequency (aka more detail), you need your pupil function to
 extend further.
 
+{% img right https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/pupil/stack.png 300 %}
+
 Animals have different shaped *pupils* or different *pupil functions* for their
 eye. A cat has a very vertical pupil, a zebra's pupil is horizontal and an
 eagle's pupil is round. There are different evolutionary reasons why an animal
@@ -102,9 +104,10 @@ needs to see more detail in the vertical or horizontal directions (ie, jumping
 vs hunting) and this shows itself with their pupils. Animals see more detail in
 the horizontal or vertical directions if that's what they care about!
 
+
 [^1]:Another limitation: the lens can only accept frequencies as large as $r/\lambda f$, meaning the input signal must be band-limited.
 
-[^2]:on page ___.
+[^2]:on page 105.
 
 [^3]:For a detailed explanation of why the laser spots we see aren't in phase, see my [previous blog post][prev-post]
 

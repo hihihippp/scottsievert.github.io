@@ -92,12 +92,12 @@ Fourier transform done on the computer.
 {% img center https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/bench/grid_0001.png 500 %}
 
 This is a real world example of how a lens, a simple object used for
-photography performs perhaps the most powerful concept in signal processing. 
-This alone is cool, but it shows itself elsewhere. The transfer
-function is just the pupil function or $$H\left(f_x, f_y\right) = P(x,y) $$
-(under coherent light, but has similar effect in incoherent light). If you want
-to resolve a higher frequency (aka more detail), you need your pupil function to
-extend further.
+photography performs perhaps the most powerful concept in signal processing.
+This alone is cool, but it shows itself elsewhere. The transfer function is
+just the pupil function or $$H\left(f_x, f_y\right) = P(x,y) $$ (minus physical
+scaling, under coherent light, but has similar effect in incoherent light). If
+you want to resolve a higher frequency (aka more detail), you need your pupil
+function to extend further.
 
 {% img right https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/pupil/stack.png 300 %}
 

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-27T15:54:05-05:00</updated>
+  <updated>2014-05-27T16:26:44-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -101,12 +101,12 @@ Fourier transform done on the computer.</p>
 <p><img class="center" src="https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/<em>posts/lens_fft_images/bench/grid</em>0001.png" width="500"></p>
 
 <p>This is a real world example of how a lens, a simple object used for
-photography performs perhaps the most powerful concept in signal processing. 
-This alone is cool, but it shows itself elsewhere. The transfer
-function is just the pupil function or <script type="math/tex">H\left(f_x, f_y\right) = P(x,y) </script>
-(under coherent light, but has similar effect in incoherent light). If you want
-to resolve a higher frequency (aka more detail), you need your pupil function to
-extend further.</p>
+photography performs perhaps the most powerful concept in signal processing.
+This alone is cool, but it shows itself elsewhere. The transfer function is
+just the pupil function or <script type="math/tex">H\left(f_x, f_y\right) = P(x,y) </script> (minus physical
+scaling, under coherent light, but has similar effect in incoherent light). If
+you want to resolve a higher frequency (aka more detail), you need your pupil
+function to extend further.</p>
 
 <p><img class="right" src="https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/pupil/stack.png" width="300"></p>
 

@@ -85,7 +85,7 @@ critical and almost impossible to get right.
 Regardless, the Fourier transform by lens shows remarkable similarity to the
 Fourier transform done on the computer.
 
-img
+{% img center https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/grid_0001.png 500 %}
 
 This is a real world example of how a lens, a simple object used for
 photography performs perhaps the most powerful concept in signal processing. 

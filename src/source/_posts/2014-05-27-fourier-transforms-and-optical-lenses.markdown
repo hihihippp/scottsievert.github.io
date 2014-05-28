@@ -36,7 +36,7 @@ probably every programming language through `fft` and there are even dedicated
 chips to perform this efficiently. The last thing we would expect is for this
 abstract and mathematical concept to be implemented by physical devices.
 
-We could easily have some integrated chip perform an FFT, but that's not
+We could easily have some integrated chip call `fft`, but that's not
 interesting. If a physical device that has some completely unrelated purpose
 but can still perform an Fourier transform without human intervention (read:
 programming), that'd be interesting. For example, an optical lens is shaped
@@ -88,12 +88,13 @@ Transform are shown below.
 
 {% img center https://raw.githubusercontent.com/scottsievert/scottsievert.github.io/master/src/source/_posts/lens_fft_images/lens-fft-computer/grid.png 600 %}
 
-We can't expect the lens Fourier transform to look exactly like this. The
-equipment required to get this image is highly specialized and costs more than
-I want to know. But even more significantly, the tuning of this equipment is
-critical and almost impossible to get right. Plus, there's detail like grid
-spacing/size/etc missing, the reason the two images aren't almost exactly
-identical.
+We can't expect the lens Fourier transform to look exactly like this. The first
+issue that jumps to mind is discrete vs continuous time, but that should
+hopefully play a small role. The equipment required to get this image is highly
+specialized and costs more than I want to know. But even more significantly,
+the tuning of this equipment is critical and almost impossible to get right.
+Plus, there's detail like grid spacing/size/etc missing, the reason the two
+images aren't almost exactly identical.
 
 Regardless, the Fourier transform by lens shows remarkable similarity to the
 Fourier transform done on the computer.

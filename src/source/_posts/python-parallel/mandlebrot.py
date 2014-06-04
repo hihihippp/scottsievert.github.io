@@ -69,6 +69,13 @@ def mandel_p(x):
 
     return m
 
+def time_function(f, string):
+    start = time()
+    result = f()
+    time_taken = time() - start
+    print "    "+string, time_taken
+    return result
+
 # timing
 print "mandel"
 global N

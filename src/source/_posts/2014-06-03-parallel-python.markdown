@@ -120,11 +120,11 @@ To be complete, here's the complete list of results:
 |            |  1  |    1            |     1             |  1                |
 ```
 
-[^1]:The full source, including function declarations is [available on
-Github][source]
+[^1]:The full source, including function declarations is 
+[available on Github][source]
 
 
-[source]:
+[source]:https://github.com/scottsievert/scottsievert.github.io/blob/master/src/source/_posts/python-parallel/mandlebrot.py
 [msi]:https://www.msi.umn.edu
 [view]:http://ipython.org/ipython-doc/dev/parallel/parallel_multiengine.html#creating-a-directview-instance
 [xkcd]:http://xkcd.com/927/

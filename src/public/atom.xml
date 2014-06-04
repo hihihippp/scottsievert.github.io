@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-05-28T09:45:31-05:00</updated>
+  <updated>2014-06-03T23:40:10-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -12,6 +12,178 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Parallel Python]]></title>
+    <link href="http://scottsievert.github.io/blog/2014/06/03/parallel-python/"/>
+    <updated>2014-06-03T23:29:51-05:00</updated>
+    <id>http://scottsievert.github.io/blog/2014/06/03/parallel-python</id>
+    <content type="html"><![CDATA[<p>In the scientific community, executing functions in parallel is critical.
+Running a function in parallel can mean hours or even days less execution time.</p>
+
+<p>Perhaps the biggest barrier to parallelization is that it can be too
+complicated to produce. The core of the scientific community, academia, often
+doesn’t even use source control meaning that they’re unwilling to invest the
+time and energy into something without something to roll back to.</p>
+
+<p>We’ll take a complicated and time-consuming function, a not-so-smart way to
+test if a number is prime. We could use much smarter methods such as a <a href="https://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">Sieve
+of Eratosthenes</a> or even some NumPy. But let’s pretend that this is some
+much longer and more intensive computation.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">test_prime</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class="line">    <span class="n">prime</span> <span class="o">=</span> <span class="bp">True</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arange</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">n</span><span class="p">):</span>
+</span><span class="line">        <span class="k">if</span> <span class="n">n</span><span class="o">/</span><span class="n">i</span> <span class="o">%</span> <span class="mi">1</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span class="line">            <span class="n">prime</span> <span class="o">=</span> <span class="bp">False</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">prime</span>
+</span><span class="line">
+</span><span class="line"><span class="n">serial</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+</span><span class="line"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">arange</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+</span><span class="line">    <span class="n">serial</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">test_prime</span><span class="p">(</span><span class="n">i</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>I don’t want to add another package to Python’s list of parallel toolboxes
+(mostly I’m afraid of [competing standards][xkcd]), but let’s define
+some functions so we can have a parallel function <em>easily</em><sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>.
+<code>some_function.parallel([1,2,3])</code> will execute <code>some_function</code> in parallel with
+the inputs <code>[1,2,3]</code>.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">parallel_attribute</span><span class="p">(</span><span class="n">f</span><span class="p">):</span>
+</span><span class="line">    <span class="k">def</span> <span class="nf">easy_parallize</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sequence</span><span class="p">):</span>
+</span><span class="line">        <span class="kn">from</span> <span class="nn">multiprocessing</span> <span class="kn">import</span> <span class="n">Pool</span>
+</span><span class="line">        <span class="n">pool</span> <span class="o">=</span> <span class="n">Pool</span><span class="p">(</span><span class="n">processes</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span>
+</span><span class="line">        <span class="n">result</span> <span class="o">=</span> <span class="n">pool</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="n">sequence</span><span class="p">)</span>
+</span><span class="line">        <span class="n">cleaned</span> <span class="o">=</span> <span class="p">[</span><span class="n">x</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">result</span> <span class="k">if</span> <span class="ow">not</span> <span class="n">x</span> <span class="ow">is</span> <span class="bp">None</span><span class="p">]</span>
+</span><span class="line">        <span class="n">cleaned</span> <span class="o">=</span> <span class="n">asarray</span><span class="p">(</span><span class="n">cleaned</span><span class="p">)</span>
+</span><span class="line">        <span class="n">pool</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</span><span class="line">        <span class="n">pool</span><span class="o">.</span><span class="n">join</span><span class="p">()</span>
+</span><span class="line">        <span class="k">return</span> <span class="n">cleaned</span>
+</span><span class="line">    <span class="kn">from</span> <span class="nn">functools</span> <span class="kn">import</span> <span class="n">partial</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">partial</span><span class="p">(</span><span class="n">easy_parallize</span><span class="p">,</span> <span class="n">f</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line"><span class="n">test_primes</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="n">parallel_attribute</span><span class="p">(</span><span class="n">test_primes</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>This parallelization is based of <a href="https://medium.com/building-things-on-the-internet/40e9b2b36148">this wonderful Medium article</a>.
+Basically, it was relatively easy to develop and works for at least
+semi-complex functions that seem prime for the scientific community.</p>
+
+<p>Perhaps the biggest question to ask is about the speedup of this code. Like all
+complex subjects, the answer is that it depends. If you are only looping over a
+small range of inputs, the overhead of creating a parallelized function is too
+high.</p>
+
+<p>More importantly, more cores results in more speedup. Small machines, like this
+4-core Macbook Air have parallel results that run twice as fast as serial
+results. On an 8-core iMac, it’s about 4 times as fast.</p>
+
+<p>If you’re running code that takes a long time to run and can be run in
+parallel, you probably have access to a large supercomputing institute such as
+I do. I have access to [MSI][msi], a resource that has supercomputers with up
+to XXX cores available. Running this code on those computers, I see parallel
+results that run about XXX as fast.</p>
+
+<p>Too often, some promising example is shown that when applied in the real world
+fails. To try and combat this, I decided to use a more complicated example,
+calculating a <a href="https://en.wikipedia.org/wiki/Mandelbrot_set">Mandelbrot set</a>. This can be natively parallelized using
+NumPy, but I decided to simulate some more complex function.</p>
+
+<p>Calculating this Mandelbrot set relies on looping over a two-dimensional grid
+(that is, without NumPy support). To parallelize this function, I essentially
+only looped over one dimension while parallelizing the other dimension.</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+<span class="line-number">8</span>
+<span class="line-number">9</span>
+<span class="line-number">10</span>
+<span class="line-number">11</span>
+<span class="line-number">12</span>
+<span class="line-number">13</span>
+<span class="line-number">14</span>
+<span class="line-number">15</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">mandel_p</span><span class="p">(</span><span class="n">x</span><span class="p">):</span>
+</span><span class="line">    <span class="c">#m = zeros((N,N)) # reducing the dimension since called with `x`</span>
+</span><span class="line">    <span class="n">m</span> <span class="o">=</span> <span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">);</span> <span class="n">i</span><span class="o">=-</span><span class="mi">1</span>
+</span><span class="line">    <span class="c">#for x in linspace(-2, 1, num=N): # called with `x`</span>
+</span><span class="line">    <span class="n">j</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="p">;</span> <span class="n">i</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class="line">    <span class="k">for</span> <span class="n">y</span> <span class="ow">in</span> <span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">N</span><span class="p">):</span>
+</span><span class="line">        <span class="n">j</span> <span class="o">+=</span> <span class="mi">1</span>
+</span><span class="line">        <span class="c">#m[j,i] = mandel_pixel(x, y)</span>
+</span><span class="line">        <span class="n">m</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">=</span> <span class="n">mandel_pixel</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">)</span>
+</span><span class="line">
+</span><span class="line">    <span class="k">return</span> <span class="n">m</span>
+</span><span class="line">
+</span><span class="line"><span class="n">mandel_p</span><span class="o">.</span><span class="n">parallel</span> <span class="o">=</span> <span class="n">parallel_attribute</span><span class="p">(</span><span class="n">mandel_p</span><span class="p">)</span>
+</span><span class="line"><span class="n">parallel</span> <span class="o">=</span> <span class="n">mandel_p</span><span class="o">.</span><span class="n">parallel</span><span class="p">(</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">num</span><span class="o">=</span><span class="n">N</span><span class="p">))</span>
+</span><span class="line"><span class="n">parallel</span> <span class="o">=</span> <span class="n">parallel</span><span class="o">.</span><span class="n">T</span> <span class="c"># dunno why</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>I see similar results with this code: about 2x speedup on my 4-core and about a
+4x speedup on the 8-core iMac.</p>
+
+<p>To be complete, here’s the complete list of results:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="o">|</span> <span class="n">Function</span>   <span class="o">|</span> <span class="err">$</span><span class="n">N</span><span class="err">$</span> <span class="o">|</span> <span class="n">Serial</span> <span class="n">time</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">|</span> <span class="n">Parallel</span> <span class="n">time</span> <span class="p">(</span><span class="n">s</span><span class="p">)</span> <span class="o">|</span> <span class="n">serial</span> <span class="o">/</span> <span class="n">parallel</span> <span class="o">|</span>
+</span><span class="line"><span class="o">|</span> <span class="p">:</span><span class="o">-</span><span class="p">:</span>        <span class="o">|</span> <span class="p">:</span><span class="o">-</span><span class="p">:</span> <span class="o">|</span> <span class="p">:</span><span class="o">-</span><span class="p">:</span>             <span class="o">|</span> <span class="p">:</span><span class="o">-</span><span class="p">:</span>               <span class="o">|</span> <span class="p">:</span><span class="o">-</span><span class="p">:</span>               <span class="o">|</span>
+</span><span class="line"><span class="o">|</span> <span class="n">Serial</span>     <span class="o">|</span>  <span class="mi">1</span>  <span class="o">|</span>    <span class="mi">1</span>            <span class="o">|</span>     <span class="mi">1</span>             <span class="o">|</span>  <span class="mi">1</span>                <span class="o">|</span>
+</span><span class="line"><span class="o">|</span>            <span class="o">|</span>  <span class="mi">1</span>  <span class="o">|</span>    <span class="mi">1</span>            <span class="o">|</span>     <span class="mi">1</span>             <span class="o">|</span>  <span class="mi">1</span>                <span class="o">|</span>
+</span><span class="line"><span class="o">|</span> <span class="n">Mandlebrot</span> <span class="o">|</span>  <span class="mi">1</span>  <span class="o">|</span>    <span class="mi">1</span>            <span class="o">|</span>     <span class="mi">1</span>             <span class="o">|</span>  <span class="mi">1</span>                <span class="o">|</span>
+</span><span class="line"><span class="o">|</span>            <span class="o">|</span>  <span class="mi">1</span>  <span class="o">|</span>    <span class="mi">1</span>            <span class="o">|</span>     <span class="mi">1</span>             <span class="o">|</span>  <span class="mi">1</span>                <span class="o">|</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Github][source]</p>
+
+<p>[source]:
+[msi]:https://www.msi.umn.edu
+[view]:http://ipython.org/ipython-doc/dev/parallel/parallel_multiengine.html#creating-a-directview-instance
+[xkcd]:http://xkcd.com/927/</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:1">
+      <p>The full source, including function declarations is [available on<a href="#fnref:1" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fourier Transforms and Optical Lenses]]></title>

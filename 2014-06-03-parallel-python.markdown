@@ -7,20 +7,26 @@ categories: python
 ---
 
 In the scientific community, executing functions in parallel can mean hours or
-even days less execution time.  There's a whole array of [Python
-parallelization toolkits][parallel], probably partially due to the [competing
-standards][xkcd] issue.
+even days less execution time.  There's a whole array of 
+[Python parallelization toolkits][parallel], probably partially due to the 
+[competing standards][xkcd] issue.
 
 <!--More-->
 
 Perhaps the biggest barrier to parallelization is that it can be very
-complicated to include, at least for the niche of the scientific community I'm
+complicated to include, at least for the part of the scientific community I'm
 in. I spent a while looking at the [IPython parallization framework][ipy] and
 various other packages, but they all gave me mysterious bugs so I decided to
-use the [multiprocessing library][multi] for this simple task. Without [this
-Medium article][medium], I would be lost in threads and classes that add
+use the [multiprocessing library][multi] for this simple task. Without 
+[this Medium article][medium], I would be lost in threads and classes that add
 significant speed boots but seem to be default in basic parallelization
 libraries.
+
+There are *extremely* large speed gains through these other toolboxes. The GPU
+has thousands of cores, while your CPU only uses a few. Of course, an easy and
+simple solution uses the least complex methods, meaning this simple
+parallelization uses the CPU. There are massive gains for using more complex
+solutions.
 
 I don't want to add another package to Python's list of parallel toolboxes
 (again, [competing standards][xkcd]), but let's define
@@ -75,12 +81,8 @@ for i in arange(N):
     serial[i] = test_prime(i)
 
 test_prime.parallel = parallel_function(test_prime)
-parallel = test_prime.parallel(arange(N))
+parallel_result = test_prime.parallel(arange(N))
 ```
-
-<!--This parallelization is based of [this wonderful Medium article][medium].-->
-<!--Basically, it was relatively easy to develop and works for at least-->
-<!--semi-complex functions that seem prime for the scientific community.-->
 
 Testing this parallelization out, we find that the results are *exactly* the
 same, even with incredibly precise floats. This means that the *exact* same
@@ -92,17 +94,17 @@ the answer is "it depends." It will primarily[^2] depend on the number of cores
 your machine has. One core or worst case means that your parallelized code will
 still run, just without the speed benefits.
 
-On "basic" machines, such as this 4-core Macbook Air, I see parallized results
+On "basic" machines, such as this 4-core Macbook Air, I see parallelized results
 that run about twice as fast. On an 8-core iMac, it's about 4 times as fast.
 It seems like my operating system is only dedicating half the cores to this
 process, but I don't want to dig into that magic.
 
 Calling `test_primes.parallel` instead of `test_primes` gives us pretty large
-speed gains. Even more convenient, editing the code to do this was *easy.*
-Perhaps even better, it's easy to use threads instead of processes. The
-`multiprocessing.dummy` module is an exact clone of `multiprocessing` that uses
-threads instead of processes. Hence if you find gains with threads (I didn't),
-use `from multiprocessing.dummy import Pool`.
+speed gains for such a simple method. Even more convenient, editing the code to
+do this was *easy.* Perhaps even better, it's easy to use threads instead of
+processes. The `multiprocessing.dummy` module is an exact clone of
+`multiprocessing` that uses threads instead of processes. Hence if you find
+gains with threads (I didn't), use `from multiprocessing.dummy import Pool`.
 
 If you're running code that takes a long time to run and can be run in
 parallel, you probably have access to a large supercomputing institute like I
@@ -166,14 +168,14 @@ well commented and works. To be complete, here are the full results:
 
 ```
   Function      | Computer | Speedup | serial time (s) | parallel time (s)  
-  --------------+----------+---------+-----------------+-------------------+
-  Primes        | Air      | 2.63    | 2.16            | 0.82              |
-                | iMac     | 3.48    | 1.59            | 0.45              |
-                | MSI      | 1       | 1               | 1                 |
-  --------------+----------+---------+-----------------+-------------------+
-  Mandlebrot    | Air      | 1.79    | 2.42            | 1.35              |
-                | iMac     | 3.53    | 2.51            | 0.71              |
-                | MSI      | 1       | 1               | 1                 |
+  --------------+----------+---------+-----------------+------------------- 
+  Primes        | Air      | 2.63    | 2.16            | 0.82               
+                | iMac     | 3.48    | 1.59            | 0.45               
+                | MSI      | 1       | 1               | 1                  
+  --------------+----------+---------+-----------------+------------------- 
+  Mandlebrot    | Air      | 1.79    | 2.42            | 1.35               
+                | iMac     | 3.53    | 2.51            | 0.71               
+                | MSI      | 1       | 1               | 1                  
 ```
 
 [^1]:The full source, including function declarations is [available on Github][source]

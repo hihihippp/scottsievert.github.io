@@ -5,7 +5,7 @@
 
 url: http://scottsievert.github.io
 title: Scott Sievert
-subtitle: <a href="https://github.com/scottsievert"><i class="fa fa-github fa-2x"></i></a>&nbsp;<a href="https://github.com/scottsievert"><i class="fa fa-twitter fa-2x"></i></a>&nbsp;&nbsp;Carefully curated musings on math, python and skiing.
+subtitle: Carefully curated musings on math, python and skiing.<br><a href="https://github.com/scottsievert"><i class="fa fa-github fa-2x"></i></a>&nbsp;<a href="https://twitter.com/stsievert"><i class="fa fa-twitter fa-2x"></i></a>
 author: Scott Sievert
 simple_search: https://www.google.com/search
 description:
@@ -70,7 +70,7 @@ github_show_profile_link: true
 github_skip_forks: true
 
 # Twitter
-twitter_user:
+twitter_user: stsievert
 twitter_tweet_button: true
 
 # Google +1

@@ -4,7 +4,7 @@ from pylab import linspace, meshgrid, arange, imshow, show, zeros, asarray
 from time import time
 
 # a function in parallel is easy
-def parallel_attribute(f):
+def parallel_function(f):
     def easy_parallize(f, sequence):
         # I didn't see gains with .dummy; you might
         from multiprocessing import Pool

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-06-29T16:11:11-05:00</updated>
+  <updated>2014-07-14T09:24:05-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -196,7 +196,7 @@ frequency,</p>
 
 <script type="math/tex; mode=display">H\left( f_x, f_y\right) = P(-\lambda z x, -\lambda z y) </script>
 
-<p>When I saw this derived<sup id="fnref:3"><a href="#fn:3" rel="footnote">2</a></sup>, I thought “holy shit.” If you just want to only pass high
+<p>When I saw this derived<sup id="fnref:3"><a href="#fn:3" rel="footnote">2</a></sup>, I thought “holy (expletive).” If you just want to only pass high
 frequency spatial content (read: edges), then all that’s required it to not let
 light through the center of the lens.</p>
 

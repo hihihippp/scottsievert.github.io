@@ -44,7 +44,7 @@ frequency,
 
 $$H\left( f_x, f_y\right) = P(-\lambda z x, -\lambda z y) $$
 
-When I saw this derived[^3], I thought "holy shit." If you just want to only pass high
+When I saw this derived[^3], I thought "holy (expletive)." If you just want to only pass high
 frequency spatial content (read: edges), then all that's required it to not let
 light through the center of the lens.
 

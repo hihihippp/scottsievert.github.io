@@ -21,17 +21,16 @@ This concept of detecting and estimating data present in a signal and using it t
 ### Projects
 My [Github][git] contains almost all of the code I work on. It has everything from research activities to small projects to this website.
 
-#### Some specific projects of mine: 
+#### Useful projects of mine: 
 
-* [iSparse][isparse]. An iOS app that reconstructs an image from *random* pixel
-  samples. This relies on the image being [sparse][sparse] in the wavelet
-  basis, meaning it relies on most of the image being of similar color.
-* [IRcamera][ir]. A thermal camera that reconstructs an image after choosing
-  the *best* places to look along with corresponding hardware. In essence, a
-  "smarter" version of iSparse. This relies on the same assumptions as iSparse
-  but adaptively chooses where to sample based on the Haar wavelet
-  tree structure.
 * [python-drawnow][drawnow]. Similar to MATLAB's `drawnow`.
+* [swix]. A matrix and machine learning library for Swift.
+* [jem-press]. A site generator designed with academic website in mind inspired
+  by [jem-doc].
+
+[swix]:https://github.com/scottsievert/swix
+[jem-press]:https://github.com/scottsievert/jem-press
+[jem-doc]:http://jemdoc.jaboc.net
 
 
 [sparse]:https://en.wikipedia.org/wiki/Sparse_matrix
@@ -40,4 +39,4 @@ My [Github][git] contains almost all of the code I work on. It has everything fr
 [talk]:http://nuit-blanche.blogspot.com/2013/08/sahd-compressive-saliency-sensing.html
 [isparse]:https://github.com/scottsievert/iSparse
 [ir]:https://github.com/scottsievert/IRcamera
-[CV]:https://www.dropbox.com/s/lk0kifmjtzyq0y4/Scott_Sievert_CV.pdf
+[CV]:https://www.dropbox.com/s/gsk6varv1c0gdft/Scott_Sievert_CV.pdf

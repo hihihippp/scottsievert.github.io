@@ -1,10 +1,11 @@
 ---
 layout: post
-title: "Parallel Python"
-date: 2014-06-03 23:29:51 -0500
+title: "Simple Python Parallelism"
+date: 2014-07-30 15:00:40 -0500
 comments: true
 categories: python
 ---
+
 
 In the scientific community, executing functions in parallel can mean hours or
 even days less execution time.  There's a whole array of 
@@ -14,19 +15,20 @@ even days less execution time.  There's a whole array of
 <!--More-->
 
 Perhaps the biggest barrier to parallelization is that it can be very
-complicated to include, at least for the part of the scientific community I'm
+complicated to include, at least for the niche of the scientific community I'm
 in. I spent a while looking at the [IPython parallization framework][ipy] and
 various other packages, but they all gave me mysterious bugs so I decided to
 use the [multiprocessing library][multi] for this simple task. Without 
 [this Medium article][medium], I would be lost in threads and classes that add
-significant speed boots but seem to be default in basic parallelization
+significant speed boosts but seem to be default in basic parallelization
 libraries.
 
-There are *extremely* large speed gains through these other toolboxes. The GPU
-has thousands of cores, while your CPU only uses a few. Of course, an easy and
-simple solution uses the least complex methods, meaning this simple
-parallelization uses the CPU. There are massive gains for using more complex
-solutions.
+I want to emphasize that there are *extremely* large speed gains through these
+other toolboxes and it's probably worth it to learn those toolboxes if you need
+those speed gains. The GPU has thousands of cores, while your CPU only has a
+few.  Of course, an easy and simple solution uses the least complex methods,
+meaning this simple parallelization uses the CPU. There are massive gains for
+using more complex solutions.
 
 I don't want to add another package to Python's list of parallel toolboxes
 (again, [competing standards][xkcd]), but let's define
@@ -55,18 +57,20 @@ function.parallel = parallel_function(test_primes)
 The function `easy_parallize` just uses `pool.map` to execute a bunch of
 statements in parallel. Using `functool`, I return a function that only needs
 `sequence` as an input. It opens and closes a pool each time; certainly not
-optimal but easy.
+optimal but easy. This method of parallelization seems prime for the scientific
+community. It's short and sweet and doesn't require extensive modifications to
+the code.
 
-This method of parallelization seems prime for the scientific community. It's
-short and sweet and doesn't require extensive modifications to the code. The
-niche of the scientific community I'm part of often doesn't even use source
-control, meaning that this method is *much* more attractive than the Java-like
-methods in other packages.
+Let's test a small example out and see what each part does. If you want to know
+my thought process through the whole thing, see 
+[my Binpress tutorial][binpress].
+We'll test a complicated and time-consuming function, a
+not-so-smart way to test if a number is prime. We could use much smarter
+methods such as using NumPy or even the  [Sieve of Eratosthenes][sieve], but
+let's pretend that this is some much longer and more computation-intensive
+computation.
 
-We'll test a complicated and time-consuming function, a not-so-smart way to
-test if a number is prime. We could use much smarter methods such as using
-NumPy or even the  [Sieve of Eratosthenes][sieve], but let's pretend that this
-is some much longer and more computation-intensive computation.
+[binpress]:http://www.binpress.com/tutorial/simple-python-parallelism/121
 
 
 ```python
@@ -99,18 +103,20 @@ that run about twice as fast. On an 8-core iMac, it's about 4 times as fast.
 It seems like my operating system is only dedicating half the cores to this
 process, but I don't want to dig into that magic.
 
+If you're running code that takes a long time to run and can be run in
+parallel, you probably should have access to a large supercomputing institute
+like I should (but don't. Classic academia). Running code on machines 
+[that have 20 cores][20], we would expect to get results in 5% of the serial time.
+
+
 Calling `test_primes.parallel` instead of `test_primes` gives us pretty large
 speed gains for such a simple method. Even more convenient, editing the code to
-do this was *easy.* Perhaps even better, it's easy to use threads instead of
-processes. The `multiprocessing.dummy` module is an exact clone of
+do this was *easy.* Another selling point is that it's easy to use threads
+instead of processes. The `multiprocessing.dummy` module is an exact clone of
 `multiprocessing` that uses threads instead of processes. Hence if you find
 gains with threads (I didn't), use `from multiprocessing.dummy import Pool`.
 
-If you're running code that takes a long time to run and can be run in
-parallel, you probably have access to a large supercomputing institute like I
-do. I have access to [MSI][msi], a resource that has supercomputers with up to
-XXX cores available. Running this code on those computers, I see parallel
-results that run about XXX as fast.
+[20]:https://www.msi.umn.edu/hpc
 
 Too often, some promising example is shown that when applied in the real world
 fails. To try and combat this, I decided to use a more complicated example,
@@ -164,18 +170,19 @@ large speed gains (even on this machine!) and huge speed gains on
 supercomputers.
 
 If you want to see this in more detail, look [at the source][source] which is
-well commented and works. To be complete, here are the full results:
+well commented and works. As I mentioned earlier, I have written a 
+[Binpress tutorial][binpress] 
+on how I discovered this function. To be complete, here are
+the full results:
 
 ```
   Function      | Computer | Speedup | serial time (s) | parallel time (s)  
   --------------+----------+---------+-----------------+------------------- 
   Primes        | Air      | 2.63    | 2.16            | 0.82               
                 | iMac     | 3.48    | 1.59            | 0.45               
-                | MSI      | 1       | 1               | 1                  
   --------------+----------+---------+-----------------+------------------- 
   Mandlebrot    | Air      | 1.79    | 2.42            | 1.35               
                 | iMac     | 3.53    | 2.51            | 0.71               
-                | MSI      | 1       | 1               | 1                  
 ```
 
 [^1]:The full source, including function declarations is [available on Github][source]
@@ -192,4 +199,5 @@ well commented and works. To be complete, here are the full results:
 [msi]:https://www.msi.umn.edu
 [view]:http://ipython.org/ipython-doc/dev/parallel/parallel_multiengine.html#creating-a-directview-instance
 [xkcd]:http://xkcd.com/927/
+
 

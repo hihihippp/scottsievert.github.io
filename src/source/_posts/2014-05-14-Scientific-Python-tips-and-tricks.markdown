@@ -141,6 +141,7 @@ recently stumbled across on
 [a method to parallelize a function in one line][parallel-oneline]. Basically,
 all you do is the following:
 
+
 ```python
 # serial
 x = []
@@ -156,6 +157,8 @@ pool.join()
 
 [The link above][parallel-oneline] goes into more detail; I'll omit most of it.
 IPython's parallelization toolkit [also includes a `map()` interface.][map]
+
+*UPDATE:* see [my blog post on how to parallelize easily](http://scottsievert.github.io/blog/2014/07/30/simple-python-parallelism/)
 
 ### SymPy (+LaTeX printing!)
 [SymPy][sympy] serves as a replacement for Mathematica (or at least it's a

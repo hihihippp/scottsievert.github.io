@@ -1,60 +1,79 @@
 
-
-There are many misconceptions about math once you get beyond calculus.
-
-(note: for the remainder of this blog post, I'll use $x$ to indicate
-vectors/matrices and $x$ to indicate scalars)
+When I was in high school and even in part of college, when I heard course
+names for higher mathematical classes, it seemed as if they were teaching
+something simple that I learned back in middle school. I knew that couldn't be
+the case, and I would like to share what I've learned.
 
 ### N dimensions
 Generalizing to N dimensions is often seen as a pointless mathematical
-exercise. Since I'm writing a blog post about it, you might guess it's not.
+exercise. This gets confused with some language. Space exists in three
+dimensions; we just need three elements or a 3 dimensional vector to describe
+any point. Because of this, we say we live in three dimensions. So isn't
+generalizing to an $N$ dimensions pointless?
 
-Most people assume we live in three dimensions (really four with time *I
-think*). But let's go back to vectors. An $N$ dimensional vector is just one with
-$N$ components. Thinking about a grid, we need two numbers to describe any
-point on that grid, $x$ and $y$. For the four dimensions we live in, we need
-four: $x, y, z, t$.
+Let's go back to vectors. An $N$ dimensional vector is just one with $N$
+components.  Thinking about a grid, we need two numbers to describe any point
+on that grid, $x$ and $y$. For the four dimensions we live in, we need four:
+$x, y, z, t$.
 
 But wait. That's starting to look like a vector. Why can't we define a five
-dimensional vector that includes my age?
+dimensional vector that includes my age or a six dimensional vector that also
+includes my year in school? Thinking about this in the real world, we have data
+that has N components all the time. Images on my computer have N pixels and my
+GPS records N data points. Almost anything *discrete* is an $N$ dimensional
+vector.
 
-$$x = [x y z t 22]$$
+This pops up all the time in machine learning, image processing and almost
+anywhere that uses linear algebra or a computer. All the vectors and matrices
+I've seen have $N$ components, a *discrete* number. Computers only have so many
+bits meaning they must also be discrete. That means if we want to do anything
+fancy with a computer, we need to use linear algebra.
 
-Thinking about images with $N$ pixels or read $N$ values off a sensor to get an
-$N$ dimensional vector.
+### Linear algebra 
+At first glance, linear algebra seems basic. I know that I learned about linear
+functions and algebra in 7th grade. In middle school you might have seen
+$y=mx+b$. In linear algebra, you might see $y=Ax+b$ where $y, x,$ and $b$ are
+vector and $A$ is a matrix.
 
-Let's say we are in charge of a university and have $N$ students that all have
-$M$ features (grades, classes, dorm, finical aid, etc). We can think of this as
-a $N$ different vectors with $M$ different components, but that's kinda clunky.
-Why not condense this into an $N$ by $M$ matrix (or 2D grid of numbers)? Then
-the component at $i,j$ would be the $i$th component of the $j$th vector.
+A matrix is just nothing more than a collection of vectors. For example, if you
+have $M$ students with $N$ features (age, weight, GPA, etc), you can collect
+them by simply stacking the vectors. In typical mathematical notation, row $i$
+refers to the $i$th student and column $j$ refers to the $j$th feature.
 
-### Linear algebra
-Linear algebra sounds basic. We were taught linear functions in 7th grade;
-they're just $y=ax + b$, right?
+We've defined both vectors and matrices, but what about basic operations? How
+do we define addition and multiplication? Mathematical history said that
+addition worked element-wise, but multiplication is a bit more interesting.
 
-Actually, that equation is accurate when we use matrices. But that opens the
-door to a whole jungle of matrix math. For example, how do we define
-multiplication? It turns out that the definition we use is rather powerful. We
-define multiplication as the [dot product][dotpr]. The definition is
+The dot product or matrix multiplication is defined rather simply, but that
+doesn't give you any intuition. You can think of matrix multiplication as
+linear combinations of the rows and columns, but that still doesn't tell what
+matrix multiplication *means.*
 
-[dotpr]:
+Intuitively, we know that we can transform any matrix into any other matrix
+because we can arbitrarily choose numbers. But wait, this looks an awful lot
+like an arbitrary function.
 
-$$[a_1 a_2; a_3 a_4] * [b_1 b_2; b_3 b_4] = [...]$$
+For example, let's say we have a set of inputs $x = [1 2 3 4]$ and we want to
+perform the function $y = f(x) = 2*x + 1$. In matrix notation, we can just do 
 
-But we can think about it as a [linear combination][lincomb] of the rows or
-columns, explained fantastically by [XXX][xxx].
+$$y = \begin{bmatrix} 2 0 0 0 \\ 0 2 0 0 \\ 0 0 2 0 \\ 0 0 0 2 \end{bmatrix} 
+\cdot
+\begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix}
++
+\begin{bmatrix} 1 \\ 1 \\ 1 \\ 1 \end{bmatrix}
+$$
 
-[lincomb]:
+With these functions, we can perform even more powerful actions. We can easily
+swap elements or perform different actions on different elements. But, it gets
+even more powerful. We can find when a matrix or function simply scales a
+vector by finding the eigenvalues and eigenvectors or use the inverse to find
+$f^{-1}(x)$.
 
-There's also other operations, including the [singular value
-decomposition][svd] and [eigenvalues and eigenvectors][eigen]. The SVD splits a
-matrix into the dot product of three separate matrices with special properties;
-$X = U\Sigma V$. Eigenvalues and eigenvectors sound scary but they just see
-when $Ax = \lambda x$ is met.
+By definition, a matrix multiplication is *linear.*
 
-[svd]:
+
 [eigen]:
+[inverse]:
 
 ### Linear functions
 All this talk of linear algebra seems pointless and airy. We can define a grid

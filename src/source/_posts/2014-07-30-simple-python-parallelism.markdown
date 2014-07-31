@@ -101,7 +101,9 @@ still run, just without the speed benefits.
 On "basic" machines, such as this 4-core Macbook Air, I see parallelized results
 that run about twice as fast. On an 8-core iMac, it's about 4 times as fast.
 It seems like my operating system is only dedicating half the cores to this
-process, but I don't want to dig into that magic.
+process, but I don't want to dig into that magic[^reddit].
+
+[^reddit]:And <a href="http://www.reddit.com/r/Python/comments/2c6cor/simple_python_parallelism/cjcs3to">/u/longjohnboy did</a>. Apparently Intel uses hyperthreading to redefine cores.
 
 If you're running code that takes a long time to run and can be run in
 parallel, you probably should have access to a large supercomputing institute

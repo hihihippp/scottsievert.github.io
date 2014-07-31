@@ -222,7 +222,7 @@ still run, just without the speed benefits.</p>
 <p>On “basic” machines, such as this 4-core Macbook Air, I see parallelized results
 that run about twice as fast. On an 8-core iMac, it’s about 4 times as fast.
 It seems like my operating system is only dedicating half the cores to this
-process, but I don’t want to dig into that magic.</p>
+process, but I don’t want to dig into that magic<sup id="fnref:reddit"><a href="#fn:reddit" rel="footnote">3</a></sup>.</p>
 
 <p>If you’re running code that takes a long time to run and can be run in
 parallel, you probably should have access to a large supercomputing institute
@@ -341,6 +341,9 @@ the full results:</p>
     </li>
     <li id="fn:2">
       <p>If your input range is small like <code>range(1, 100)</code>, the overhead of creating the parallel function will wipe out any speed benefits. Luckily, your range is small enough this shouldn’t matter.<a href="#fnref:2" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:reddit">
+      <p>And <a href="http://www.reddit.com/r/Python/comments/2c6cor/simple_python_parallelism/cjcs3to">/u/longjohnboy did</a>. Apparently Intel uses hyperthreading to redefine cores.<a href="#fnref:reddit" rel="reference">&#8617;</a></p>
     </li>
   </ol>
 </div>

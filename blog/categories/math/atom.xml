@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-07-31T13:07:58-05:00</updated>
+  <updated>2014-07-31T23:18:17-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -12,6 +12,190 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Common Mathematical Misconceptions]]></title>
+    <link href="http://scottsievert.github.io/blog/2014/07/31/common-mathematical-misconceptions/"/>
+    <updated>2014-07-31T21:12:26-05:00</updated>
+    <id>http://scottsievert.github.io/blog/2014/07/31/common-mathematical-misconceptions</id>
+    <content type="html"><![CDATA[<p>When I heard course names for higher mathematical classes during high school
+and even part of college, it seemed as if they were teaching something simple
+that I learned back in middle school. I knew that couldn’t be the case, and
+three years of college have taught me otherwise.</p>
+
+<!--More-->
+
+<h2 id="n-dimensions">N dimensions</h2>
+<p>Generalizing to $N$ <a href="https://en.wikipedia.org/wiki/Dimension_(mathematics_and_physics)">dimensions</a> is often seen as a pointless mathematical
+exercise because of a language confusion. Space exists in three dimensions; we
+just need three elements or a three dimensional vector to describe any point.
+Because of this, we say we live in three dimensions. So isn’t generalizing to
+an $N$ dimensions pointless?</p>
+
+<p>Let’s go back to <a href="https://en.wikipedia.org/wiki/Vector_space">vectors</a>. An $N$ dimensional vector is just one with $N$
+components.<sup id="fnref:numpy"><a href="#fn:numpy" rel="footnote">1</a></sup> Thinking about a grid or 2D graph, we need two numbers to
+describe any point on that grid, $x$ and $y$. That’s a two dimensional vector.
+For the four dimensions we live in, we need four: $x, y, z, t$.</p>
+
+<p>But wait. Why can’t we define a five dimensional vector that includes my age or
+a six dimensional vector that also includes my year in school? Thinking about
+this in the real world, we have data that has $N$ components all the time. Images
+on my computer have $N$ pixels and my GPS records $N$ locations. Almost anything
+<em>discrete</em> is an $N$ dimensional vector.</p>
+
+<p>This pops up all the time in image processing, machine learning and almost
+anywhere that uses linear algebra <em>or a computer.</em> All the vectors and matrices
+I’ve seen have $N$ components, a <em>discrete</em> number. Computers only have a
+finite number of bits<sup id="fnref:computer"><a href="#fn:computer" rel="footnote">2</a></sup> meaning computers must also be discrete. That
+means if we want to do anything fancy with a computer, we need to use linear
+algebra.</p>
+
+<h2 id="linear-algebra">Linear algebra</h2>
+<p>At first glance, <a href="https://en.wikipedia.org/wiki/Linear_algebra">linear algebra</a> seems like middle school material. In
+middle school you might have seen $y=m\cdot x+b$ (more on this linear function
+later). In linear algebra, you might see $\mathbf{y}=\mathbf{A\cdot x+b}$ where $\mathbf{y, x,}$ and $\mathbf{b}$ are
+vectors and $\mathbf{A}$ is a matrix.<sup id="fnref:font"><a href="#fn:font" rel="footnote">3</a></sup></p>
+
+<p>A matrix is just nothing more than a collection of vectors and 2D grid of
+numbers. For example, if you have $M$ students with $N$ features (age, weight,
+GPA, etc), you can collect them by simply stacking the vectors and make an
+$M\times N$ matrix.</p>
+
+<p>We’ve defined both vectors and matrices, but what about basic operations? How
+do we define addition and multiplication? Addition works element-wise, but
+multiplication is a bit more interesting.</p>
+
+<p><a href="https://en.wikipedia.org/wiki/Matrix_multiplication">Matrix multiplication</a> is defined rather simply, but that doesn’t give you any
+intuition. You can think of matrix multiplication as linear combinations of the
+rows and columns, but that still doesn’t tell what matrix multiplication
+<em>means.</em></p>
+
+<p>Intuitively, we know that we can transform any matrix into any other matrix
+because we can arbitrarily choose numbers. But wait. In middle school we
+learned that a function could transform any number into any other number.
+Matrices are then analogous to functions!</p>
+
+<p>For example, let’s say we have a set of inputs $\mathbf{x} = [1,~2,~3,~4]^T$ and we want to
+perform the function $y = f(x) = 2\cdot x + 1$ on each element in our vector. In
+matrix notation, we can just do </p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\mathbf{y} = 
+\begin{bmatrix} 2&0&0&0 \\ 0&2&0&0 \\ 0&0&2&0 \\ 0&0&0&2 \end{bmatrix} 
+\cdot
+\begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix}
++
+\begin{bmatrix} 1 \\ 1 \\ 1 \\ 1 \end{bmatrix}
+ %]]&gt;</script>
+
+<p>With these functions, we can perform even more powerful actions. We can easily
+swap elements or perform different actions on different elements. It gets even
+more powerful but still relatively simple to an experienced mathematician. We
+can find when a matrix or function simply scales a vector by finding the
+<a href="https://en.wikipedia.org/wiki/Eigenvalue">eigenvalues and eigenvectors</a> or use the <a href="https://en.wikipedia.org/wiki/Inverse_matrix">inverse</a> to find a discrete
+analog to $f^{-1}(x)$.</p>
+
+<h2 id="linear-functions">Linear functions</h2>
+<p>A <a href="https://en.wikipedia.org/wiki/Linear_function">linear function</a> seems like the most boring function. It’s just a straight
+line, right? It is, but English got confused and it also means when some
+function obeys the <a href="https://en.wikipedia.org/wiki/Superposition_principle">superposition principle</a>. Concisely in math, it’s
+when $f(\alpha x+\beta y)=\alpha\cdot f(x)+\beta\cdot f(y)$.</p>
+
+<p>This means that <em>a general linear function is not linear.</em> If $f(x) = mx+b$,
+$f(x+y) = f(x)+f(y)+b$ which doesn’t satisfy the definition of a linear
+function. But there’s much more interesting functions out there.  <a href="https://en.wikipedia.org/wiki/Integral">Integration</a>
+and <a href="https://en.wikipedia.org/wiki/Derivative">differentiation</a> respect scalar multiplication and addition, meaning
+they’re linear.</p>
+
+<p>Since a host of other functions depend on integration and differentiation, so
+many of these  functions (but not all!) are also linear.<sup id="fnref:linear"><a href="#fn:linear" rel="footnote">4</a></sup> The 
+<a href="https://en.wikipedia.org/wiki/Discrete_Fourier_transform">discrete Fourier transform</a> (computed by <code>fft</code>), <a href="https://en.wikipedia.org/wiki/Wavelet_transform">wavelet transform</a> and a host of other
+functions are linear.</p>
+
+<p>Addition and scalar multiplication are defined element-wise for matrices, so
+any linear function can be represented by a matrix. There are matrices for
+computing the <code>fft</code> and wavelet transform. While unused as they require
+$O(n^2)$ operations, they exist. Exploiting specific properties, mathematicians
+are often able to push the number of operations down to $O(n\log(n))$.</p>
+
+<p>Linear functions are perceived as boring. If you know $\mathbf{y}$ in $\mathbf{y=Ax}$ for
+some known<sup id="fnref:mat_comp"><a href="#fn:mat_comp" rel="footnote">5</a></sup> matrix $\mathbf{A}$, you can easily find $\mathbf{x}$ by left-multipying
+with $\mathbf{A}^{-1}$. This might be expensive time-wise, but an exact solution is
+computable.  </p>
+
+<p>Nonlinear functions have a unique property that an exact and closed form
+solution <a href="https://en.wikipedia.org/wiki/List_of_nonlinear_partial_differential_equations#Exact_solutions">often can’t be found</a>. This means that no combination of
+elementary function like $\sin(\cdot), \exp(\cdot), \sqrt{\cdot},\int \cdot~dx,
+\frac{d~\cdot}{dx}$ along with respective operators and the infinitely many
+real numbers<sup id="fnref:uncount"><a href="#fn:uncount" rel="footnote">6</a></sup> cannot describe the solution. Instead, those elementary
+functions can only describe the equation that needs to be solved.</p>
+
+<p>Even a “simple” problem such as 
+<a href="https://en.wikipedia.org/wiki/Pendulum_(mathematics)">describing the motion of a pendulum</a> 
+is nonlinear and an exact solution can’t be found, even for the most simple
+case. Getting even more complex,
+there’s a whole list of 
+<a href="https://en.wikipedia.org/wiki/List_of_nonlinear_partial_differential_equations">nonlinear parital differential equations</a> 
+that solve important problems.<sup id="fnref:head"><a href="#fn:head" rel="footnote">7</a></sup></p>
+
+<p>This is why simulation is such a big deal. No closed form solution can be found
+meaning that you have to find a solution numerically.  Supercomputers don’t
+exist to for mild speed boosts or storage requirements that machine
+learning or “big data”<sup id="fnref:buzz"><a href="#fn:buzz" rel="footnote">8</a></sup> seems to require. No, supercomputers exist
+because with a nonlinear problem, a simulation <em>has</em> to be run to get <em>any</em>
+result. Running one of these simulations on my personal computer would take
+years if not decades.</p>
+
+<p>When you hand this type of problem to an experienced mathematician, they won’t
+look for a solution. Instead, they’ll look for bounds and guarantees on a
+solution they work out. If they just came up with a solution, they wouldn’t
+even know how good it is! So, they’ll try to bound the error and look for ways
+to lower that error.</p>
+
+<p>When I started college, I was under the impression that my later career would
+involve long and messy exact solutions. In my second and third years, I came to
+realize that those messy solutions didn’t exist and instead we used extremely
+elegant math to find exact solutions. In the last couple months<sup id="fnref:nonlinear"><a href="#fn:nonlinear" rel="footnote">9</a></sup>, I have come to
+realize that while simple math might <em>describe</em> the problem, there’s no closed
+form solution and the only way to get a solution to “interesting” problems is
+with a computer.</p>
+
+<h2 id="section"></h2>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:numpy">
+      <p>And hence an ndarray or “N dimensional array” in NumPy.<a href="#fnref:numpy" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:computer">
+      <p>When computers can have an <a href="(https://en.wikipedia.org/wiki/Uncountable_set)">uncountably infinite</a> number of bits they can be continuous and I’ll eat my hat.<a href="#fnref:computer" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:font">
+      <p>For the rest of this post, I’ll use that bold mathematical notation to describe vector and the regular font to describe scalars<a href="#fnref:font" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:linear">
+      <p>That is if the only depend on the simplest forms of integration and differentation.<a href="#fnref:linear" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:mat_comp">
+      <p>And matrix completion handles when $A$ isn’t known. This is analgous to finding an unknown scalar function.<a href="#fnref:mat_comp" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:uncount">
+      <p>The real numbers are actually <a href="(https://en.wikipedia.org/wiki/Uncountable_set)">uncountably infinite</a><a href="#fnref:uncount" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:head">
+      <p>And these problems are wayyy over my head.<a href="#fnref:head" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:buzz">
+      <p>Yeah it’s a buzz word. For example, satellites that collect 2 billion measurements a day. That’s a lot of data, but analyzing it and using it is not “big data.”<a href="#fnref:buzz" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:nonlinear">
+      <p>Or even as I write this blog post. I’ve known this for a while but this is a new light.<a href="#fnref:nonlinear" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Fourier Transforms and Optical Lenses]]></title>

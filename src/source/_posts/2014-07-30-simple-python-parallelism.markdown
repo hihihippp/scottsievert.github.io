@@ -14,6 +14,12 @@ even days less execution time.  There's a whole array of
 
 <!--More-->
 
+Python has the infamous global interpreter lock (GIL) which greatly restricts
+parallelism. We could try to step around it ourselves, but a lesson I've
+learned is not to solve a problem others tackled, especially when they do it
+*right.* There are a host of other packages available, and all done *right.*
+They all tackle problems similar to their own problem.
+
 Perhaps the biggest barrier to parallelization is that it can be very
 complicated to include, at least for the niche of the scientific community I'm
 in. I spent a while looking at the [IPython parallization framework][ipy] and

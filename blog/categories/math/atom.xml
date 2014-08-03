@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-08-01T13:40:16-05:00</updated>
+  <updated>2014-08-02T21:14:47-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -103,7 +103,7 @@ function obeys the <a href="https://en.wikipedia.org/wiki/Superposition_principl
 when $f(\alpha x+\beta y)=\alpha\cdot f(x)+\beta\cdot f(y)$.</p>
 
 <p>This means that <em>a general linear function is not linear.</em> If $f(x) = mx+b$,
-$f(x+y) = f(x)+f(y)+b$ which doesn’t satisfy the definition of a linear
+$f(x+y) = f(x)+f(y)-b$ which doesn’t satisfy the definition of a linear
 function. But there’s much more interesting functions out there.  <a href="https://en.wikipedia.org/wiki/Integral">Integration</a>
 and <a href="https://en.wikipedia.org/wiki/Derivative">differentiation</a> respect scalar multiplication and addition, meaning
 they’re linear.</p>
@@ -128,7 +128,7 @@ computable.  </p>
 solution <a href="https://en.wikipedia.org/wiki/List_of_nonlinear_partial_differential_equations#Exact_solutions">often can’t be found</a>. This means that no combination of
 elementary function like $\sin(\cdot), \exp(\cdot), \sqrt{\cdot},\int \cdot~dx,
 \frac{d~\cdot}{dx}$ along with respective operators and the infinitely many
-real numbers<sup id="fnref:uncount"><a href="#fn:uncount" rel="footnote">6</a></sup> cannot describe the solution. Instead, those elementary
+real numbers can describe <em>every</em> solution.<sup id="fnref:solution"><a href="#fn:solution" rel="footnote">6</a></sup> Instead, those elementary
 functions can only describe the equation that needs to be solved.</p>
 
 <p>Even a “simple” problem such as 
@@ -166,31 +166,31 @@ with a computer.</p>
 <div class="footnotes">
   <ol>
     <li id="fn:numpy">
-      <p>And hence an ndarray or “N dimensional array” in NumPy.<a href="#fnref:numpy" rel="reference">&#8617;</a></p>
+      <p>And hence an ndarray or “N dimensional array” in NumPy<a href="#fnref:numpy" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:computer">
-      <p>When computers can have an <a href="(https://en.wikipedia.org/wiki/Uncountable_set)">uncountably infinite</a> number of bits they can be continuous and I’ll eat my hat.<a href="#fnref:computer" rel="reference">&#8617;</a></p>
+      <p>When computers can have an <a href="(https://en.wikipedia.org/wiki/Uncountable_set)">uncountably infinite</a> number of bits they can be continuous and I’ll eat my hat<a href="#fnref:computer" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:font">
       <p>For the rest of this post, I’ll use that bold mathematical notation to describe vector and the regular font to describe scalars<a href="#fnref:font" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:linear">
-      <p>That is if the only depend on the simplest forms of integration and differentation.<a href="#fnref:linear" rel="reference">&#8617;</a></p>
+      <p>That is if they only depend on the simplest forms of integration and differentiation<a href="#fnref:linear" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:mat_comp">
-      <p>And matrix completion handles when $A$ isn’t known. This is analgous to finding an unknown scalar function.<a href="#fnref:mat_comp" rel="reference">&#8617;</a></p>
+      <p>And matrix completion handles when $A$ isn’t known. This is analgous to finding an unknown scalar function<a href="#fnref:mat_comp" rel="reference">&#8617;</a></p>
     </li>
-    <li id="fn:uncount">
-      <p>The real numbers are actually <a href="(https://en.wikipedia.org/wiki/Uncountable_set)">uncountably infinite</a><a href="#fnref:uncount" rel="reference">&#8617;</a></p>
+    <li id="fn:solution">
+      <p>It should be noted that <em>occaisonally</em> a closed form solution can be found <em>assuming</em> certain conditions apply<a href="#fnref:solution" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:head">
-      <p>And these problems are wayyy over my head.<a href="#fnref:head" rel="reference">&#8617;</a></p>
+      <p>And these problems are wayyy over my head<a href="#fnref:head" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:buzz">
       <p>Yeah it’s a buzz word. For example, satellites that collect 2 billion measurements a day. That’s a lot of data, but analyzing it and using it is not “big data.”<a href="#fnref:buzz" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:nonlinear">
-      <p>Or even as I write this blog post. I’ve known this for a while but this is a new light.<a href="#fnref:nonlinear" rel="reference">&#8617;</a></p>
+      <p>Or even as I write this blog post. I’ve known this for a while but this is a new light<a href="#fnref:nonlinear" rel="reference">&#8617;</a></p>
     </li>
   </ol>
 </div>

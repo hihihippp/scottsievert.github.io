@@ -28,7 +28,7 @@ describe any point on that grid, $x$ and $y$. That's a two dimensional vector.
 For the four dimensions we live in, we need four: $x, y, z, t$.
 
 [vectors]:https://en.wikipedia.org/wiki/Vector_space
-[^numpy]:And hence an ndarray or "N dimensional array" in NumPy.
+[^numpy]:And hence an ndarray or "N dimensional array" in NumPy
 
 But wait. Why can't we define a five dimensional vector that includes my age or
 a six dimensional vector that also includes my year in school? Thinking about
@@ -43,7 +43,7 @@ finite number of bits[^computer] meaning computers must also be discrete. That
 means if we want to do anything fancy with a computer, we need to use linear
 algebra.
 
-[^computer]:When computers can have an [uncountably infinite] number of bits they can be continuous and I'll eat my hat.
+[^computer]:When computers can have an [uncountably infinite] number of bits they can be continuous and I'll eat my hat
 
 ## Linear algebra 
 At first glance, [linear algebra] seems like middle school material. In
@@ -107,7 +107,7 @@ when $f(\alpha x+\beta y)=\alpha\cdot f(x)+\beta\cdot f(y)$.
 [super]:https://en.wikipedia.org/wiki/Superposition_principle
 
 This means that *a general linear function is not linear.* If $f(x) = mx+b$,
-$f(x+y) = f(x)+f(y)+b$ which doesn't satisfy the definition of a linear
+$f(x+y) = f(x)+f(y)-b$ which doesn't satisfy the definition of a linear
 function. But there's much more interesting functions out there.  [Integration]
 and [differentiation] respect scalar multiplication and addition, meaning
 they're linear.
@@ -122,7 +122,7 @@ functions are linear.
 
 [discrete Fourier transform]:https://en.wikipedia.org/wiki/Discrete_Fourier_transform
 [wavelet transform]:https://en.wikipedia.org/wiki/Wavelet_transform
-[^linear]:That is if the only depend on the simplest forms of integration and differentation.
+[^linear]:That is if they only depend on the simplest forms of integration and differentiation
 
 Addition and scalar multiplication are defined element-wise for matrices, so
 any linear function can be represented by a matrix. There are matrices for
@@ -139,8 +139,10 @@ Nonlinear functions have a unique property that an exact and closed form
 solution [often can't be found][exact]. This means that no combination of
 elementary function like $\sin(\cdot), \exp(\cdot), \sqrt{\cdot},\int \cdot~dx,
 \frac{d~\cdot}{dx}$ along with respective operators and the infinitely many
-real numbers[^uncount] cannot describe the solution. Instead, those elementary
+real numbers can describe *every* solution.[^solution] Instead, those elementary
 functions can only describe the equation that needs to be solved.
+
+[^solution]:It should be noted that *occaisonally* a closed form solution can be found *assuming* certain conditions apply
 
 [^uncount]:The real numbers are actually [uncountably infinite]
 
@@ -154,9 +156,9 @@ there's a whole list of
 [nonlinear parital differential equations][npde] 
 that solve important problems.[^head]
 
-[^head]:And these problems are wayyy over my head.
+[^head]:And these problems are wayyy over my head
 
-[^mat_comp]:And matrix completion handles when $A$ isn't known. This is analgous to finding an unknown scalar function.
+[^mat_comp]:And matrix completion handles when $A$ isn't known. This is analgous to finding an unknown scalar function
 
 This is why simulation is such a big deal. No closed form solution can be found
 meaning that you have to find a solution numerically.  Supercomputers don't
@@ -182,7 +184,7 @@ realize that while simple math might *describe* the problem, there's no closed
 form solution and the only way to get a solution to "interesting" problems is
 with a computer.
 
-[^nonlinear]:Or even as I write this blog post. I've known this for a while but this is a new light.
+[^nonlinear]:Or even as I write this blog post. I've known this for a while but this is a new light
 
 ## 
 

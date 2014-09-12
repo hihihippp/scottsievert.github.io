@@ -50,6 +50,8 @@ their pros and cons, but the QtConsole wins for plain interpreters.
 out there that tries to present a MATLAB-like GUI. I do know 
 [it's possible to have IPython's QtConsole in Spyder][spyder-qt].
 
+*EDIT: Apparently Spyder includes IPython's QtConsole by default.*
+
 ##### QtConsole
 This is what I most highly recommend. It allows you to see plots inline. Let me
 repeat that: *you can plot inline*. To see what I mean, here's an example:

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-08-02T21:14:47-05:00</updated>
+  <updated>2014-11-01T14:19:59-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -12,6 +12,154 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Mathematics Behind XKCD #688]]></title>
+    <link href="http://scottsievert.github.io/blog/2014/10/31/mathematics-behind-xkcd-number-688/"/>
+    <updated>2014-10-31T09:56:00-05:00</updated>
+    <id>http://scottsievert.github.io/blog/2014/10/31/mathematics-behind-xkcd-number-688</id>
+    <content type="html"><![CDATA[<p>What mathematics go behind the <a href="http://xkcd.com/688/">XKCD #688</a>? In the past two months, I have learned a lot of the theory behind it, much more than I knew when I <a href="https://github.com/scottsievert/xkcd-688">implemented</a> it myself. But I don’t want to cover two months of Applied Linear Algebra<sup id="fnref:course"><a href="#fn:course" rel="footnote">1</a></sup> so I’ll just touch on a couple of the applications.</p>
+
+<!--More-->
+
+<p><img src="http://imgs.xkcd.com/comics/self_description.png" alt="xkcd comic" /></p>
+
+<p>Randall probably probably just called a function in a for loop (like I would certainly do!).</p>
+
+<p><code>python
+x = define_source_image()
+for i in arange(7):
+    x = process_image(x)
+</code></p>
+
+<p><img src="https://github.com/scottsievert/xkcd-688/raw/master/out.gif" alt="animated comic" /></p>
+
+<p>This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the <a href="http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented in the naïve code below<sup id="fnref:code"><a href="#fn:code" rel="footnote">2</a></sup>:</p>
+
+<p><code>python
+def fibonacci(k):
+    """ calculate the k-th fibonacci number """
+    x = array([0, 1, nan]) # first two fibonacci numbers
+    for i in arange(k):
+        x[2] = x[0] + x[1]
+        x[0:2] = x[1:]
+    return x[2]
+</code></p>
+
+<p>Mathematically, it can be represented as $x_k = x_{k-1} + x_{k-2}$ with $x_0 = 0$ and $x_1 = 1$. While this is valid, it doesn’t reveal the entire theory. Instead, let’s choose to represent it with a matrix:</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+    \begin{bmatrix}
+    x_k \\
+    x_{k-1} \\
+    \end{bmatrix}
+    =
+    \mathbf{x_k}
+    =
+    \mathbf{A} \cdot \mathbf{x}_{k-1}
+    =
+    \begin{bmatrix}
+    1 & 1 \\
+    1 & 0 \\
+    \end{bmatrix}
+    \begin{bmatrix}
+    x_{k-1} \\
+    x_{k-2} \\
+    \end{bmatrix}
+ %]]&gt;</script>
+
+<p>Calculating the Fibonacci numbers is also an example of <a href="https://en.wikipedia.org/wiki/Fixed_point_(mathematics)">fixed point iteration</a>. With this method if we wanted to calculate the $k$th Fibonacci number $x_k$ we’d have do $k$ matrix multiplications. </p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+    \begin{align*}
+    \mathbf{x}_k &= \mathbf{A}\cdot \mathbf{x}_{k-1} \\ 
+    &= \mathbf{A}\cdot \left( \mathbf{A}\cdot \mathbf{x}_{k-2} \right) \\
+    &= \mathbf{A}\cdot \mathbf{A}\cdot \mathbf{A} \cdots \mathbf{A} \cdot \mathbf{x}_0 \\
+    &= \mathbf{A}^k \cdot \mathbf{x}_0
+    \end{align*}
+ %]]&gt;</script>
+
+<p>This naïve implemention of this code can calculate our full <a href="https://en.wikipedia.org/wiki/State_space_representation">state vector</a> $\mathbf{x}_k$ which can be useful for other similar concepts such as <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> where $\mathbf{A}$ changes over time. To implement this, we’d just call <code>x = A.dot(x)</code> in a for-loop with possible additional processing.</p>
+
+<p>This <a href="http://en.wikipedia.org/wiki/Matrix_multiplication">matrix multiplication</a> is expensive timewise. Calculating $\mathbf{x}_k$ via this method has a <a href="https://en.wikipedia.org/wiki/Computational_complexity_theory">computational complexity</a> of $O(k\cdot n^3)$ when $\mathbf{A}$ is a $n \times n$ matrix. The cost of this algorithm drastically increases with $n$. This could be the number of pixels in our image or the number of locations a GPS records. Powerful algorithms like the FFT with their complexity of $O(n \log n)$ drastically outweigh this seemingly simple Fibonacci calculation.</p>
+
+<p>For the Fibonacci case, $\mathbf{A}$ remains constant and math has a nice way to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we’ll need to find $\mathbb{\mathbb{\Lambda}}^k$ first which only requires $O(k\cdot n)$ operations. We’re just doing $k$ multiplications $n$ times as shown below:</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\mathbb{\Lambda}^k = 
+\mathbb{\Lambda} \cdot \mathbb{\Lambda} \cdot \ldots \cdot \mathbb{\Lambda} =
+ \begin{bmatrix}
+   \lambda_{_1}^k    &                &        &                \\
+                     & \lambda_{_2}^k &        &                \\
+                     &                & \ddots &                \\
+                     &                &        & \lambda_{_n}^k \\
+ \end{bmatrix}
+ %]]&gt;</script>
+
+<p>But we can’t just arbitrarily loose information. It turns out that for the right choices<sup id="fnref:calculate"><a href="#fn:calculate" rel="footnote">3</a></sup> of $\mathbf{Q}$ and $\mathbb{\Lambda}$ involving eigenvales and eigenvectors we get<sup id="fnref:limit"><a href="#fn:limit" rel="footnote">4</a></sup> $\mathbf{A} = \mathbf{Q} \cdot\mathbb{\Lambda}\cdot \mathbf{Q}^{-1}$. We really want $\mathbf{A}^k$ for our fixed point iteration, and we can get it in terms of $\mathbb{\Lambda}$ and $\mathbf{Q}$ by using the fact that $\mathbf{Q}\cdot\mathbf{Q}^{-1} = \mathbf{I}$ and anything times this identity is itself:</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{align*}
+\mathbf{A}^k &= (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \cdot (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \cdots (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \\
+&= \mathbf{Q} \cdot \mathbb{\Lambda}^k\cdot \mathbf{Q}^{-1}
+\end{align*}
+ %]]&gt;</script>
+
+<p>Because of this added $\mathbf{Q}$ we find that our computational complexity is $O(k\cdot n^2 + n^3)$ for an $n \times n$ matrix. Over the naïve code for the simple case, this is a large speed up! A factor of $k$ – which could be as large as a hundred – is nothing to sneer at!</p>
+
+<p>But… wait. This $\mathbf{A}^k$ is simple. There’s no complicated dot product, only <em>one</em> scalar power in each term of $\mathbf{x}_k$. While we had a <a href="https://en.wikipedia.org/wiki/Closed-form_expression">closed form solution</a> beforehand for our Fibonacci matrix, this one is <em>simple</em>. With the associated $\mathbf{Q}$ and $\mathbb{\Lambda}$ with entiries $\lambda_1$ and $\lambda_2$ we find that</p>
+
+<script type="math/tex; mode=display">
+x_k = \frac{1}{\sqrt{5}} (\lambda_1^k - \lambda_2^k) = 
+\frac{1}{\sqrt{5}} \left[
+    \left(\frac{1+\sqrt{5}}{2}\right)^k - \left(\frac{1-\sqrt{5}}{2}\right)^k
+\right]
+</script>
+
+<p>Let’s think about what I’m saying here. I’m saying that a formula involving three irrational numbers with two raised to a power is an integer <em>and</em> the $k$th Fibonacci number. I mean, even the irrational <a href="https://en.wikipedia.org/wiki/Golden_ratio">golden ratio</a> $\phi = (1 + \sqrt{5})/2 = 1.618\cdots$ appears! The last thing we would expect is a rational number, much less an integer. But the theory is solid and the first values of $x_k$ are $0, 1, 1, 2, 3, 5, 8$ – the Fibonacci numbers!</p>
+
+<p>This means that we can just define our <code>fibonacci</code> function to run <em>fast</em>. If we want a single value, this algorithm runs in $O(1)$ time vs the naïve code that ran in $O(k)$ time. Similar speed results are seen for the general case if $\mathbf{Q} \cdot \mathbf{A}\cdot \mathbf{Q^{-1}}$ is calculated before hand.</p>
+
+<p><code>python
+def fibonacci(k):
+    """ returns the k-th fibonacci number """
+    l_1 = (1 + sqrt(5)) / 2
+    l_2 = (1 - sqrt(5)) / 2
+    return (l_1**k - l_2**k) / sqrt(5)
+</code></p>
+
+<p>This theory of eigenvalues and eigenvectors <em>must</em> have other insights. The most obvious one is <a href="https://en.wikipedia.org/wiki/Linear_stability">stability</a>. The definition of stability I’ll use is that a system (which can be represented by a matrix) is stable if it doesn’t blow up towards infinity. Since $\left|x_k\right| \propto \left(\left|\lambda\right|_\max\right)^k$ for large $k$, this system only converges if $ \left|\lambda \right|_\max &lt; 1$ and blows up if $\left| \lambda \right|_\max &gt; 1$. We can see that clearly with our Fibonacci sequence as our largest eigenvalue is the golden ration and greater than one. As expected, the Fibonacci numbers blow up towards infinity.</p>
+
+<p>Can we tell by looking if any system represented by a matrix is stable? This complex problems like factoring an $n$th degree polynomial and finding a <a href="https://en.wikipedia.org/wiki/Determinant">determinant</a>. There’s no simple easy method besides the computer sitting at your hands with the function <code>eig</code> in <code>numpy.linalg</code>. Take that with a grain of salt as there might be some relation between eigenvalues and the <a href="https://en.wikipedia.org/wiki/Z-transform">z-transform</a> because a <a href="https://en.wikipedia.org/wiki/Causality">causal</a> system only converges if it has poles $\left|p\right|$ with $\left|p\right| &lt; 1$. This also involves factoring an $n$th degree polynomial but it’s a little easier to obtain.</p>
+
+<p>Stability is critical for differential equations, and eigenvalues play a critical role in determining stability for certain differential equations. As you may know, differential equations are functions that govern our world. There are many examples but the unsolved <a href="https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations">Navier-Stokes equation</a> governs fluid flow and the <a href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Schrödinger equation</a> governs quantum mechanics.</p>
+
+<p>Another more interesting application is with social networks. If you want to see how many friend groups are in some social network, you can just count the eigenvalues that are 0. But there are people I only see sometimes; are we in the same friend group? Accordingly, calculating smaller eigenvalues is much more time intensive.</p>
+
+<p>There are more uses of eigenvalues including machine learning concepts such as principle component analysis and face recognition. One interpretation of eigenvalues is that they’re a convenient way of representing a matrix with some very nice properties but I’m betting there’s more. I’ve talked with signal processors that say it seems like everything rests on eigenvalues.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:course">
+      <p>I covered why this course name sounds basic in a <a href="http://scottsievert.github.io/blog/2014/07/31/common-mathematical-misconceptions/">previous blog post</a>. This covered the seemingly simple names of dimensions, linear functions and linear algebra and eventually built up to why computers are nesessary.<a href="#fnref:course" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:code">
+      <p>I don’t want to clutter up the code so I use <code>from pylab import *</code>. Yes it is bad practice… but man it’s nice.<a href="#fnref:code" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:calculate">
+      <p>If you want to calculate $Q$ and $\mathbb{\Lambda}$, see the <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">wiki page</a>. More intuition is present in a <a href="http://math.stackexchange.com/questions/36815/a-simple-explanation-of-eigenvectors-and-eigenvalues-with-big-picture-ideas-of">StackExchange question</a>.<a href="#fnref:calculate" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:limit">
+      <p>Well, there are certain restrictions, one being $A$ has to have distinct eigenvalues.<a href="#fnref:limit" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Common Mathematical Misconceptions]]></title>

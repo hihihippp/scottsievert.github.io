@@ -120,7 +120,7 @@ Because of this added $\mathbf{Q}$ we find that our computational complexity is 
 [^calculate]:If you want to calculate $Q$ and $\mathbb{\Lambda}$, see the [wiki page](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors). More intuition is present in a [StackExchange question].
 [eigenvectors and eigenvalues]:http://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors
 
-But... wait. This $\mathbf{A}^k$ is simple. There's no complicated dot product, only *one* scalar power in each term of $\mathbf{x}\_k$. While we had a [closed form solution] beforehand for our Fibonacci matrix, this one is *simple*. With the associated $\mathbf{Q}$ and $\mathbb{\Lambda}$ with entiries $\lambda\_1$ and $\lambda\_2$ we find that
+But... wait. This $\mathbf{A}^k$ is simple. There's no complicated dot product, only some scalar powers of $\lambda^k$ and constants. While we had a [closed form solution] beforehand for our Fibonacci matrix, this one is *simple*. With the associated $\mathbf{Q}$ and $\mathbb{\Lambda}$ with entiries $\lambda\_1$ and $\lambda\_2$ we find that
 
 $$
 x_k = \frac{1}{\sqrt{5}} (\lambda_1^k - \lambda_2^k) = 
@@ -133,7 +133,7 @@ Let's think about what I'm saying here. I'm saying that a formula involving thre
 
 [golden ratio]:https://en.wikipedia.org/wiki/Golden_ratio
 
-This means that we can just define our `fibonacci` function to run *fast*. If we want a single value, this algorithm runs in $O(1)$ time vs the naïve code that ran in $O(k)$ time. Similar speed results are seen for the general case if $\mathbf{Q} \cdot \mathbf{A}\cdot \mathbf{Q^{-1}}$ is calculated before hand.
+This means that we can just define our `fibonacci` function to run *fast*. If we want a single value, this algorithm runs in almost $O(1)$ time vs the naïve code that ran in $O(k)$ time. Likewise, the matrix multiplication of $\mathbf{Q} \cdot \mathbf{A}\cdot \mathbf{Q^{-1}}$ just results in terms that only have scalar multiplication.
 
 ```python
 def fibonacci(k):
@@ -148,17 +148,14 @@ This theory of eigenvalues and eigenvectors *must* have other insights. The most
 Can we tell by looking if any system represented by a matrix is stable? This complex problems like factoring an $n$th degree polynomial and finding a [determinant]. There's no simple easy method besides the computer sitting at your hands with the function `eig` in `numpy.linalg`. Take that with a grain of salt as there might be some relation between eigenvalues and the [z-transform] because a [causal] system only converges if it has poles $\left\|p\right\|$ with $\left\|p\right\| < 1$. This also involves factoring an $n$th degree polynomial but it's a little easier to obtain.
 
 [determinant]:https://en.wikipedia.org/wiki/Determinant
-
 [causal]:https://en.wikipedia.org/wiki/Causality
 [z-transform]:https://en.wikipedia.org/wiki/Z-transform
-
 [stability]:https://en.wikipedia.org/wiki/Linear_stability
 [non-contractive map]:https://en.wikipedia.org/wiki/Contraction_mapping
 
 [^complex]:But eigenvalues can be complex -- having $\mathbb{\Lambda}=1$ is not nearly the only case where $\|\mathbb{\Lambda}\|=1$.
 
 Stability is critical for differential equations, and eigenvalues play a critical role in determining stability for certain differential equations. As you may know, differential equations are functions that govern our world. There are many examples but the unsolved [Navier-Stokes equation] governs fluid flow and the [Schrödinger equation] governs quantum mechanics.
-
 
 [Schrödinger equation]:https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation
 [Navier-Stokes equation]:https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations

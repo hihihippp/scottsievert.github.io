@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-11-01T17:26:06-05:00</updated>
+  <updated>2014-11-01T18:39:50-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -111,7 +111,7 @@ def fibonacci(k):
 
 <p>Because of this added $\mathbf{Q}$ we find that our computational complexity is $O(k\cdot n^2 + n^3)$ for an $n \times n$ matrix. Over the naïve code for the simple case, this is a large speed up! A factor of $k$ – which could be as large as a hundred – is nothing to sneer at!</p>
 
-<p>But… wait. This $\mathbf{A}^k$ is simple. There’s no complicated dot product, only <em>one</em> scalar power in each term of $\mathbf{x}_k$. While we had a <a href="https://en.wikipedia.org/wiki/Closed-form_expression">closed form solution</a> beforehand for our Fibonacci matrix, this one is <em>simple</em>. With the associated $\mathbf{Q}$ and $\mathbb{\Lambda}$ with entiries $\lambda_1$ and $\lambda_2$ we find that</p>
+<p>But… wait. This $\mathbf{A}^k$ is simple. There’s no complicated dot product, only some scalar powers of $\lambda^k$ and constants. While we had a <a href="https://en.wikipedia.org/wiki/Closed-form_expression">closed form solution</a> beforehand for our Fibonacci matrix, this one is <em>simple</em>. With the associated $\mathbf{Q}$ and $\mathbb{\Lambda}$ with entiries $\lambda_1$ and $\lambda_2$ we find that</p>
 
 <script type="math/tex; mode=display">
 x_k = \frac{1}{\sqrt{5}} (\lambda_1^k - \lambda_2^k) = 
@@ -122,7 +122,7 @@ x_k = \frac{1}{\sqrt{5}} (\lambda_1^k - \lambda_2^k) =
 
 <p>Let’s think about what I’m saying here. I’m saying that a formula involving three irrational numbers with two raised to a power is an integer <em>and</em> the $k$th Fibonacci number. I mean, even the irrational <a href="https://en.wikipedia.org/wiki/Golden_ratio">golden ratio</a> $\phi = (1 + \sqrt{5})/2 = 1.618\cdots$ appears! The last thing we would expect is a rational number, much less an integer. But the theory is solid and the first values of $x_k$ are $0, 1, 1, 2, 3, 5, 8$ – the Fibonacci numbers!</p>
 
-<p>This means that we can just define our <code>fibonacci</code> function to run <em>fast</em>. If we want a single value, this algorithm runs in $O(1)$ time vs the naïve code that ran in $O(k)$ time. Similar speed results are seen for the general case if $\mathbf{Q} \cdot \mathbf{A}\cdot \mathbf{Q^{-1}}$ is calculated before hand.</p>
+<p>This means that we can just define our <code>fibonacci</code> function to run <em>fast</em>. If we want a single value, this algorithm runs in almost $O(1)$ time vs the naïve code that ran in $O(k)$ time. Likewise, the matrix multiplication of $\mathbf{Q} \cdot \mathbf{A}\cdot \mathbf{Q^{-1}}$ just results in terms that only have scalar multiplication.</p>
 
 <p><code>python
 def fibonacci(k):

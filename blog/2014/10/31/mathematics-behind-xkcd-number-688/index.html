@@ -9,7 +9,7 @@
   <meta name="author" content="Scott Sievert">
 
   
-  <meta name="description" content="What are the mathematics behind XKCD #688? I implemented it myself but didn’t grasp the theory behind it but that’s been taken care of by Applied &hellip;">
+  <meta name="description" content="What are the mathematics behind XKCD #688? I implemented it myself but didn’t grasp the theory behind it but that’s been covered by a course1 I’m &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -34,17 +34,6 @@
 <!--font awesome-->
 <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
 
-<!--Google Analyitcs-->
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-
-  ga('create', 'UA-56234593-1', 'auto');
-  ga('send', 'pageview');
-
-</script>
 
   
 
@@ -135,13 +124,13 @@ alt="stats"></a></div></noscript>
   </header>
 
 
-<div class="entry-content"><p>What are the mathematics behind <a href="http://xkcd.com/688/">XKCD #688</a>? I <a href="https://github.com/scottsievert/xkcd-688">implemented</a> it myself but didn’t grasp the theory behind it but that’s been taken care of by Applied Linear Algebra<sup id="fnref:course"><a href="#fn:course" rel="footnote">1</a></sup>, a course I’m currently taking. While I want to touch on the applications, I won’t attempt to teach something that took me two months to learn.</p>
+<div class="entry-content"><p>What are the mathematics behind <a href="http://xkcd.com/688/">XKCD #688</a>? I <a href="https://github.com/scottsievert/xkcd-688">implemented</a> it myself but didn’t grasp the theory behind it but that’s been covered by a course<sup id="fnref:course"><a href="#fn:course" rel="footnote">1</a></sup> I’m taking. While I want to touch on the applications, I won’t attempt to teach something that took me two months to learn.</p>
 
 <!--More-->
 
 <p><img src="http://imgs.xkcd.com/comics/self_description.png" alt="xkcd comic" /></p>
 
-<p>I’m betting Randall implemented this with a for-loop even though he probably knows the theory. A for-loop is just too easy.</p>
+<p>I’m betting Randall implemented this with a for-loop even though he probably knows the theory. It’s what I would also do – a for-loop is just too easy.</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -153,7 +142,7 @@ alt="stats"></a></div></noscript>
 
 <p><img src="https://github.com/scottsievert/xkcd-688/raw/master/out.gif" alt="animated comic" /></p>
 
-<p>This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the <a href="http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented in the naïve code below<sup id="fnref:code"><a href="#fn:code" rel="footnote">2</a></sup>. As we’re just calling the equivalent of some function in a for loop, this is very similar to the XKCD code.</p>
+<p>This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the <a href="http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented<sup id="fnref:code"><a href="#fn:code" rel="footnote">2</a></sup> in the naïve code below. As we’re just calling the equivalent of some function in a for loop, this is very similar to the XKCD code.</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>
@@ -206,11 +195,9 @@ alt="stats"></a></div></noscript>
     \end{align*}
  %]]></script>
 
-<p>This naïve implementation of this code can calculate our full <a href="https://en.wikipedia.org/wiki/State_space_representation">state vector</a> $\mathbf{x}_k$ which can be useful for other similar concepts such as <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> where $\mathbf{A}$ changes over time. To implement this, we <em>could</em> just call <code>x = A.dot(x)</code> in a for-loop with some some  additional processing.</p>
+<p>We’d just compute $\mathbf{A}^k$ by using <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.matrix_power.html"><code>np.linalg.matrix_power</code></a> to implement this, but naïve <a href="http://en.wikipedia.org/wiki/Matrix_multiplication">matrix multiplication</a> is expensive timewise. Calculating $\mathbf{x}_k$ naïvely has a <a href="https://en.wikipedia.org/wiki/Computational_complexity_theory">computational complexity</a> of $O(k\cdot n^3)$ when $\mathbf{A}$ is a $n \times n$ matrix. The cost of this algorithm drastically increases with $n$. This could be the number of pixels in our image or the number of locations a GPS records. Powerful algorithms like the FFT with their complexity of $O(n \log n)$ drastically outweigh this seemingly simple Fibonacci calculation.</p>
 
-<p>This <a href="http://en.wikipedia.org/wiki/Matrix_multiplication">matrix multiplication</a> is expensive timewise. Calculating $\mathbf{x}_k$ via this method has a <a href="https://en.wikipedia.org/wiki/Computational_complexity_theory">computational complexity</a> of $O(k\cdot n^3)$ when $\mathbf{A}$ is a $n \times n$ matrix. The cost of this algorithm drastically increases with $n$. This could be the number of pixels in our image or the number of locations a GPS records. Powerful algorithms like the FFT with their complexity of $O(n \log n)$ drastically outweigh this seemingly simple Fibonacci calculation.</p>
-
-<p>For the Fibonacci case, $\mathbf{A}$ remains constant and math has several nice ways to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we’ll need to find $\mathbb{\mathbb{\Lambda}}^k$ first. </p>
+<p>For the Fibonacci case, $\mathbf{A}$ remains constant and math has several nice ways<sup id="fnref:other"><a href="#fn:other" rel="footnote">3</a></sup> to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we’ll need to find $\mathbb{\mathbb{\Lambda}}^k$ first. </p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 
@@ -224,7 +211,7 @@ alt="stats"></a></div></noscript>
      \end{bmatrix}
  %]]></script>
 
-<p>But we can’t just arbitrarily lose information. It turns out that for the right choices<sup id="fnref:calculate"><a href="#fn:calculate" rel="footnote">3</a></sup> of $\mathbf{Q}$ and $\mathbb{\Lambda}$ involving eigenvalues and eigenvectors we get<sup id="fnref:limit"><a href="#fn:limit" rel="footnote">4</a></sup> $\mathbf{A} = \mathbf{Q} \cdot\mathbb{\Lambda}\cdot \mathbf{Q}^{-1}$. We really want $\mathbf{A}^k$ for our fixed point iteration, and we can get it in terms of $\mathbb{\Lambda}$ and $\mathbf{Q}$ by using the fact that $\mathbf{Q}\cdot\mathbf{Q}^{-1} = \mathbf{I}$ and anything times this identity $\mathbf{I}$ is itself:</p>
+<p>But we can’t just arbitrarily lose information. It turns out that for the right choices<sup id="fnref:calculate"><a href="#fn:calculate" rel="footnote">4</a></sup> of $\mathbf{Q}$ and $\mathbb{\Lambda}$ involving eigenvalues and eigenvectors we get<sup id="fnref:limit"><a href="#fn:limit" rel="footnote">5</a></sup> $\mathbf{A} = \mathbf{Q} \cdot\mathbb{\Lambda}\cdot \mathbf{Q}^{-1}$. We really want $\mathbf{A}^k$ for our fixed point iteration, and we can get it in terms of $\mathbb{\Lambda}$ and $\mathbf{Q}$ by using the fact that $\mathbf{Q}\cdot\mathbf{Q}^{-1} = \mathbf{I}$ and anything times this identity $\mathbf{I}$ is itself:</p>
 
 <script type="math/tex; mode=display">% <![CDATA[
 
@@ -276,10 +263,13 @@ x_k = \frac{1}{\sqrt{5}} (\lambda_1^k - \lambda_2^k) =
 <div class="footnotes">
   <ol>
     <li id="fn:course">
-      <p>I covered why this course name sounds basic in a <a href="http://scottsievert.github.io/blog/2014/07/31/common-mathematical-misconceptions/">previous blog post</a>. This covered the seemingly simple names of dimensions, linear functions and linear algebra and eventually built up to why computers are nesessary.<a href="#fnref:course" rel="reference">&#8617;</a></p>
+      <p>This course is called Applied Linear Algebra. I covered why this course name sounds basic in a <a href="http://scottsievert.github.io/blog/2014/07/31/common-mathematical-misconceptions/">previous blog post</a>. This covered the seemingly simple names of dimensions, linear functions and linear algebra and eventually built up to why computers are nesessary.<a href="#fnref:course" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:code">
       <p>I don’t want to clutter up the code so I use <code>from pylab import *</code>. Yes it is bad practice… but man it’s nice.<a href="#fnref:code" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:other">
+      <p>The current limit for computing $A^k$ is done with the <a href="http://en.wikipedia.org/wiki/Coppersmith–Winograd_algorithm">Coppersmith-Winograd algorithm</a> with a computation complexity of $O(n^{2.3727}\log k)$.<a href="#fnref:other" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:calculate">
       <p>If you want to calculate $Q$ and $\mathbb{\Lambda}$, see the <a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">wiki page</a>. More intuition is present in a <a href="http://math.stackexchange.com/questions/36815/a-simple-explanation-of-eigenvectors-and-eigenvalues-with-big-picture-ideas-of">StackExchange question</a>.<a href="#fnref:calculate" rel="reference">&#8617;</a></p>

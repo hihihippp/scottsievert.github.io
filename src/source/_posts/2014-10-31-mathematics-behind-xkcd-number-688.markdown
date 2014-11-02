@@ -6,13 +6,13 @@ comments: true
 categories: math
 ---
 
-What are the mathematics behind [XKCD #688]? I [implemented] it myself but didn't grasp the theory behind it but that's been taken care of by Applied Linear Algebra[^course], a course I'm currently taking. While I want to touch on the applications, I won't attempt to teach something that took me two months to learn.
+What are the mathematics behind [XKCD #688]? I [implemented] it myself but didn't grasp the theory behind it but that's been covered by a course[^course] I'm taking. While I want to touch on the applications, I won't attempt to teach something that took me two months to learn.
 
 <!--More-->
 
 ![xkcd comic](http://imgs.xkcd.com/comics/self_description.png)
 
-I'm betting Randall implemented this with a for-loop even though he probably knows the theory. A for-loop is just too easy.
+I'm betting Randall implemented this with a for-loop even though he probably knows the theory. It's what I would also do -- a for-loop is just too easy.
 
 ```python
 x = define_source_image()
@@ -22,7 +22,7 @@ for i in arange(7):
 
 ![animated comic](https://github.com/scottsievert/xkcd-688/raw/master/out.gif)
 
-This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the [Fibonacci numbers]. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented in the naïve code below[^code]. As we're just calling the equivalent of some function in a for loop, this is very similar to the XKCD code.
+This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the [Fibonacci numbers]. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented[^code] in the naïve code below. As we're just calling the equivalent of some function in a for loop, this is very similar to the XKCD code.
 
 ```python
 def fibonacci(k):
@@ -67,11 +67,13 @@ $$
     \end{align*}
 $$
 
-This naïve implementation of this code can calculate our full [state vector] $\mathbf{x}_k$ which can be useful for other similar concepts such as [Markov chains][mar] where $\mathbf{A}$ changes over time. To implement this, we *could* just call `x = A.dot(x)` in a for-loop with some some  additional processing.
+We'd just compute $\mathbf{A}^k$ by using [`np.linalg.matrix_power`][matrix_power] to implement this, but naïve [matrix multiplication] is expensive timewise. Calculating $\mathbf{x}\_k$ naïvely has a [computational complexity] of $O(k\cdot n^3)$ when $\mathbf{A}$ is a $n \times n$ matrix. The cost of this algorithm drastically increases with $n$. This could be the number of pixels in our image or the number of locations a GPS records. Powerful algorithms like the FFT with their complexity of $O(n \log n)$ drastically outweigh this seemingly simple Fibonacci calculation.
 
-This [matrix multiplication] is expensive timewise. Calculating $\mathbf{x}\_k$ via this method has a [computational complexity] of $O(k\cdot n^3)$ when $\mathbf{A}$ is a $n \times n$ matrix. The cost of this algorithm drastically increases with $n$. This could be the number of pixels in our image or the number of locations a GPS records. Powerful algorithms like the FFT with their complexity of $O(n \log n)$ drastically outweigh this seemingly simple Fibonacci calculation.
+[matrix_power]:http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.matrix_power.html
 
-For the Fibonacci case, $\mathbf{A}$ remains constant and math has several nice ways to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we'll need to find $\mathbb{\mathbb{\Lambda}}^k$ first. 
+For the Fibonacci case, $\mathbf{A}$ remains constant and math has several nice ways[^other] to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we'll need to find $\mathbb{\mathbb{\Lambda}}^k$ first. 
+
+[^other]:The current limit for computing $A^k$ is done with the [Coppersmith-Winograd algorithm](http://en.wikipedia.org/wiki/Coppersmith–Winograd_algorithm) with a computation complexity of $O(n^{2.3727}\log k)$.
 
 $$
     \mathbb{\Lambda}^k = 
@@ -148,7 +150,7 @@ There are more uses of eigenvalues including machine learning concepts such as p
 [^theory]:If you need a primer, check out my [previous blog post].
 [golden ratio]:https://en.wikipedia.org/wiki/Golden_ratio
 [XKCD #688]:http://xkcd.com/688/
-[^course]:I covered why this course name sounds basic in a [previous blog post]. This covered the seemingly simple names of dimensions, linear functions and linear algebra and eventually built up to why computers are nesessary.
+[^course]:This course is called Applied Linear Algebra. I covered why this course name sounds basic in a [previous blog post]. This covered the seemingly simple names of dimensions, linear functions and linear algebra and eventually built up to why computers are nesessary.
 [previous blog post]:http://scottsievert.github.io/blog/2014/07/31/common-mathematical-misconceptions/
 [implemented]:https://github.com/scottsievert/xkcd-688
 [^code]:I don't want to clutter up the code so I use `from pylab import *`. Yes it is bad practice... but man it's nice.

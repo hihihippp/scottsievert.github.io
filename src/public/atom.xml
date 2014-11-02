@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-11-02T08:47:43-06:00</updated>
+  <updated>2014-11-02T12:37:24-06:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -18,13 +18,13 @@
     <link href="http://scottsievert.github.io/blog/2014/10/31/mathematics-behind-xkcd-number-688/"/>
     <updated>2014-10-31T09:56:00-05:00</updated>
     <id>http://scottsievert.github.io/blog/2014/10/31/mathematics-behind-xkcd-number-688</id>
-    <content type="html"><![CDATA[<p>What are the mathematics behind <a href="http://xkcd.com/688/">XKCD #688</a>? I <a href="https://github.com/scottsievert/xkcd-688">implemented</a> it myself but didn’t grasp the theory behind it but that’s been covered by a course<sup id="fnref:course"><a href="#fn:course" rel="footnote">1</a></sup> I’m taking. While I want to touch on the applications, I won’t attempt to teach something that took me two months to learn.</p>
+    <content type="html"><![CDATA[<p>Two months ago, I <a href="https://github.com/scottsievert/xkcd-688">implemented</a> and tried to explain the theory behind <a href="http://xkcd.com/688/">XKCD #688</a>. I’ve since taken a course<sup id="fnref:course"><a href="#fn:course" rel="footnote">1</a></sup> that has taught me much of the relevant theory, so I would like to devote a blog post to explaining the <em>applications</em> – I won’t try to compress two months into a blog post.</p>
 
 <!--More-->
 
 <p><img src="http://imgs.xkcd.com/comics/self_description.png" alt="xkcd comic" /></p>
 
-<p>I’m betting Randall implemented this with a for-loop even though he probably knows the theory. It’s what I would also do – a for-loop is just too easy.</p>
+<p>I’m betting Randall implemented this with a for-loop even though he probably knows the theory. It’s what I would also do (and did) – a for-loop is just too easy.</p>
 
 <div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
 <span class="line-number">2</span>

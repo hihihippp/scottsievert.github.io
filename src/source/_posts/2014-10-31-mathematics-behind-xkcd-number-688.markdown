@@ -6,13 +6,13 @@ comments: true
 categories: math
 ---
 
-What are the mathematics behind [XKCD #688]? I [implemented] it myself but didn't grasp the theory behind it but that's been covered by a course[^course] I'm taking. While I want to touch on the applications, I won't attempt to teach something that took me two months to learn.
+Two months ago, I [implemented] and tried to explain the theory behind [XKCD #688]. I've since taken a course[^course] that has taught me much of the relevant theory, so I would like to devote a blog post to explaining the *applications* -- I won't try to compress two months into a blog post.
 
 <!--More-->
 
 ![xkcd comic](http://imgs.xkcd.com/comics/self_description.png)
 
-I'm betting Randall implemented this with a for-loop even though he probably knows the theory. It's what I would also do -- a for-loop is just too easy.
+I'm betting Randall implemented this with a for-loop even though he probably knows the theory. It's what I would also do (and did) -- a for-loop is just too easy.
 
 ```python
 x = define_source_image()

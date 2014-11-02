@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-11-01T18:39:50-05:00</updated>
+  <updated>2014-11-01T21:30:52-05:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -18,13 +18,13 @@
     <link href="http://scottsievert.github.io/blog/2014/10/31/mathematics-behind-xkcd-number-688/"/>
     <updated>2014-10-31T09:56:00-05:00</updated>
     <id>http://scottsievert.github.io/blog/2014/10/31/mathematics-behind-xkcd-number-688</id>
-    <content type="html"><![CDATA[<p>What mathematics go behind the <a href="http://xkcd.com/688/">XKCD #688</a>? In the past two months, I have learned a lot of the theory behind it, much more than I knew when I <a href="https://github.com/scottsievert/xkcd-688">implemented</a> it myself. But I don’t want to cover two months of Applied Linear Algebra<sup id="fnref:course"><a href="#fn:course" rel="footnote">1</a></sup> so I’ll just touch on a couple of the applications.</p>
+    <content type="html"><![CDATA[<p>What are the mathematics behind <a href="http://xkcd.com/688/">XKCD #688</a>? I <a href="https://github.com/scottsievert/xkcd-688">implemented</a> it myself but didn’t grasp the theory behind it but that’s been taken care of by Applied Linear Algebra<sup id="fnref:course"><a href="#fn:course" rel="footnote">1</a></sup>, a course I’m currently taking. While I want to touch on the applications, I won’t attempt to teach something that took me two months to learn.</p>
 
 <!--More-->
 
 <p><img src="http://imgs.xkcd.com/comics/self_description.png" alt="xkcd comic" /></p>
 
-<p>Randall probably probably just called a function in a for loop (like I would certainly do!).</p>
+<p>I’m betting Randall implemented this with a for-loop even though he probably knows the theory. A for-loop is just too easy.</p>
 
 <p><code>python
 x = define_source_image()
@@ -34,7 +34,7 @@ for i in arange(7):
 
 <p><img src="https://github.com/scottsievert/xkcd-688/raw/master/out.gif" alt="animated comic" /></p>
 
-<p>This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the <a href="http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented in the naïve code below<sup id="fnref:code"><a href="#fn:code" rel="footnote">2</a></sup>:</p>
+<p>This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the <a href="http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented in the naïve code below<sup id="fnref:code"><a href="#fn:code" rel="footnote">2</a></sup>. As we’re just calling the equivalent of some function in a for loop, this is very similar to the XKCD code.</p>
 
 <p><code>python
 def fibonacci(k):
@@ -81,37 +81,37 @@ def fibonacci(k):
     \end{align*}
  %]]&gt;</script>
 
-<p>This naïve implemention of this code can calculate our full <a href="https://en.wikipedia.org/wiki/State_space_representation">state vector</a> $\mathbf{x}_k$ which can be useful for other similar concepts such as <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> where $\mathbf{A}$ changes over time. To implement this, we’d just call <code>x = A.dot(x)</code> in a for-loop with possible additional processing.</p>
+<p>This naïve implementation of this code can calculate our full <a href="https://en.wikipedia.org/wiki/State_space_representation">state vector</a> $\mathbf{x}_k$ which can be useful for other similar concepts such as <a href="https://en.wikipedia.org/wiki/Markov_chain">Markov chains</a> where $\mathbf{A}$ changes over time. To implement this, we <em>could</em> just call <code>x = A.dot(x)</code> in a for-loop with some some  additional processing.</p>
 
 <p>This <a href="http://en.wikipedia.org/wiki/Matrix_multiplication">matrix multiplication</a> is expensive timewise. Calculating $\mathbf{x}_k$ via this method has a <a href="https://en.wikipedia.org/wiki/Computational_complexity_theory">computational complexity</a> of $O(k\cdot n^3)$ when $\mathbf{A}$ is a $n \times n$ matrix. The cost of this algorithm drastically increases with $n$. This could be the number of pixels in our image or the number of locations a GPS records. Powerful algorithms like the FFT with their complexity of $O(n \log n)$ drastically outweigh this seemingly simple Fibonacci calculation.</p>
 
-<p>For the Fibonacci case, $\mathbf{A}$ remains constant and math has a nice way to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we’ll need to find $\mathbb{\mathbb{\Lambda}}^k$ first which only requires $O(k\cdot n)$ operations. We’re just doing $k$ multiplications $n$ times as shown below:</p>
+<p>For the Fibonacci case, $\mathbf{A}$ remains constant and math has several nice ways to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we’ll need to find $\mathbb{\mathbb{\Lambda}}^k$ first. </p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 
-\mathbb{\Lambda}^k = 
-\mathbb{\Lambda} \cdot \mathbb{\Lambda} \cdot \ldots \cdot \mathbb{\Lambda} =
- \begin{bmatrix}
-   \lambda_{_1}^k    &                &        &                \\
-                     & \lambda_{_2}^k &        &                \\
-                     &                & \ddots &                \\
-                     &                &        & \lambda_{_n}^k \\
- \end{bmatrix}
+    \mathbb{\Lambda}^k = 
+    \mathbb{\Lambda} \cdot \mathbb{\Lambda} \cdot \ldots \cdot \mathbb{\Lambda} =
+     \begin{bmatrix}
+       \lambda_{_1}^k    &                &        &                \\
+                         & \lambda_{_2}^k &        &                \\
+                         &                & \ddots &                \\
+                         &                &        & \lambda_{_n}^k \\
+     \end{bmatrix}
  %]]&gt;</script>
 
-<p>But we can’t just arbitrarily loose information. It turns out that for the right choices<sup id="fnref:calculate"><a href="#fn:calculate" rel="footnote">3</a></sup> of $\mathbf{Q}$ and $\mathbb{\Lambda}$ involving eigenvales and eigenvectors we get<sup id="fnref:limit"><a href="#fn:limit" rel="footnote">4</a></sup> $\mathbf{A} = \mathbf{Q} \cdot\mathbb{\Lambda}\cdot \mathbf{Q}^{-1}$. We really want $\mathbf{A}^k$ for our fixed point iteration, and we can get it in terms of $\mathbb{\Lambda}$ and $\mathbf{Q}$ by using the fact that $\mathbf{Q}\cdot\mathbf{Q}^{-1} = \mathbf{I}$ and anything times this identity is itself:</p>
+<p>But we can’t just arbitrarily lose information. It turns out that for the right choices<sup id="fnref:calculate"><a href="#fn:calculate" rel="footnote">3</a></sup> of $\mathbf{Q}$ and $\mathbb{\Lambda}$ involving eigenvalues and eigenvectors we get<sup id="fnref:limit"><a href="#fn:limit" rel="footnote">4</a></sup> $\mathbf{A} = \mathbf{Q} \cdot\mathbb{\Lambda}\cdot \mathbf{Q}^{-1}$. We really want $\mathbf{A}^k$ for our fixed point iteration, and we can get it in terms of $\mathbb{\Lambda}$ and $\mathbf{Q}$ by using the fact that $\mathbf{Q}\cdot\mathbf{Q}^{-1} = \mathbf{I}$ and anything times this identity $\mathbf{I}$ is itself:</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 
-\begin{align*}
-\mathbf{A}^k &= (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \cdot (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \cdots (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \\
-&= \mathbf{Q} \cdot \mathbb{\Lambda}^k\cdot \mathbf{Q}^{-1}
-\end{align*}
+    \begin{align*}
+    \mathbf{A}^k &= (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \cdot (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \cdots (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \\
+    &= \mathbf{Q} \cdot \mathbb{\Lambda}^k\cdot \mathbf{Q}^{-1}
+    \end{align*}
  %]]&gt;</script>
 
-<p>Because of this added $\mathbf{Q}$ we find that our computational complexity is $O(k\cdot n^2 + n^3)$ for an $n \times n$ matrix. Over the naïve code for the simple case, this is a large speed up! A factor of $k$ – which could be as large as a hundred – is nothing to sneer at!</p>
+<p>Because of this added $\mathbf{Q}$ we find that computing $\mathbf{A}^k$ takes $O(n\log n)$ time assuming we’re given  $\mathbb{\Lambda}$. Computing $\mathbb{\Lambda}$ requires $O(n^3)$ time meaning that $\mathbf{A}^k$ can be computed in $O(n\log n + n^3) \approx O(n^3)$ time. Over the naïve code for the simple case, this is a large speed up! A factor of $k$ – which could be as large as a hundred – is nothing to sneer at!</p>
 
-<p>But… wait. This $\mathbf{A}^k$ is simple. There’s no complicated dot product, only some scalar powers of $\lambda^k$ and constants. While we had a <a href="https://en.wikipedia.org/wiki/Closed-form_expression">closed form solution</a> beforehand for our Fibonacci matrix, this one is <em>simple</em>. With the associated $\mathbf{Q}$ and $\mathbb{\Lambda}$ with entiries $\lambda_1$ and $\lambda_2$ we find that</p>
+<p>But… wait. We don’t care about every value in the vector this Fibonacci case. We only care about $x_k$. We already have a <a href="https://en.wikipedia.org/wiki/Closed-form_expression">closed form solution</a> for $\mathbf{x}_k$ but after doing the matrix multiplication we find that $x_k$ has a simple formula. With the associated matrices $\mathbf{Q}$ and $\mathbb{\Lambda}$ we find that</p>
 
 <script type="math/tex; mode=display">
 x_k = \frac{1}{\sqrt{5}} (\lambda_1^k - \lambda_2^k) = 
@@ -122,7 +122,7 @@ x_k = \frac{1}{\sqrt{5}} (\lambda_1^k - \lambda_2^k) =
 
 <p>Let’s think about what I’m saying here. I’m saying that a formula involving three irrational numbers with two raised to a power is an integer <em>and</em> the $k$th Fibonacci number. I mean, even the irrational <a href="https://en.wikipedia.org/wiki/Golden_ratio">golden ratio</a> $\phi = (1 + \sqrt{5})/2 = 1.618\cdots$ appears! The last thing we would expect is a rational number, much less an integer. But the theory is solid and the first values of $x_k$ are $0, 1, 1, 2, 3, 5, 8$ – the Fibonacci numbers!</p>
 
-<p>This means that we can just define our <code>fibonacci</code> function to run <em>fast</em>. If we want a single value, this algorithm runs in almost $O(1)$ time vs the naïve code that ran in $O(k)$ time. Likewise, the matrix multiplication of $\mathbf{Q} \cdot \mathbf{A}\cdot \mathbf{Q^{-1}}$ just results in terms that only have scalar multiplication.</p>
+<p>This means that we can just define our <code>fibonacci</code> function to run <em>fast</em>. If we want a single value, this algorithm runs in $O(1)$ time vs the naïve code that ran in $O(k)$ time. </p>
 
 <p><code>python
 def fibonacci(k):
@@ -132,15 +132,17 @@ def fibonacci(k):
     return (l_1**k - l_2**k) / sqrt(5)
 </code></p>
 
-<p>This theory of eigenvalues and eigenvectors <em>must</em> have other insights. The most obvious one is <a href="https://en.wikipedia.org/wiki/Linear_stability">stability</a>. The definition of stability I’ll use is that a system (which can be represented by a matrix) is stable if it doesn’t blow up towards infinity. Since $\left|x_k\right| \propto \left(\left|\lambda\right|_\max\right)^k$ for large $k$, this system only converges if $ \left|\lambda \right|_\max &lt; 1$ and blows up if $\left| \lambda \right|_\max &gt; 1$. We can see that clearly with our Fibonacci sequence as our largest eigenvalue is the golden ration and greater than one. As expected, the Fibonacci numbers blow up towards infinity.</p>
+<p>This theory of eigenvalues and eigenvectors <em>must</em> have other insights. Eigenvalues applied themselves well to the Fibonacci problem; where else could they be used? </p>
 
-<p>Can we tell by looking if any system represented by a matrix is stable? This complex problems like factoring an $n$th degree polynomial and finding a <a href="https://en.wikipedia.org/wiki/Determinant">determinant</a>. There’s no simple easy method besides the computer sitting at your hands with the function <code>eig</code> in <code>numpy.linalg</code>. Take that with a grain of salt as there might be some relation between eigenvalues and the <a href="https://en.wikipedia.org/wiki/Z-transform">z-transform</a> because a <a href="https://en.wikipedia.org/wiki/Causality">causal</a> system only converges if it has poles $\left|p\right|$ with $\left|p\right| &lt; 1$. This also involves factoring an $n$th degree polynomial but it’s a little easier to obtain.</p>
+<p>The most obvious application is with <a href="https://en.wikipedia.org/wiki/Linear_stability">stability</a>. The definition of stability I’ll use is that a system (which can be represented by a matrix) is stable if it doesn’t blow up towards infinity. Since $\left|x_k\right| \propto \left(\left|\lambda\right|_\max\right)^k$ for large $k$, this system only converges if $ \left|\lambda \right|_\max &lt; 1$ and blows up if $\left| \lambda \right|_\max &gt; 1$. We can see that clearly with our Fibonacci sequence as our largest eigenvalue is the golden ration and greater than one. As expected, the Fibonacci numbers blow up towards infinity.</p>
 
-<p>Stability is critical for differential equations, and eigenvalues play a critical role in determining stability for certain differential equations. As you may know, differential equations are functions that govern our world. There are many examples but the unsolved <a href="https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations">Navier-Stokes equation</a> governs fluid flow and the <a href="https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation">Schrödinger equation</a> governs quantum mechanics.</p>
+<p>Can we just glance at a matrix to tell if the corresponding system is stable? This involves complex problems like factoring an $n$th degree polynomial and finding a <a href="https://en.wikipedia.org/wiki/Determinant">determinant</a>. For the general case, there’s no simple easy method besides the computer sitting at your hands with the function <code>eig</code> in <code>numpy.linalg</code>. Take that with a grain of salt as there might be some relation between eigenvalues and the <a href="https://en.wikipedia.org/wiki/Z-transform">z-transform</a> because a <a href="https://en.wikipedia.org/wiki/Causality">causal</a> system only converges if it has poles $\left|p\right|$ with $\left|p\right| &lt; 1$. This also involves factoring an $n$th degree polynomial but it’s a little easier to obtain.</p>
 
-<p>Another more interesting application is with social networks. If you want to see how many friend groups are in some social network, you can just count the eigenvalues that are 0. But there are people I only see sometimes; are we in the same friend group? Accordingly, calculating smaller eigenvalues is much more time intensive.</p>
+<p>Stability is critical for differential equations, and eigenvalues play a critical role in determining stability for certain differential equations. As you may know, differential equations govern our world. Examples of differential equations are found everywhere – they govern the size of animal populations and how airplanes fly.</p>
 
-<p>There are more uses of eigenvalues including machine learning concepts such as principle component analysis and face recognition. One interpretation of eigenvalues is that they’re a convenient way of representing a matrix with some very nice properties but I’m betting there’s more. I’ve talked with signal processors that say it seems like everything rests on eigenvalues.</p>
+<p>Another more interesting application is with social networks. If you want to see how many friend groups are in some social network, you can just count the eigenvalues that are 0. But there are people I only interact with occasionally; are we in the same friend group? Accordingly, calculating small eigenvalues is much more time intensive.</p>
+
+<p>There are more uses of eigenvalues including machine learning concepts such as principle component analysis and face recognition. One interpretation of eigenvalues is that they’re a convenient way of representing a matrix with some very nice properties but I’m betting there’s more as it seems that any interesting application involves eigenvalues in some way.</p>
 
 <div class="footnotes">
   <ol>

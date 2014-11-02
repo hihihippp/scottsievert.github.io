@@ -6,19 +6,13 @@ comments: true
 categories: math
 ---
 
-What mathematics go behind the [XKCD #688]? In the past two months, I have learned a lot of the theory behind it, much more than I knew when I [implemented] it myself. But I don't want to cover two months of Applied Linear Algebra[^course] so I'll just touch on a couple of the applications.
-
-[^course]:I covered why this course name sounds basic in a [previous blog post]. This covered the seemingly simple names of dimensions, linear functions and linear algebra and eventually built up to why computers are nesessary.
-
-[previous blog post]:http://scottsievert.github.io/blog/2014/07/31/common-mathematical-misconceptions/
+What are the mathematics behind [XKCD #688]? I [implemented] it myself but didn't grasp the theory behind it but that's been taken care of by Applied Linear Algebra[^course], a course I'm currently taking. While I want to touch on the applications, I won't attempt to teach something that took me two months to learn.
 
 <!--More-->
 
-[XKCD #688]:http://xkcd.com/688/
-
 ![xkcd comic](http://imgs.xkcd.com/comics/self_description.png)
 
-Randall probably probably just called a function in a for loop (like I would certainly do!).
+I'm betting Randall implemented this with a for-loop even though he probably knows the theory. A for-loop is just too easy.
 
 ```python
 x = define_source_image()
@@ -28,12 +22,7 @@ for i in arange(7):
 
 ![animated comic](https://github.com/scottsievert/xkcd-688/raw/master/out.gif)
 
-This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the [Fibonacci numbers]. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented in the naïve code below[^code]:
-
-[implemented]:https://github.com/scottsievert/xkcd-688
-
-[^code]:I don't want to clutter up the code so I use `from pylab import *`. Yes it is bad practice... but man it's nice.
-[Fibonacci numbers]:http://en.wikipedia.org/wiki/Fibonacci_number
+This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the [Fibonacci numbers]. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented in the naïve code below[^code]. As we're just calling the equivalent of some function in a for loop, this is very similar to the XKCD code.
 
 ```python
 def fibonacci(k):
@@ -78,49 +67,35 @@ $$
     \end{align*}
 $$
 
-This naïve implemention of this code can calculate our full [state vector] $\mathbf{x}_k$ which can be useful for other similar concepts such as [Markov chains][mar] where $\mathbf{A}$ changes over time. To implement this, we'd just call `x = A.dot(x)` in a for-loop with possible additional processing.
-
-[linear function]:https://en.wikipedia.org/wiki/Linear_function
-[fixed point iteration]:https://en.wikipedia.org/wiki/Fixed_point_(mathematics)
-[state vector]:https://en.wikipedia.org/wiki/State_space_representation
-[mar]:https://en.wikipedia.org/wiki/Markov_chain
+This naïve implementation of this code can calculate our full [state vector] $\mathbf{x}_k$ which can be useful for other similar concepts such as [Markov chains][mar] where $\mathbf{A}$ changes over time. To implement this, we *could* just call `x = A.dot(x)` in a for-loop with some some  additional processing.
 
 This [matrix multiplication] is expensive timewise. Calculating $\mathbf{x}\_k$ via this method has a [computational complexity] of $O(k\cdot n^3)$ when $\mathbf{A}$ is a $n \times n$ matrix. The cost of this algorithm drastically increases with $n$. This could be the number of pixels in our image or the number of locations a GPS records. Powerful algorithms like the FFT with their complexity of $O(n \log n)$ drastically outweigh this seemingly simple Fibonacci calculation.
 
-[computational complexity]:https://en.wikipedia.org/wiki/Computational_complexity_theory
-
-For the Fibonacci case, $\mathbf{A}$ remains constant and math has a nice way to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we'll need to find $\mathbb{\mathbb{\Lambda}}^k$ first which only requires $O(k\cdot n)$ operations. We're just doing $k$ multiplications $n$ times as shown below:
-
-[matrix multiplication]:http://en.wikipedia.org/wiki/Matrix_multiplication
-[FFT]:https://en.wikipedia.org/wiki/Fast_Fourier_transform
+For the Fibonacci case, $\mathbf{A}$ remains constant and math has several nice ways to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we'll need to find $\mathbb{\mathbb{\Lambda}}^k$ first. 
 
 $$
-\mathbb{\Lambda}^k = 
-\mathbb{\Lambda} \cdot \mathbb{\Lambda} \cdot \ldots \cdot \mathbb{\Lambda} =
- \begin{bmatrix}
-   \lambda_{_1}^k    &                &        &                \\
-                     & \lambda_{_2}^k &        &                \\
-                     &                & \ddots &                \\
-                     &                &        & \lambda_{_n}^k \\
- \end{bmatrix}
+    \mathbb{\Lambda}^k = 
+    \mathbb{\Lambda} \cdot \mathbb{\Lambda} \cdot \ldots \cdot \mathbb{\Lambda} =
+     \begin{bmatrix}
+       \lambda_{_1}^k    &                &        &                \\
+                         & \lambda_{_2}^k &        &                \\
+                         &                & \ddots &                \\
+                         &                &        & \lambda_{_n}^k \\
+     \end{bmatrix}
 $$
 
-But we can't just arbitrarily loose information. It turns out that for the right choices[^calculate] of $\mathbf{Q}$ and $\mathbb{\Lambda}$ involving eigenvales and eigenvectors we get[^limit] $\mathbf{A} = \mathbf{Q} \cdot\mathbb{\Lambda}\cdot \mathbf{Q}^{-1}$. We really want $\mathbf{A}^k$ for our fixed point iteration, and we can get it in terms of $\mathbb{\Lambda}$ and $\mathbf{Q}$ by using the fact that $\mathbf{Q}\cdot\mathbf{Q}^{-1} = \mathbf{I}$ and anything times this identity is itself:
+But we can't just arbitrarily lose information. It turns out that for the right choices[^calculate] of $\mathbf{Q}$ and $\mathbb{\Lambda}$ involving eigenvalues and eigenvectors we get[^limit] $\mathbf{A} = \mathbf{Q} \cdot\mathbb{\Lambda}\cdot \mathbf{Q}^{-1}$. We really want $\mathbf{A}^k$ for our fixed point iteration, and we can get it in terms of $\mathbb{\Lambda}$ and $\mathbf{Q}$ by using the fact that $\mathbf{Q}\cdot\mathbf{Q}^{-1} = \mathbf{I}$ and anything times this identity $\mathbf{I}$ is itself:
 
 $$
-\begin{align*}
-\mathbf{A}^k &= (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \cdot (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \cdots (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \\
-&= \mathbf{Q} \cdot \mathbb{\Lambda}^k\cdot \mathbf{Q}^{-1}
-\end{align*}
+    \begin{align*}
+    \mathbf{A}^k &= (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \cdot (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \cdots (\mathbf{Q}\cdot \mathbb{\Lambda}\cdot \mathbf{Q}^{-1}) \\
+    &= \mathbf{Q} \cdot \mathbb{\Lambda}^k\cdot \mathbf{Q}^{-1}
+    \end{align*}
 $$ 
 
-Because of this added $\mathbf{Q}$ we find that our computational complexity is $O(k\cdot n^2 + n^3)$ for an $n \times n$ matrix. Over the naïve code for the simple case, this is a large speed up! A factor of $k$ -- which could be as large as a hundred -- is nothing to sneer at!
+Because of this added $\mathbf{Q}$ we find that computing $\mathbf{A}^k$ takes $O(n\log n)$ time assuming we're given  $\mathbb{\Lambda}$. Computing $\mathbb{\Lambda}$ requires $O(n^3)$ time meaning that $\mathbf{A}^k$ can be computed in $O(n\log n + n^3) \approx O(n^3)$ time. Over the naïve code for the simple case, this is a large speed up! A factor of $k$ -- which could be as large as a hundred -- is nothing to sneer at!
 
-[^limit]:Well, there are certain restrictions, one being $A$ has to have distinct eigenvalues.
-[^calculate]:If you want to calculate $Q$ and $\mathbb{\Lambda}$, see the [wiki page](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors). More intuition is present in a [StackExchange question].
-[eigenvectors and eigenvalues]:http://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors
-
-But... wait. This $\mathbf{A}^k$ is simple. There's no complicated dot product, only some scalar powers of $\lambda^k$ and constants. While we had a [closed form solution] beforehand for our Fibonacci matrix, this one is *simple*. With the associated $\mathbf{Q}$ and $\mathbb{\Lambda}$ with entiries $\lambda\_1$ and $\lambda\_2$ we find that
+But... wait. We don't care about every value in the vector this Fibonacci case. We only care about $x\_k$. We already have a [closed form solution] for $\mathbf{x}\_k$ but after doing the matrix multiplication we find that $x\_k$ has a simple formula. With the associated matrices $\mathbf{Q}$ and $\mathbb{\Lambda}$ we find that
 
 $$
 x_k = \frac{1}{\sqrt{5}} (\lambda_1^k - \lambda_2^k) = 
@@ -131,9 +106,7 @@ $$
 
 Let's think about what I'm saying here. I'm saying that a formula involving three irrational numbers with two raised to a power is an integer *and* the $k$th Fibonacci number. I mean, even the irrational [golden ratio] $\phi = (1 + \sqrt{5})/2 = 1.618\cdots$ appears! The last thing we would expect is a rational number, much less an integer. But the theory is solid and the first values of $x\_k$ are $0, 1, 1, 2, 3, 5, 8$ -- the Fibonacci numbers!
 
-[golden ratio]:https://en.wikipedia.org/wiki/Golden_ratio
-
-This means that we can just define our `fibonacci` function to run *fast*. If we want a single value, this algorithm runs in almost $O(1)$ time vs the naïve code that ran in $O(k)$ time. Likewise, the matrix multiplication of $\mathbf{Q} \cdot \mathbf{A}\cdot \mathbf{Q^{-1}}$ just results in terms that only have scalar multiplication.
+This means that we can just define our `fibonacci` function to run *fast*. If we want a single value, this algorithm runs in $O(1)$ time vs the naïve code that ran in $O(k)$ time. 
 
 ```python
 def fibonacci(k):
@@ -143,29 +116,44 @@ def fibonacci(k):
     return (l_1**k - l_2**k) / sqrt(5)
 ```
 
-This theory of eigenvalues and eigenvectors *must* have other insights. The most obvious one is [stability]. The definition of stability I'll use is that a system (which can be represented by a matrix) is stable if it doesn't blow up towards infinity. Since $\left\|x\_k\right\| \propto \left(\left\|\lambda\right\|\_\max\right)^k$ for large $k$, this system only converges if $ \left\|\lambda \right\|\_\max < 1$ and blows up if $\left\| \lambda \right\|\_\max > 1$. We can see that clearly with our Fibonacci sequence as our largest eigenvalue is the golden ration and greater than one. As expected, the Fibonacci numbers blow up towards infinity.
+This theory of eigenvalues and eigenvectors *must* have other insights. Eigenvalues applied themselves well to the Fibonacci problem; where else could they be used? 
 
-Can we tell by looking if any system represented by a matrix is stable? This complex problems like factoring an $n$th degree polynomial and finding a [determinant]. There's no simple easy method besides the computer sitting at your hands with the function `eig` in `numpy.linalg`. Take that with a grain of salt as there might be some relation between eigenvalues and the [z-transform] because a [causal] system only converges if it has poles $\left\|p\right\|$ with $\left\|p\right\| < 1$. This also involves factoring an $n$th degree polynomial but it's a little easier to obtain.
+The most obvious application is with [stability]. The definition of stability I'll use is that a system (which can be represented by a matrix) is stable if it doesn't blow up towards infinity. Since $\left\|x\_k\right\| \propto \left(\left\|\lambda\right\|\_\max\right)^k$ for large $k$, this system only converges if $ \left\|\lambda \right\|\_\max < 1$ and blows up if $\left\| \lambda \right\|\_\max > 1$. We can see that clearly with our Fibonacci sequence as our largest eigenvalue is the golden ration and greater than one. As expected, the Fibonacci numbers blow up towards infinity.
 
+Can we just glance at a matrix to tell if the corresponding system is stable? This involves complex problems like factoring an $n$th degree polynomial and finding a [determinant]. For the general case, there's no simple easy method besides the computer sitting at your hands with the function `eig` in `numpy.linalg`. Take that with a grain of salt as there might be some relation between eigenvalues and the [z-transform] because a [causal] system only converges if it has poles $\left\|p\right\|$ with $\left\|p\right\| < 1$. This also involves factoring an $n$th degree polynomial but it's a little easier to obtain.
+
+Stability is critical for differential equations, and eigenvalues play a critical role in determining stability for certain differential equations. As you may know, differential equations govern our world. Examples of differential equations are found everywhere -- they govern the size of animal populations and how airplanes fly.
+
+Another more interesting application is with social networks. If you want to see how many friend groups are in some social network, you can just count the eigenvalues that are 0. But there are people I only interact with occasionally; are we in the same friend group? Accordingly, calculating small eigenvalues is much more time intensive.
+
+There are more uses of eigenvalues including machine learning concepts such as principle component analysis and face recognition. One interpretation of eigenvalues is that they're a convenient way of representing a matrix with some very nice properties but I'm betting there's more as it seems that any interesting application involves eigenvalues in some way.
+
+[closed form solution]:https://en.wikipedia.org/wiki/Closed-form_expression
+[StackExchange question]:http://math.stackexchange.com/questions/36815/a-simple-explanation-of-eigenvectors-and-eigenvalues-with-big-picture-ideas-of
 [determinant]:https://en.wikipedia.org/wiki/Determinant
 [causal]:https://en.wikipedia.org/wiki/Causality
 [z-transform]:https://en.wikipedia.org/wiki/Z-transform
 [stability]:https://en.wikipedia.org/wiki/Linear_stability
 [non-contractive map]:https://en.wikipedia.org/wiki/Contraction_mapping
-
+[linear function]:https://en.wikipedia.org/wiki/Linear_function
+[fixed point iteration]:https://en.wikipedia.org/wiki/Fixed_point_(mathematics)
+[state vector]:https://en.wikipedia.org/wiki/State_space_representation
+[mar]:https://en.wikipedia.org/wiki/Markov_chain
+[matrix multiplication]:http://en.wikipedia.org/wiki/Matrix_multiplication
+[FFT]:https://en.wikipedia.org/wiki/Fast_Fourier_transform
+[computational complexity]:https://en.wikipedia.org/wiki/Computational_complexity_theory
 [^complex]:But eigenvalues can be complex -- having $\mathbb{\Lambda}=1$ is not nearly the only case where $\|\mathbb{\Lambda}\|=1$.
-
-Stability is critical for differential equations, and eigenvalues play a critical role in determining stability for certain differential equations. As you may know, differential equations are functions that govern our world. There are many examples but the unsolved [Navier-Stokes equation] governs fluid flow and the [Schrödinger equation] governs quantum mechanics.
-
 [Schrödinger equation]:https://en.wikipedia.org/wiki/Schr%C3%B6dinger_equation
 [Navier-Stokes equation]:https://en.wikipedia.org/wiki/Navier%E2%80%93Stokes_equations
-
-Another more interesting application is with social networks. If you want to see how many friend groups are in some social network, you can just count the eigenvalues that are 0. But there are people I only see sometimes; are we in the same friend group? Accordingly, calculating smaller eigenvalues is much more time intensive.
-
-There are more uses of eigenvalues including machine learning concepts such as principle component analysis and face recognition. One interpretation of eigenvalues is that they're a convenient way of representing a matrix with some very nice properties but I'm betting there's more. I've talked with signal processors that say it seems like everything rests on eigenvalues.
-
-[closed form solution]:https://en.wikipedia.org/wiki/Closed-form_expression
-[StackExchange question]:http://math.stackexchange.com/questions/36815/a-simple-explanation-of-eigenvectors-and-eigenvalues-with-big-picture-ideas-of
-
 [^theory]:If you need a primer, check out my [previous blog post].
+[golden ratio]:https://en.wikipedia.org/wiki/Golden_ratio
+[XKCD #688]:http://xkcd.com/688/
+[^course]:I covered why this course name sounds basic in a [previous blog post]. This covered the seemingly simple names of dimensions, linear functions and linear algebra and eventually built up to why computers are nesessary.
+[previous blog post]:http://scottsievert.github.io/blog/2014/07/31/common-mathematical-misconceptions/
+[implemented]:https://github.com/scottsievert/xkcd-688
+[^code]:I don't want to clutter up the code so I use `from pylab import *`. Yes it is bad practice... but man it's nice.
+[Fibonacci numbers]:http://en.wikipedia.org/wiki/Fibonacci_number
+[^limit]:Well, there are certain restrictions, one being $A$ has to have distinct eigenvalues.
+[^calculate]:If you want to calculate $Q$ and $\mathbb{\Lambda}$, see the [wiki page](https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors). More intuition is present in a [StackExchange question].
+[eigenvectors and eigenvalues]:http://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors
 

@@ -12,7 +12,9 @@ Two months ago, I [implemented] and tried to explain the theory behind [XKCD #68
 
 ![xkcd comic](http://imgs.xkcd.com/comics/self_description.png)
 
-I'm betting Randall implemented this with a for-loop even though he probably knows the theory. It's what I would also do (and did) -- a for-loop is just too easy.
+I'm betting Randall implemented this with a for-loop[^bet] even though he probably knows the theory. It's what I would also do (and did) -- a for-loop is just too easy.
+
+[^bet]:Randall's for-loop was implemented with Photoshop.
 
 ```python
 x = define_source_image()
@@ -22,7 +24,9 @@ for i in arange(7):
 
 ![animated comic](https://github.com/scottsievert/xkcd-688/raw/master/out.gif)
 
-This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the [Fibonacci numbers]. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented[^code] in the naïve code below. As we're just calling the equivalent of some function in a for loop, this is very similar to the XKCD code.
+When is this system stable? When does it converge? These are interesting questions best answered by the eigenvalue decomposition. Of course, there are other topics that could be brought up. The largest one is with fixed point iteration and attractive points, but I haven't learned the theory to delve into that. Instead, let's look at the stability theory to see when this comic would converge -- if unstable, it'd oscillate wildly meaning the graphs would drastically change value each iteration.
+
+While we could see the theory with the image, we can see it more clearly with the [Fibonacci numbers]. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented[^code] in the naïve code below. As we're just calling the equivalent of some constant function in a for loop, this is very similar to the XKCD code. Both can be represented with a linear map and the linear map remains constant over time. While there are some fairly large differences, some of the theory is shown through the Fibonacci numbers. This theory also results with some other cool applications, including a simple non-recursive formula for any Fibonacci number.
 
 ```python
 def fibonacci(k):
@@ -71,7 +75,7 @@ We'd just compute $\mathbf{A}^k$ by using [`np.linalg.matrix_power`][matrix_powe
 
 [matrix_power]:http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.matrix_power.html
 
-For the Fibonacci case, $\mathbf{A}$ remains constant and math has several nice ways[^other] to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we'll need to find $\mathbb{\mathbb{\Lambda}}^k$ first. 
+For the XKCD case, the matrix $\mathbf{A}$ remains constant and likewise for the Fibonacci case. As is typical, math has several[^other] nice ways to speed this up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we'll need to find $\mathbb{\mathbb{\Lambda}}^k$ first. 
 
 [^other]:The current limit for computing $A^k$ is done with the [Coppersmith-Winograd algorithm](http://en.wikipedia.org/wiki/Coppersmith–Winograd_algorithm) with a computation complexity of $O(n^{2.3727}\log k)$.
 
@@ -118,24 +122,29 @@ def fibonacci(k):
     return (l_1**k - l_2**k) / sqrt(5)
 ```
 
-This theory of eigenvalues and eigenvectors *must* have other insights. Eigenvalues applied themselves well to the Fibonacci problem; where else could they be used? 
+Despite this interesting sidetrack, we don't care about how fast we can
+calculate a solution. We want to know if a system is [stable]. Will it converge
+to a set of values or will it wildly oscillate?
 
-The most obvious application is with [stability]. The definition of stability I'll use is that a system (which can be represented by a matrix) is stable if it doesn't blow up towards infinity. Since $\left\|x\_k\right\| \propto \left(\left\|\lambda\right\|\_\max\right)^k$ for large $k$, this system only converges if $ \left\|\lambda \right\|\_\max < 1$ and blows up if $\left\| \lambda \right\|\_\max > 1$. We can see that clearly with our Fibonacci sequence as our largest eigenvalue is the golden ration and greater than one. As expected, the Fibonacci numbers blow up towards infinity.
+Since $\left\|x\_k\right\| \propto \left(\left\|\lambda\right\|\_\max\right)^k$ for large $k$, this system only converges if $ \left\|\lambda \right\|\_\max < 1$ and blows up if $\left\| \lambda \right\|\_\max > 1$. We can see that clearly with our Fibonacci sequence as our largest eigenvalue is the golden ration and greater than one. As expected, the Fibonacci numbers blow up towards infinity.
 
 Can we just glance at a matrix to tell if the corresponding system is stable? This involves complex problems like factoring an $n$th degree polynomial and finding a [determinant]. For the general case, there's no simple easy method besides the computer sitting at your hands with the function `eig` in `numpy.linalg`. Take that with a grain of salt as there might be some relation between eigenvalues and the [z-transform] because a [causal] system only converges if it has poles $\left\|p\right\|$ with $\left\|p\right\| < 1$. This also involves factoring an $n$th degree polynomial but it's a little easier to obtain.
 
-Stability is critical for differential equations, and eigenvalues play a critical role in determining stability for certain differential equations. As you may know, differential equations govern our world. Examples of differential equations are found everywhere -- they govern the size of animal populations and how airplanes fly.
+In the XKCD case, this equation must obey the general eigenvalue equation: $\mathbf{A}\cdot\mathbf{x} = \lambda\cdot\mathbf{x}$ for some image $\mathbf{x}$ and some transformation $\mathbf{A}$. Because this is a fixed point, $\mathbf{A}\cdot\mathbf{x} = \mathbf{x}$ meaning that it has an eigenvalue of 1. If $\left\| \lambda\right\|\_\max = 1$, the system is only marginally stable. From the eigenvalues, we can't tell if it will explode or be stable. While I can't discuss the theory in detail, I do know that there might a non-contractive map might exist which would make the system unstable. In my implementation, I tried playing around but couldn't make it unstable.
 
-Another more interesting application is with social networks. If you want to see how many friend groups are in some social network, you can just count the eigenvalues that are 0. But there are people I only interact with occasionally; are we in the same friend group? Accordingly, calculating small eigenvalues is much more time intensive.
-
-There are more uses of eigenvalues including machine learning concepts such as principle component analysis and face recognition. One interpretation of eigenvalues is that they're a convenient way of representing a matrix with some very nice properties but I'm betting there's more as it seems that any interesting application involves eigenvalues in some way.
+While I couldn't show the theory behind XKCD comic and determine when it was
+stable, I could show how to figure out when a linear system is stable. Even
+better, I showed that a simple non-recursive solution could be found.
+Eigenvalue are powerful -- accordingly, they show up almost everywhere. Face
+recognition, social networks and differential equations make heavy use of
+eigenvalues.
 
 [closed form solution]:https://en.wikipedia.org/wiki/Closed-form_expression
 [StackExchange question]:http://math.stackexchange.com/questions/36815/a-simple-explanation-of-eigenvectors-and-eigenvalues-with-big-picture-ideas-of
 [determinant]:https://en.wikipedia.org/wiki/Determinant
 [causal]:https://en.wikipedia.org/wiki/Causality
 [z-transform]:https://en.wikipedia.org/wiki/Z-transform
-[stability]:https://en.wikipedia.org/wiki/Linear_stability
+[stable]:https://en.wikipedia.org/wiki/Linear_stability
 [non-contractive map]:https://en.wikipedia.org/wiki/Contraction_mapping
 [linear function]:https://en.wikipedia.org/wiki/Linear_function
 [fixed point iteration]:https://en.wikipedia.org/wiki/Fixed_point_(mathematics)

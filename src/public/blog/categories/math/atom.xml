@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Math | Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/blog/categories/math/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-11-02T12:37:24-06:00</updated>
+  <updated>2014-11-03T21:19:57-06:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -24,7 +24,7 @@
 
 <p><img src="http://imgs.xkcd.com/comics/self_description.png" alt="xkcd comic" /></p>
 
-<p>I’m betting Randall implemented this with a for-loop even though he probably knows the theory. It’s what I would also do (and did) – a for-loop is just too easy.</p>
+<p>I’m betting Randall implemented this with a for-loop<sup id="fnref:bet"><a href="#fn:bet" rel="footnote">2</a></sup> even though he probably knows the theory. It’s what I would also do (and did) – a for-loop is just too easy.</p>
 
 <p><code>python
 x = define_source_image()
@@ -34,7 +34,9 @@ for i in arange(7):
 
 <p><img src="https://github.com/scottsievert/xkcd-688/raw/master/out.gif" alt="animated comic" /></p>
 
-<p>This is the natural method, but the theory has some interesting applications. While we could see the theory with the image, we can see it more clearly with the <a href="http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented<sup id="fnref:code"><a href="#fn:code" rel="footnote">2</a></sup> in the naïve code below. As we’re just calling the equivalent of some function in a for loop, this is very similar to the XKCD code.</p>
+<p>When is this system stable? When does it converge? These are interesting questions best answered by the eigenvalue decomposition. Of course, there are other topics that could be brought up. The largest one is with fixed point iteration and attractive points, but I haven’t learned the theory to delve into that. Instead, let’s look at the stability theory to see when this comic would converge – if unstable, it’d oscillate wildly meaning the graphs would drastically change value each iteration.</p>
+
+<p>While we could see the theory with the image, we can see it more clearly with the <a href="http://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci numbers</a>. The Fibonacci numbers just add up the two previous Fibonacci numbers. These are typically implemented<sup id="fnref:code"><a href="#fn:code" rel="footnote">3</a></sup> in the naïve code below. As we’re just calling the equivalent of some constant function in a for loop, this is very similar to the XKCD code. Both can be represented with a linear map and the linear map remains constant over time. While there are some fairly large differences, some of the theory is shown through the Fibonacci numbers. This theory also results with some other cool applications, including a simple non-recursive formula for any Fibonacci number.</p>
 
 <p><code>python
 def fibonacci(k):
@@ -83,7 +85,7 @@ def fibonacci(k):
 
 <p>We’d just compute $\mathbf{A}^k$ by using <a href="http://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.matrix_power.html"><code>np.linalg.matrix_power</code></a> to implement this, but naïve <a href="http://en.wikipedia.org/wiki/Matrix_multiplication">matrix multiplication</a> is expensive timewise. Calculating $\mathbf{x}_k$ naïvely has a <a href="https://en.wikipedia.org/wiki/Computational_complexity_theory">computational complexity</a> of $O(k\cdot n^3)$ when $\mathbf{A}$ is a $n \times n$ matrix. The cost of this algorithm drastically increases with $n$. This could be the number of pixels in our image or the number of locations a GPS records. Powerful algorithms like the FFT with their complexity of $O(n \log n)$ drastically outweigh this seemingly simple Fibonacci calculation.</p>
 
-<p>For the Fibonacci case, $\mathbf{A}$ remains constant and math has several nice ways<sup id="fnref:other"><a href="#fn:other" rel="footnote">3</a></sup> to speed things up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we’ll need to find $\mathbb{\mathbb{\Lambda}}^k$ first. </p>
+<p>For the XKCD case, the matrix $\mathbf{A}$ remains constant and likewise for the Fibonacci case. As is typical, math has several<sup id="fnref:other"><a href="#fn:other" rel="footnote">4</a></sup> nice ways to speed this up. One convenient way is to find a diagonal representation of the matrix called $\mathbb{\Lambda}$ because then we could find $\mathbf{A}^k$ easily. To do that, we’ll need to find $\mathbb{\mathbb{\Lambda}}^k$ first. </p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 
@@ -97,7 +99,7 @@ def fibonacci(k):
      \end{bmatrix}
  %]]&gt;</script>
 
-<p>But we can’t just arbitrarily lose information. It turns out that for the right choices<sup id="fnref:calculate"><a href="#fn:calculate" rel="footnote">4</a></sup> of $\mathbf{Q}$ and $\mathbb{\Lambda}$ involving eigenvalues and eigenvectors we get<sup id="fnref:limit"><a href="#fn:limit" rel="footnote">5</a></sup> $\mathbf{A} = \mathbf{Q} \cdot\mathbb{\Lambda}\cdot \mathbf{Q}^{-1}$. We really want $\mathbf{A}^k$ for our fixed point iteration, and we can get it in terms of $\mathbb{\Lambda}$ and $\mathbf{Q}$ by using the fact that $\mathbf{Q}\cdot\mathbf{Q}^{-1} = \mathbf{I}$ and anything times this identity $\mathbf{I}$ is itself:</p>
+<p>But we can’t just arbitrarily lose information. It turns out that for the right choices<sup id="fnref:calculate"><a href="#fn:calculate" rel="footnote">5</a></sup> of $\mathbf{Q}$ and $\mathbb{\Lambda}$ involving eigenvalues and eigenvectors we get<sup id="fnref:limit"><a href="#fn:limit" rel="footnote">6</a></sup> $\mathbf{A} = \mathbf{Q} \cdot\mathbb{\Lambda}\cdot \mathbf{Q}^{-1}$. We really want $\mathbf{A}^k$ for our fixed point iteration, and we can get it in terms of $\mathbb{\Lambda}$ and $\mathbf{Q}$ by using the fact that $\mathbf{Q}\cdot\mathbf{Q}^{-1} = \mathbf{I}$ and anything times this identity $\mathbf{I}$ is itself:</p>
 
 <script type="math/tex; mode=display">% &lt;![CDATA[
 
@@ -130,22 +132,30 @@ def fibonacci(k):
     return (l_1**k - l_2**k) / sqrt(5)
 </code></p>
 
-<p>This theory of eigenvalues and eigenvectors <em>must</em> have other insights. Eigenvalues applied themselves well to the Fibonacci problem; where else could they be used? </p>
+<p>Despite this interesting sidetrack, we don’t care about how fast we can
+calculate a solution. We want to know if a system is <a href="https://en.wikipedia.org/wiki/Linear_stability">stable</a>. Will it converge
+to a set of values or will it wildly oscillate?</p>
 
-<p>The most obvious application is with <a href="https://en.wikipedia.org/wiki/Linear_stability">stability</a>. The definition of stability I’ll use is that a system (which can be represented by a matrix) is stable if it doesn’t blow up towards infinity. Since $\left|x_k\right| \propto \left(\left|\lambda\right|_\max\right)^k$ for large $k$, this system only converges if $ \left|\lambda \right|_\max &lt; 1$ and blows up if $\left| \lambda \right|_\max &gt; 1$. We can see that clearly with our Fibonacci sequence as our largest eigenvalue is the golden ration and greater than one. As expected, the Fibonacci numbers blow up towards infinity.</p>
+<p>Since $\left|x_k\right| \propto \left(\left|\lambda\right|_\max\right)^k$ for large $k$, this system only converges if $ \left|\lambda \right|_\max &lt; 1$ and blows up if $\left| \lambda \right|_\max &gt; 1$. We can see that clearly with our Fibonacci sequence as our largest eigenvalue is the golden ration and greater than one. As expected, the Fibonacci numbers blow up towards infinity.</p>
 
 <p>Can we just glance at a matrix to tell if the corresponding system is stable? This involves complex problems like factoring an $n$th degree polynomial and finding a <a href="https://en.wikipedia.org/wiki/Determinant">determinant</a>. For the general case, there’s no simple easy method besides the computer sitting at your hands with the function <code>eig</code> in <code>numpy.linalg</code>. Take that with a grain of salt as there might be some relation between eigenvalues and the <a href="https://en.wikipedia.org/wiki/Z-transform">z-transform</a> because a <a href="https://en.wikipedia.org/wiki/Causality">causal</a> system only converges if it has poles $\left|p\right|$ with $\left|p\right| &lt; 1$. This also involves factoring an $n$th degree polynomial but it’s a little easier to obtain.</p>
 
-<p>Stability is critical for differential equations, and eigenvalues play a critical role in determining stability for certain differential equations. As you may know, differential equations govern our world. Examples of differential equations are found everywhere – they govern the size of animal populations and how airplanes fly.</p>
+<p>In the XKCD case, this equation must obey the general eigenvalue equation: $\mathbf{A}\cdot\mathbf{x} = \lambda\cdot\mathbf{x}$ for some image $\mathbf{x}$ and some transformation $\mathbf{A}$. Because this is a fixed point, $\mathbf{A}\cdot\mathbf{x} = \mathbf{x}$ meaning that it has an eigenvalue of 1. If $\left| \lambda\right|_\max = 1$, the system is only marginally stable. From the eigenvalues, we can’t tell if it will explode or be stable. While I can’t discuss the theory in detail, I do know that there might a non-contractive map might exist which would make the system unstable. In my implementation, I tried playing around but couldn’t make it unstable.</p>
 
-<p>Another more interesting application is with social networks. If you want to see how many friend groups are in some social network, you can just count the eigenvalues that are 0. But there are people I only interact with occasionally; are we in the same friend group? Accordingly, calculating small eigenvalues is much more time intensive.</p>
-
-<p>There are more uses of eigenvalues including machine learning concepts such as principle component analysis and face recognition. One interpretation of eigenvalues is that they’re a convenient way of representing a matrix with some very nice properties but I’m betting there’s more as it seems that any interesting application involves eigenvalues in some way.</p>
+<p>While I couldn’t show the theory behind XKCD comic and determine when it was
+stable, I could show how to figure out when a linear system is stable. Even
+better, I showed that a simple non-recursive solution could be found.
+Eigenvalue are powerful – accordingly, they show up almost everywhere. Face
+recognition, social networks and differential equations make heavy use of
+eigenvalues.</p>
 
 <div class="footnotes">
   <ol>
     <li id="fn:course">
       <p>This course is called Applied Linear Algebra. I covered why this course name sounds basic in a <a href="http://scottsievert.github.io/blog/2014/07/31/common-mathematical-misconceptions/">previous blog post</a>. This covered the seemingly simple names of dimensions, linear functions and linear algebra and eventually built up to why computers are nesessary.<a href="#fnref:course" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:bet">
+      <p>Randall’s for-loop was implemented with Photoshop.<a href="#fnref:bet" rel="reference">&#8617;</a></p>
     </li>
     <li id="fn:code">
       <p>I don’t want to clutter up the code so I use <code>from pylab import *</code>. Yes it is bad practice… but man it’s nice.<a href="#fnref:code" rel="reference">&#8617;</a></p>

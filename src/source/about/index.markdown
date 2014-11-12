@@ -1,42 +1,54 @@
 ---
 layout: page
-title: "about"
+title: "About"
 date: 2014-05-14 08:56
 comments: false
-sharing: true
-footer: true
+sharing: false
+footer: false
 ---
 
-{% img center http://scottsievert.github.io/images/tree-orig.png 440 %}
+{% img right http://scottsievert.github.io/images/tree-orig.png 340 %}
 
-I'm rather interested in adaptive sampling and the new techniques compressed
-sensing brings to the table. There are interesting places to look in any
-signal, and most of our energy (aka time or money) should be focused there.
+## Research interests
+<p style="font-size:12pt;">
+<em>Adaptive sampling theory, learning theory, statistical signal processing,
+compressed sensing</em>
+</p>
 
-For example, thermal images are relatively simple; why not focus on the edges? That's where the detail, the most pertinent information lies. Or determining ages from a family portrait: the faces hold the information we're interested in. Prof. Jarvis Haupt, the advisor of our lab, has done [a great talk][talk] on finding the most interesting information.
+Why are these interesting? One example is because any real world signal has areas that are similar in value. Real world images have areas that tend to be the same color and speech signals have fairly similar values. If constrained by time or money, why not use all the data at your disposal? This requires looking for the areas with the most detail, and [Prof. Jarvis Haupt] has done a [great talk] on it.
+
+Making these natural and intuitive assumptions seems to be the basis behind compressed sensing. A good overview is included in a [Wired article].
+
+## Education
+I am currently finishing undergraduate career at the University of Minnesota in Electrical Engineering with a focus in signal processing. I would like to earn my doctorate so I can devise my own solutions.
+
+## Software
+* [swix], the Swift Matrix Library. Brings a Python/MATLAB like interface to
+  smartphones.
+* [jem-press]. A simple static site generator very similar to [jem-doc].
+  If you want a preview, take a look at the [documentation] (implemented in
+  jem-press!).
+* [python-drawnow]. Very similar to Matlab's `drawnow` with some additional
+  features.
 
 
-This concept of detecting and estimating data present in a signal and using it to your advantage seems so natural and fascinates me, the reason I'll be getting my doctorate in it. My most up to date "course of life," my CV, is available [here][CV].
+## Contact
+Email: [me@scottsievert.com] or [sieve121@umn.edu]
 
-### Projects
-My [Github][git] contains almost all of the code I work on. It has everything from research activities to small projects to this website.
+My most current "course of life" or CV is available [here][CV].
 
-#### Useful projects of mine: 
-
-* [python-drawnow][drawnow]. Similar to MATLAB's `drawnow`.
-* [swix]. A matrix and machine learning library for Swift.
-* [jem-press]. A site generator designed with academic website in mind inspired
-  by [jem-doc].
+[Wired article]:http://www.wired.com/2010/02/ff_algorithm/
+[great talk]:http://nuit-blanche.blogspot.com/2013/08/sahd-compressive-saliency-sensing.html
+[documentation]:http://scottsievert.github.io/jem-press/
+[me@scottsievert.com]:mailto:me@scottsievert.com
+[sieve121@umn.edu]:mailto:sieve121@umn.edu
 
 [swix]:https://github.com/scottsievert/swix
 [jem-press]:https://github.com/scottsievert/jem-press
 [jem-doc]:http://jemdoc.jaboc.net
 
-
+[Prof. Jarvis Haupt]:http://www.ece.umn.edu/~jdhaupt/
 [sparse]:https://en.wikipedia.org/wiki/Sparse_matrix
-[drawnow]:https://github.com/scottsievert/python-drawnow
+[python-drawnow]:https://github.com/scottsievert/python-drawnow
 [git]:https://github.com/scottsievert
-[talk]:http://nuit-blanche.blogspot.com/2013/08/sahd-compressive-saliency-sensing.html
-[isparse]:https://github.com/scottsievert/iSparse
-[ir]:https://github.com/scottsievert/IRcamera
 [CV]:https://www.dropbox.com/s/gsk6varv1c0gdft/Scott_Sievert_CV.pdf

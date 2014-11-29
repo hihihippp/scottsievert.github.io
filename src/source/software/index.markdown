@@ -33,7 +33,8 @@ I created [an application] that ran the command inside the terminal. A complete
 description of this app can be found on a [Github Gist].
 
 [Github Gist]:https://gist.github.com/scottsievert/83ebb64812c7e209efad
-[an application]:Macvim-latex.zip
+[an application]:https://github.com/scottsievert/scottsievert.github.io/blob/master/software/MacVim-latex.zip?raw=true
+
 
 
 

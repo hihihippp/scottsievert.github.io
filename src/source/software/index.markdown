@@ -26,6 +26,15 @@ sites in mind.
 Very similar to Matlab's `drawnow` with some additional features. It allows you
 to drop to to a debugger or ask for a confirm every iteration.
 
+## MacVim-latex
+I ran into an annoying issue where MacVim wouldn't compile latex files only
+while opening files with Spotlight (it worked using the terminal). To fix this,
+I created [an application] that ran the command inside the terminal. A complete
+description of this app can be found on a [Github Gist].
+
+[Github Gist]:https://gist.github.com/scottsievert/83ebb64812c7e209efad
+[an application]:Macvim-latex.zip
+
 
 
 [swix]:https://github.com/scottsievert/swix

@@ -38,8 +38,8 @@ description of this app can be found on a [Github Gist].
 
 
 
-[swix]:https://github.com/scottsievert/swix
-[jem-press]:https://github.com/scottsievert/jem-press
+[swix]:http://scottsievert.github.io/swix
+[jem-press]:http://scottsievert.github.io/jem-press
 [jem-doc]:http://jemdoc.jaboc.net
 [python-drawnow]:https://github.com/scottsievert/python-drawnow
 [documentation]:http://scottsievert.github.io/jem-press/

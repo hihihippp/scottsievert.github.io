@@ -9,8 +9,8 @@
   <meta name="author" content="Scott Sievert">
 
   
-  <meta name="description" content="When I heard course names for higher mathematical classes during high school
-and even part of college, it seemed as if they were teaching something &hellip;">
+  <meta name="description" content="The Fibonacci problem is a well known mathematical problem that models
+population growth and was conceived in the 1200s. Leonardo of Pisa aka &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -50,6 +50,9 @@ MathJax.Hub.Config({
     processEscapes: true,
     skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
   },
+  TeX: {
+    extensions: ["AMSmath.js", "AMSsymbols.js"]
+  },
   messageStyle: "none",
   "HTML-CSS": { preferredFont: "TeX", availableFonts: ["STIX","TeX"] }
 });
@@ -60,7 +63,7 @@ MathJax.Hub.Config({
   <header role="banner"><hgroup>
   <h1><a href="/">Scott Sievert</a></h1>
   
-    <h2>Carefully curated musings on math, python and skiing.<br><a href="https://github.com/scottsievert"><i class="fa fa-github fa-2x"></i></a>&nbsp;<a href="https://twitter.com/stsievert"><i class="fa fa-twitter fa-2x"></i></a>&nbsp;<a href="http://scottsievert.github.io/atom.xml"><i class="fa fa-rss fa-2x"></i></a></h2>
+    <h2>Carefully curated musings on math, python and skiing.<br> <a href="https://github.com/scottsievert"><i class="fa fa-github fa-2x"></i></a> <a href="https://twitter.com/stsievert">  <i class="fa fa-twitter fa-2x"></i></a> <a href="http://scottsievert.github.io/atom.xml"><i class="fa fa-rss fa-2x"></i></a></h2>
   
 </hgroup>
 
@@ -100,6 +103,51 @@ alt="stats"></a></div></noscript>
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/01/31/the-mysterious-eigenvalue/">Applying Eigenvalues to the Fibonacci Problem</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-01-31T19:41:26-06:00" pubdate data-updated="true">Jan 31<span>st</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>The <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci problem</a> is a well known mathematical problem that models
+population growth and was conceived in the 1200s. <a href="https://en.wikipedia.org/wiki/Fibonacci">Leonardo of Pisa</a> aka
+Fibonacci decided to use a <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursive</a> equation: $x_{n} = x_{n-1} + x_{n-2}$
+with the seed values $x_0 = 0$ and $x_1 = 1$. Implementing this recursive
+function is straightforward:<sup id="fnref:implement"><a href="#fn:implement" rel="footnote">1</a></sup></p>
+
+</div>
+  
+  
+    <footer>
+      <a rel="full-article" href="/blog/2015/01/31/the-mysterious-eigenvalue/">Read on &rarr;</a>
+    </footer>
+  
+
+
+    </article>
   
   
     <article>
@@ -388,6 +436,10 @@ learned.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2015/01/31/the-mysterious-eigenvalue/">Applying Eigenvalues to the Fibonacci Problem</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2014/07/31/common-mathematical-misconceptions/">Common Mathematical Misconceptions</a>
       </li>
     
@@ -401,10 +453,6 @@ learned.</p>
     
       <li class="post">
         <a href="/blog/2014/05/18/speckle-and-lasers/">Speckle and Lasers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2014/05/14/Scientific-Python-tips-and-tricks/">Scientific Python Tips and Tricks</a>
       </li>
     
   </ul>
@@ -450,7 +498,7 @@ learned.</p>
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Scott Sievert -
+  Copyright &copy; 2015 - Scott Sievert -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

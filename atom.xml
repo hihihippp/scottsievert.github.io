@@ -4,7 +4,7 @@
   <title><![CDATA[Scott Sievert]]></title>
   <link href="http://scottsievert.github.io/atom.xml" rel="self"/>
   <link href="http://scottsievert.github.io/"/>
-  <updated>2014-11-29T11:03:37-06:00</updated>
+  <updated>2015-01-31T22:36:17-06:00</updated>
   <id>http://scottsievert.github.io/</id>
   <author>
     <name><![CDATA[Scott Sievert]]></name>
@@ -12,6 +12,209 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Applying Eigenvalues to the Fibonacci Problem]]></title>
+    <link href="http://scottsievert.github.io/blog/2015/01/31/the-mysterious-eigenvalue/"/>
+    <updated>2015-01-31T19:41:26-06:00</updated>
+    <id>http://scottsievert.github.io/blog/2015/01/31/the-mysterious-eigenvalue</id>
+    <content type="html"><![CDATA[<p>The <a href="https://en.wikipedia.org/wiki/Fibonacci_number">Fibonacci problem</a> is a well known mathematical problem that models
+population growth and was conceived in the 1200s. <a href="https://en.wikipedia.org/wiki/Fibonacci">Leonardo of Pisa</a> aka
+Fibonacci decided to use a <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursive</a> equation: $x_{n} = x_{n-1} + x_{n-2}$
+with the seed values $x_0 = 0$ and $x_1 = 1$. Implementing this recursive
+function is straightforward:<sup id="fnref:implement"><a href="#fn:implement" rel="footnote">1</a></sup></p>
+
+<!--More-->
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">0</span><span class="p">:</span> <span class="k">return</span> <span class="mi">0</span>
+</span><span class="line">    <span class="k">if</span> <span class="n">n</span><span class="o">==</span><span class="mi">1</span><span class="p">:</span> <span class="k">return</span> <span class="mi">1</span>
+</span><span class="line">    <span class="k">else</span><span class="p">:</span> <span class="k">return</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">1</span><span class="p">)</span> <span class="o">+</span> <span class="n">fib</span><span class="p">(</span><span class="n">n</span><span class="o">-</span><span class="mi">2</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>Since the Fibonacci sequence was conceived to model population growth, it would
+seem that there should be a simple equation that grows almost exponentially.
+Plus, this recursive calling is expensive both in time and memory.<sup id="fnref:compiler"><a href="#fn:compiler" rel="footnote">2</a></sup>.
+The cost of this function doesn’t seem worthwhile. To see the surprising
+formula that we end up with, we need to define our Fibonacci problem in a
+matrix language.<sup id="fnref:matrix"><a href="#fn:matrix" rel="footnote">3</a></sup></p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{bmatrix}
+x_{n} \\ x_{n-1}
+\end{bmatrix} =
+\mathbf{x}_{n} =
+\mathbf{A}\cdot \mathbf{x}_{n-1} =
+\begin{bmatrix}
+1 & 1 \\ 1 & 0
+\end{bmatrix} \cdot
+\begin{bmatrix}
+x_{n-1} \\ x_{n-2}
+\end{bmatrix} 
+ %]]&gt;</script>
+
+<p>Calling each of those matrices and vectors variables and recognizing the fact
+that $\mathbf{x}_{n-1}$ follows the same formula as $\mathbf{x}_n$ allows us to write</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\begin{align*}
+\mathbf{x}_n &= \mathbf{A} \cdot \mathbf{x}_{n-1} \\
+&= \mathbf{A} \cdot \mathbf{A} \cdots \mathbf{A} \cdot \mathbf{x}_0 \\
+&= \mathbf{A}^n \cdot \mathbf{x}_0
+\end{align*}
+ %]]&gt;</script>
+
+<p>where we have used $\mathbf{A}^n$ to mean $n$ <a href="https://en.wikipedia.org/wiki/Matrix_multiplication#Matrix_product_.28two_matrices.29">matrix multiplications</a>.
+The corresponding implementation looks something like this:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class="line">    <span class="n">A</span>   <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="s">&#39;1 1; 1 0&#39;</span><span class="p">)</span>
+</span><span class="line">    <span class="n">x_0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asmatrix</span><span class="p">(</span><span class="s">&#39;1; 0&#39;</span><span class="p">)</span>
+</span><span class="line">    <span class="n">x_n</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">matrix_power</span><span class="p">(</span><span class="n">A</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span><span class="o">.</span><span class="n">dot</span><span class="p">(</span><span class="n">x_0</span><span class="p">)</span>
+</span><span class="line">    <span class="k">return</span> <span class="n">x_n</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>While this isn’t recursive, there’s still an $n-1$ unnecessary matrix
+multiplications. These are expensive time-wise and it seems like there should
+be a simple formula involving $n$. As populations grow exponentially, we would
+expect this formula to involve scalars raised to the $n$th power. A simple
+equation like this could be implemented many times faster than the recursive
+implementation!</p>
+
+<p>The trick to do this rests on the mysterious and intimidating 
+<a href="https://en.wikipedia.org/wiki/Eigenvalues_and_eigenvectors">eigenvalues and eigenvectors</a>. These are just a nice way to view the same data but they have a lot of mystery
+behind them. Most simply, for a matrix $\mathbf{A}$ they obey the equation</p>
+
+<script type="math/tex; mode=display">\mathbf{A}\cdot\mathbf{x} = \lambda \cdot\mathbf{x}</script>
+
+<p>for different eigenvalues $\lambda$ and eigenvectors $\mathbf{x}$. Through the
+way matrix multiplication is defined, we can represent all of these cases. This
+rests on the fact that the left multiplied diagonal matrix $\mathbf{\Lambda}$
+just scales each $\mathbf{x}_i$ by $\lambda_i$.  The column-wise
+definition of matrix multiplication makes it clear that this is represents
+every case where the equation above occurs. </p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+
+\mathbf{A} \cdot
+\begin{bmatrix}
+\mathbf{x}_1 & \mathbf{x}_2\\
+\end{bmatrix}
+= 
+\begin{bmatrix}
+\mathbf{x}_1 & \mathbf{x}_2\\
+\end{bmatrix}
+\cdot
+\begin{bmatrix}
+\lambda_{1} & 0\\
+0           & \lambda_2
+\end{bmatrix}
+ %]]&gt;</script>
+
+<p>Or compacting the vectors $\mathbf{x}_i$ into a matrix called $\mathbf{X}$ and
+the diagonal matrix of $\lambda_i$’s into $\mathbf{\Lambda}$, we find that </p>
+
+<script type="math/tex; mode=display">\mathbf{A}\cdot\mathbf{X} = \mathbf{X}\cdot\mathbf{\Lambda}</script>
+
+<p>Because the Fibonacci eigenvector matrix is invertible,<sup id="fnref:inv"><a href="#fn:inv" rel="footnote">4</a></sup></p>
+
+<script type="math/tex; mode=display">\mathbf{A} = \mathbf{X}\cdot\mathbf{\Lambda}\cdot\mathbf{X}^{-1}</script>
+
+<p>And then because a matrix and it’s inverse cancel</p>
+
+<script type="math/tex; mode=display">% &lt;![CDATA[
+\begin{align*}
+\mathbf{A}^n &= \mathbf{X}\cdot\mathbf{\Lambda}\cdot\mathbf{X}^{-1}
+\cdot\ldots\cdot
+\mathbf{X}\cdot\mathbf{\Lambda}\cdot\mathbf{X}^{-1}\\
+&= \mathbf{X}\cdot\mathbf{\Lambda}^n\cdot\mathbf{X}^{-1}
+\end{align*} %]]&gt;</script>
+
+<p>$\mathbf{\Lambda}^n$ is a simple computation because $\mathbf{\Lambda}$ is a
+diagonal matrix: every element is just raised to the $n$th power. That means
+the expensive matrix multiplication only happens twice now. This is a powerful
+speed boost and we can calculate the result by substituting for $\mathbf{A}^n$</p>
+
+<script type="math/tex; mode=display">\mathbf{x}_n = \mathbf{X}\cdot \mathbf{\Lambda}^n \cdot \mathbf{X}^{-1}\cdot\mathbf{x}_0</script>
+
+<p>For this Fibonacci matrix, we find that 
+$\mathbf{\Lambda} = \textrm{diag}\left(\frac{1+\sqrt{5}}{2}, \frac{1-\sqrt{5}}{2}\right)= \textrm{diag}\left(\lambda_1, \lambda_2\right)$.
+We could define our Fibonacci function to carry out this matrix multiplication,
+but these matrices are simple: $\mathbf{\Lambda}$ is diagonal and
+$\mathbf{x}_0 = \left[1; 0\right]$.
+So, carrying out this fairly simple computation gives</p>
+
+<script type="math/tex; mode=display">x_n = \frac{1}{\sqrt{5}}\left(\lambda_{_1}^n - \lambda_{_2}^n\right) \approx
+\frac{1}{\sqrt{5}} \cdot 1.618034^n</script>
+
+<p>We would not expect this equation to give an integer. It involves the power of
+two irrational numbers, a division by another irrational number and even the
+golden ratio phi $\phi \approx 1.618$! However, it gives exactly the Fibonacci
+numbers – you can check yourself!</p>
+
+<p>This means we can define our function rather simply:</p>
+
+<div class="bogus-wrapper"><notextile><figure class="code"><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class="line-number">1</span>
+<span class="line-number">2</span>
+<span class="line-number">3</span>
+<span class="line-number">4</span>
+<span class="line-number">5</span>
+<span class="line-number">6</span>
+<span class="line-number">7</span>
+</pre></td><td class="code"><pre><code class="python"><span class="line"><span class="k">def</span> <span class="nf">fib</span><span class="p">(</span><span class="n">n</span><span class="p">):</span>
+</span><span class="line">    <span class="n">lambda1</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+</span><span class="line">    <span class="n">lambda2</span> <span class="o">=</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">))</span><span class="o">/</span><span class="mi">2</span>
+</span><span class="line">    <span class="k">return</span> <span class="p">(</span><span class="n">lambda1</span><span class="o">**</span><span class="n">n</span> <span class="o">-</span> <span class="n">lambda2</span><span class="o">**</span><span class="n">n</span><span class="p">)</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span><span class="line"><span class="k">def</span> <span class="nf">fib_approx</span><span class="p">(</span><span class="n">n</span><span class="p">)</span>
+</span><span class="line">    <span class="c"># for practical range, percent error &lt; 10^-6</span>
+</span><span class="line">    <span class="k">return</span> <span class="mf">1.618034</span><span class="o">**</span><span class="n">n</span> <span class="o">/</span> <span class="n">sqrt</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure></notextile></div>
+
+<p>As one would expect, this implementation is <em>fast</em>. We see speedups of roughly
+$1000$ for $n=25$, milliseconds vs microseconds. This is almost typical when
+mathematics are applied to a seemingly straightforward problem. There are often
+large benefits by making the implementation slightly more cryptic!</p>
+
+<p>I’ve found that mathematics<sup id="fnref:math"><a href="#fn:math" rel="footnote">5</a></sup> becomes fascinating, especially in higher
+level college courses, and can often yield surprising results. I mean, look at
+this blog post. We went from a expensive recursive equation to a simple and
+fast equation that only involves scalars. This derivation is one I enjoy and I
+especially enjoy the simplicity of the final result. This is part of the reason
+why I’m going to grad school for highly mathematical signal processing. Real
+world benefits $+$ neat theory $=$ &lt;3.</p>
+
+<div class="footnotes">
+  <ol>
+    <li id="fn:implement">
+      <p>The complete implementation can be found <a href="https://github.com/scottsievert/scottsievert.github.io/blob/master/src/source/_posts/2014-fib.py">on Github</a>.<a href="#fnref:implement" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:compiler">
+      <p>Yes, in some languages some compilers are smart enough to get rid of recursion for some functions.<a href="#fnref:compiler" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:matrix">
+      <p>I’m assuming you have taken a course that deals with matrices.<a href="#fnref:matrix" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:inv">
+      <p>This happens when a matrix is <a href="https://en.wikipedia.org/wiki/Diagonalizable_matrix">diagonalizable</a>.<a href="#fnref:inv" rel="reference">&#8617;</a></p>
+    </li>
+    <li id="fn:math">
+      <p>Not math. Courses beyond calculus deserve a different name.<a href="#fnref:math" rel="reference">&#8617;</a></p>
+    </li>
+  </ol>
+</div>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Common Mathematical Misconceptions]]></title>

@@ -1,15 +1,13 @@
 
-puts "\n"
-puts "\n"
 puts "ruby gh_pages_copy.rb"
 puts "====================="
 puts "    Copying folders to parent directory"
 folders = ['about',
-           'software',
            'assets',
            'blog',
            'images',
            'javascripts',
+           'software',
            'stylesheets']
 
 for folder in folders do
